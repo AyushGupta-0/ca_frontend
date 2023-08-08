@@ -60,7 +60,9 @@ const Trial_Info
                                         <Heading fontSize={"15px"}>Only Desktop</Heading>
                                         <Heading fontSize={"12px"} textDecoration={"line-through"}>3100</Heading>
                                         <Heading fontSize={"15px"}>2900</Heading>
-                                        <Button border={"1 px solid blue"} color={"blue.200"} >Buy Now</Button>
+                                        <Link to={"/Transaction"}>
+                                            <Button border={"1 px solid blue"} color={"blue.200"} >Buy Now</Button>
+                                        </Link>
                                     </Box>
 
 
@@ -73,8 +75,9 @@ const Trial_Info
                                         <Heading fontSize={"15px"}>Mobile + Desktop</Heading>
                                         <Heading fontSize={"12px"} textDecoration={"line-through"}>4100</Heading>
                                         <Heading fontSize={"18px"}>3500</Heading>
-                                        <Button background={"red.500"}>Buy Now</Button>
-
+                                        <Link to={"/Transaction"}>
+                                            <Button background={"red.500"}>Buy Now</Button>
+                                        </Link>
                                     </Box>
 
 
@@ -103,7 +106,9 @@ const Trial_Info
                                         <Heading fontSize={"15px"}>Only Desktop</Heading>
                                         <Heading fontSize={"12px"} textDecoration={"line-through"}>8299</Heading>
                                         <Heading fontSize={"15px"}>5499</Heading>
-                                        <Button border={"1 px solid blue"} color={"blue.200"} >Buy Now</Button>
+                                        <Link to={"/Transaction"}>
+                                            <Button border={"1 px solid blue"} color={"blue.200"} >Buy Now</Button>
+                                        </Link>
                                     </Box>
 
 
@@ -116,7 +121,9 @@ const Trial_Info
                                         <Heading fontSize={"15px"}>Mobile + Desktop</Heading>
                                         <Heading fontSize={"12px"} textDecoration={"line-through"}>10999</Heading>
                                         <Heading fontSize={"18px"}>8999</Heading>
-                                        <Button background={"red.500"}>Buy Now</Button>
+                                        <Link to={"/Transaction"}>
+                                            <Button background={"red.500"}>Buy Now</Button>
+                                        </Link>
 
                                     </Box>
 

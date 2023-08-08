@@ -54,10 +54,10 @@ const Company_name = (ppx) => {
     const [bussinessAddress, setBussinessAddress] = useState("");
     const [bussinessCategory, setBussinessCategory] = useState("");
 
-
+    
     const handleImages = () => {
         let count = 0;
-
+        
 
         for (let i = 0; i < images.length; i++) {
             const storageRef = ref(storage, `/files/${images[i].name}`)
@@ -89,7 +89,9 @@ const Company_name = (ppx) => {
     useEffect(() => {
         handleImages()
     }, [images])
-
+    const Company = {
+        name: "Company Name"
+    }
     return (
         <> <Box
         // position={"sticky"} top="132px" zIndex={"10000"}
@@ -113,7 +115,7 @@ const Company_name = (ppx) => {
                 </Link> */}
 
             </Flex>
-            <Flex margin={"auto"} textAlign={"center"} backgroundColor="rgb(1,37,70)" color={"white"}
+            <Flex margin={"auto"} textAlign={"center"} backgroundColor="rgb(255,185,29)" color={"white"}
                 padding={"10px"} alignItems={"center"}
                 boxShadow="rgba(3, 102, 214, 0.3) 0px 0px 0px 3px" >
                 <HStack style={{ margin: "10px" }} height="100%">
@@ -128,7 +130,7 @@ const Company_name = (ppx) => {
                 <Heading fontSize={{ base: "12px", md: "14px", lg: "20px" }} margin={"auto"} cursor={"pointer"} onClick={onOpen}>
                     <Image src={ylogo} width="25px" height="25px" borderRadius={"50%"}></Image>
 
-                    {ppx.company_name}
+                    {Company.name}
 
                 </Heading>
                 <HStack>
@@ -152,7 +154,7 @@ const Company_name = (ppx) => {
             {isShown &&
                 (<HStack height="100%" position="relative" background={"blackAlpha.800"}
                     padding={"20px"} color={"white"} >
-                    <Input type="search" placeholder="search" marginRight={"10px"} backgroundColor="rgb(1,37,70)" />
+                <Input type="search" placeholder="search" marginRight={"10px"} backgroundColor="rgb(255,185,29)" />
                     {/* <Button style={{ backgroundColor: "orange" }} onClick={() => ""}>Search</Button> */}
                     <Image src={search3} width="30px" height="30px" borderRadius={"10px"} backgroundColor={"orange"} ></Image>
                 </HStack>)
