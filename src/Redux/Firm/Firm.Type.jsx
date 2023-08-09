@@ -1,0 +1,5 @@
+export const LOADING_FIRM_REGISTER = "register/LOADING_FIRM_REGISTER";
+export const SUCCESS_FIRM_REGISTER = "register/SUCCESS_FIRM_REGISTER";
+export const ERROR_FIRM_REGISTER = "register/ERROR_FIRM_REGISTER";
+
+

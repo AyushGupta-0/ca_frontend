@@ -33,15 +33,15 @@ import { LoginAction } from '../../Redux/Singin/Signin.Action';
 
 
 
-const Login = () => {
+const LoginVendorLogin = () => {
 
     const [form, setForm] = useState({ email: "", password: "", })
     const dispatch = useDispatch();
     const toast = useToast();
     const navigate = useNavigate();
     // const selector = useSelector(store => store.Signin);
-    const { token, loginData } = useSelector(store => store.Signin)
-    // console.log(token, data)
+    const { token, data } = useSelector(store => store.Signin)
+    console.log(token, data)
     const auth = useContext(AppContext);
 
     // {}
@@ -52,36 +52,19 @@ const Login = () => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value })
     }
-    console.log(token, loginData)
+
     const LogInHandle = () => {
         if (!form.email && !form.password) {
             return alert('Please Fill All the fields')
         }
-        dispatch(LoginAction(form));
-
-        if (loginData.status === 200 && loginData.data.token) {
-
-            // alert("Login successful");
-            // navigate("/HomeDash")
-            if (!loginData.data.token) {
-                navigate("/Login")
-            }
-            else
-                if (loginData.data.token && company.length > 0) {
-                    navigate("/HomeDash")
-
-                } else {
-                    navigate("/AddCompanyForm")
-                }
-
-        }
-
+        dispatch(LoginAction(form, navigate, company));
+        // freeHandle()
     }
 
 
     return (
         <>
-            <Box bgImage={""} style={{
+            <VStack bgImage={""} style={{
                 backgroundRepeat: "no-repeat",
                 backgroundAttachment: "fixed",
                 backgroundSize: "cover",
@@ -104,10 +87,10 @@ const Login = () => {
                     // backgroundPosition: "center",
                     boxSizing: "border-box",
                     margin: "auto",
-                    height: "80vh"
+                    height: "100vh"
 
                 }} className='container' width={{ base: "80%", md: "50%", lg: "50%" }} padding={"10px"}>
-                    <Heading color={"white"}>Sign In</Heading>
+                    <Heading color={"white"}>Vendor Sign In</Heading>
                     <Box
                         className='container'
                         rounded={'lg'}
@@ -152,16 +135,12 @@ const Login = () => {
 
                 </VStack>
 
-                <Link to={"/LoginVendorLogin"}>
-                    <Box bg={"rgb(1,37,70)"}>
-                        <Button bg="blue.400">Vendor SignIn</Button>
-                    </Box>
-                </Link>
 
-            </Box>
 
+            </VStack>
+           
         </>
     )
 }
 
-export default Login
+export default LoginVendorLogin

@@ -11,7 +11,7 @@ import { store } from './Store/Store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <AppContextProvider>
+  
     
     <ChakraProvider>
       <Provider store={store} >
@@ -23,7 +23,7 @@ root.render(
         </Provider>
       </ChakraProvider>
     
-  </AppContextProvider>
+  
   
 );
 

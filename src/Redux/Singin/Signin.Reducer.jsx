@@ -1,4 +1,4 @@
-  
+
 import { ERROR_LOGIN, LOADING_LOGIN, SUCCESS_LOGIN, SUCCESS_LOGOUT } from "./Signin.Type";
 
 const initialState = {
@@ -18,13 +18,13 @@ export const Signin_Reducer = (state = initialState, { type, payload }) => {
         }
         case SUCCESS_LOGIN: {
             localStorage.setItem('token', payload.data.token);
-            // console.log("paysdkjccdwjf", payload.data.token)
+            console.log("paysdkjccdwjf", payload.data)
             return { ...state, loading: false, error: false, loginData: payload, token: payload.data.token }
-            
+
         }
         case ERROR_LOGIN: {
-            console.log("paysdkjccdwjf", payload)
-            return { ...state, loading: false, error: true,loginData:payload }
+            // console.log("paysdkjccdwjf", payload)
+            return { ...state, loading: false, error: true, loginData: payload }
 
         }
 

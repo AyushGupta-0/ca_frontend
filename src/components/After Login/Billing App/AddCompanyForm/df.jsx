@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { firmRegisterAction } from '../../../../Redux/Firm/Firm.Action';
 import Company_name from '../Company_name/Company_name';
+// import { FirmRegisterAction } from '../../../../Redux/Firm/Firm.Action';
 
 const AddCompanyForm = () => {
     const { token } = useSelector((store) => store.Signin);
@@ -23,7 +24,7 @@ const AddCompanyForm = () => {
         businessDescription: "",
     });
 
-    const { isOpen, onOpen } = useDisclosure();
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const [imageURL, setImageURL] = useState("");
 
     const handleChange = (e) => {
@@ -31,13 +32,18 @@ const AddCompanyForm = () => {
         if (files) {
             const reader = new FileReader();
             reader.readAsDataURL(files[0]);
-            reader.onload = () => {
-                setImageURL(reader.result);
-                setFormData({ ...formData, [name]: reader.result });
-            };
-            reader.onerror = (error) => console.log(error);
+            try {
+                reader.onload = () => setImageURL(reader.result);
+                // setFormData({ companyLogo: reader.result })
+                setFormData({ ...formData, [name]: reader.result })
+                console.log(formData)
+            } catch (e) {
+                reader.onerror = (error) => console.log(error);
+            }
+
         } else {
             setFormData({ ...formData, [name]: value });
+            console.log(formData)
         }
     };
 
@@ -47,12 +53,12 @@ const AddCompanyForm = () => {
 
     return (
         <>
-            <Company_name />
+            <Company_name ></Company_name>
             <Box className='container' width={"80%"} boxShadow={"rgba(20,20,20,0.8) 0px 7px 29px 0px "} margin={"100px auto"} padding="20px" borderRadius={"10px"}>
-                <Image src={formData.companyLogo} w="100px" h="100px" alt="No Image" />
+                <Image src={imageURL} w="100px" h="100px" alt="No Image" />
                 <FormControl mt={4}>
                     <FormLabel>Logo</FormLabel>
-                    <Input type="file" name="companyLogo" accept="image/*" onChange={handleChange} />
+                    <Input type="file" name="companyLogo" value={formData.companyLogo} accept="image/*" onChange={handleChange} />
                 </FormControl>
                 <FormControl>
                     <FormLabel>Business Name</FormLabel>
@@ -81,7 +87,7 @@ const AddCompanyForm = () => {
                             {/* <FormLabel>Signature</FormLabel> */}
                             <FormControl mt={4}>
                                 <FormLabel>Signature</FormLabel>
-                                <Input type="file" name="signature" accept="image/*" onChange={handleChange} />
+                                <Input type="file" name="signature" value={formData.signature} accept="image/*" onChange={handleChange} />
                             </FormControl>
                             {/* <Input type='file' placeholder='Add Signature' /> */}
 

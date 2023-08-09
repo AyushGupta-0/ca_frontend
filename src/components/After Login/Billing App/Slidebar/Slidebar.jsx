@@ -61,7 +61,9 @@ const Slidebar = () => {
 
     return (
 
+
         <Box minHeight={"600px"} backgroundColor="rgb(1,37,70)" color={"white"} padding={"5px"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
+
 
         position="sticky" left={"0px"} top={"0"} height={{base:"100vh",md:"100vh"}} overflowY={"scroll"} 
         // scrollbarWidth="thin" 

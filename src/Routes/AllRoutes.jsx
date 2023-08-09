@@ -134,6 +134,11 @@ import Manage_Orders from '../components/After Login/Billing App/Online_Store/Ma
 import Stor_Reports from '../components/After Login/Billing App/Online_Store/Stor_Reports/Stor_Reports'
 import PrivateRoute from '../components/PrivateRoute'
 import AddCompanyForm from '../components/After Login/Billing App/AddCompanyForm/AddCompanyForm'
+import LoginVendorLogin from '../components/Vendor/VendorLogin'
+import VendorAllClint from '../components/Vendor/VendorAllClint'
+import AddClientForm from '../components/Vendor/AddClinentForm'
+import Transaction from '../components/After Login/Billing App/Transaction/Transaction'
+import TransactionTable from '../components/After Login/Billing App/Utilities/Export_to_Tally/TransactionTable'
 
 // admin imports
 import AdminLogin from '../components/admin/AdminLogin'
@@ -236,6 +241,8 @@ export default function AllRoutes() {
 
             </PrivateRoute>} */}
             <Route element={<Profile />} path="/Profile" ></Route>
+            {/* <Route element={<Profile />} path="/Profile" ></Route> */}
+
             <Route element={<Inventory_Software />} path="/Inventory_Software" ></Route>
             <Route element={<Inventiry_Home />} path="/Inventiry_Home" ></Route>
             <Route element={<Slidebar />} path="/Slidebar" ></Route>
@@ -259,8 +266,8 @@ export default function AllRoutes() {
             <Route element={<Loan_Account />} path="/Loan_Account" ></Route>
 
             <Route element={<Software1 />} path="/Software" ></Route>
-
-            <Route element={<PrivateRoute><HomeDash /></PrivateRoute>} path="/HomeDash" ></Route>
+            {/* <PrivateRoute><</PrivateRoute> */}
+            <Route element={<HomeDash />} path="/HomeDash" ></Route>
 
             <Route element={<MenuBar />} path="/MenuBar"></Route>
             <Route element={<Estimate />} path="/Estimate"></Route>
@@ -291,6 +298,12 @@ export default function AllRoutes() {
             <Route element={<Stor_Reports />} path="/Stor_Reports"></Route>
 
             <Route element={<AddCompanyForm />} path="/AddCompanyForm"></Route>
+            <Route element={<LoginVendorLogin />} path="/LoginVendorLogin"></Route>
+            <Route element={<VendorAllClint />} path="/VendorAllClint"></Route>
+            <Route element={<AddClientForm />} path="/AddClientForm"></Route>
+            <Route element={<Transaction />} path="/Transaction"></Route>
+
+            <Route element={<TransactionTable />} path="/TransactionTable"></Route>
 
 
             {/* Admin Routes */}

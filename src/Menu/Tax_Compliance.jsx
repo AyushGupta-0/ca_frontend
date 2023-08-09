@@ -26,7 +26,7 @@ const TaxCompliance = () => {
                 className="Trademark_Menu"
                 onClick={() => toggleFunc()}
             >
-                TAX AND COMPLIANCE
+                TAX & COMPLIANCE
             </Box>
             {
                 isActive ? (
