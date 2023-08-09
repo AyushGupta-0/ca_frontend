@@ -28,6 +28,8 @@ import search2 from "../../../assets/search2.png"
 import user from "../../../assets/user.svg"
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../../firebase';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 
 const Company_name = (ppx) => {
@@ -53,11 +55,26 @@ const Company_name = (ppx) => {
     const [state, setState] = useState("");
     const [bussinessAddress, setBussinessAddress] = useState("");
     const [bussinessCategory, setBussinessCategory] = useState("");
+    const [companies, setCompanies] = useState([])
+    const [company,setCompany] = useState({})
+    const { token } = useSelector(store => store.Signin)
 
-    
+    console.log(token)
+    useEffect(() => {
+        const headers = {
+            "token":`${token}`
+        }
+        axios.get(` https://taxservicebackend.onrender.com/firm_registration`, { headers }).then((res) => {
+            setCompanies(res.data)
+            console.log("sadsd", res.data)
+            console.log("comns",companies)
+        })
+    }, [])
     const handleImages = () => {
+       
+       
         let count = 0;
-        
+       
 
         for (let i = 0; i < images.length; i++) {
             const storageRef = ref(storage, `/files/${images[i].name}`)
@@ -128,9 +145,9 @@ const Company_name = (ppx) => {
                 </HStack>
 
                 <Heading fontSize={{ base: "12px", md: "14px", lg: "20px" }} margin={"auto"} cursor={"pointer"} onClick={onOpen}>
-                    <Image src={ylogo} width="25px" height="25px" borderRadius={"50%"}></Image>
+                    <Image src={company?.logo||ylogo} width="25px" height="25px" borderRadius={"50%"}></Image>
 
-                    {Company.name}
+                    {company?.name||"Company Name"}
 
                 </Heading>
                 <HStack>
@@ -154,7 +171,7 @@ const Company_name = (ppx) => {
             {isShown &&
                 (<HStack height="100%" position="relative" background={"blackAlpha.800"}
                     padding={"20px"} color={"white"} >
-                <Input type="search" placeholder="search" marginRight={"10px"} backgroundColor="rgb(255,185,29)" />
+                    <Input type="search" placeholder="search" marginRight={"10px"} backgroundColor="rgb(255,185,29)" />
                     {/* <Button style={{ backgroundColor: "orange" }} onClick={() => ""}>Search</Button> */}
                     <Image src={search3} width="30px" height="30px" borderRadius={"10px"} backgroundColor={"orange"} ></Image>
                 </HStack>)
@@ -166,7 +183,7 @@ const Company_name = (ppx) => {
                 finalFocusRef={finalRef}
                 isOpen={isOpen}
                 onClose={onClose}
-                
+
             >
                 <ModalOverlay />
                 <ModalContent maxW="800px" >
@@ -178,11 +195,11 @@ const Company_name = (ppx) => {
                     <ModalBody pb={10}  >
                         <Box></Box>
                         <Select>
-                            <option value="Company1">Company1</option>
-                            <option value="Company1">Company2</option>
-                            <option value="Company1">Company3</option>
-                        
+                            {companies.map((comp) => (
+                                <option value={comp.companyName}>{comp.companyName}</option>
+                            ))}
                         </Select>
+
                         <Link to={"/AddCompanyForm"}>
                             <Button m={"10px auto"} bg={"orange.300"}>Add New Company +</Button>
                         </Link>

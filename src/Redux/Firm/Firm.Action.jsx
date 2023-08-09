@@ -14,7 +14,10 @@ export const firmRegisterAction = (formData, token) => (dispatch) => {
     axios.post(`https://taxservicebackend.onrender.com/firm_registration`, formData, { headers })
         .then(res => {
             dispatch({ type: SUCCESS_FIRM_REGISTER, payload: res.data });
-            console.log(res.data);
+            console.log(res);
+            if (res.status === 201) {
+                alert("Successfully registered") 
+            }
         })
         .catch(err => {
             dispatch({ type: ERROR_FIRM_REGISTER, payload: err });

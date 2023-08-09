@@ -30,6 +30,7 @@ import { AppContext } from '../../Context/AppContext';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginAction } from '../../Redux/Singin/Signin.Action';
+import { VENDOR_LoginAction } from '../../Redux/Vender/Vendor.Action';
 
 
 
@@ -57,7 +58,7 @@ const LoginVendorLogin = () => {
         if (!form.email && !form.password) {
             return alert('Please Fill All the fields')
         }
-        dispatch(LoginAction(form, navigate, company));
+        dispatch(VENDOR_LoginAction(form, navigate));
         // freeHandle()
     }
 
