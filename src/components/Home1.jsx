@@ -8,7 +8,6 @@ import { MdReadMore } from "react-icons/md";
 import data from "./data";
 
 
-
 export default function Home1() {
   const [people, setPeople] = useState(data);
   const [index, setIndex] = useState(0);

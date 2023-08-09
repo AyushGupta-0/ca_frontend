@@ -25,10 +25,9 @@ export default function Home12() {
       >
         <div w="100%" style={{border:"9px solid grey",height:"320px",display:"flex",justifyContent:"center",alignItems:"center"}} className="section-center">
 
-        <Image w="90%" h="250px"  src={software2} />
+          <Image w="90%" h="250px"  src={software2} />
         </div>
         <Box textAlign={{ base: "center", lg: "left" }}>
-         
           <Text
             lineHeight={{ base: "35px", lg: "65px" }}
             fontFamily="'Poppins', sans-serif"

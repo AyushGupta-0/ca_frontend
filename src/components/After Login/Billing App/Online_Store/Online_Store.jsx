@@ -40,11 +40,9 @@ const Online_Store
                     <Slidebar />
                     <VStack width={"80%"} MinHeight="600px" margin="auto">
                         {/* <Image src={loading} width="100px" borderRadius={"50%"}></Image> */}
-
-                        <Box  >
+                        <Box>
                             <Image src={loading}  maxH={"200px"} borderRadius="40%"></Image>
                             <Heading>Coming Soon !!! </Heading>
-
                         </Box>
                     </VStack>
                 </Flex>

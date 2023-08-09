@@ -9,9 +9,10 @@ const rootReducer = combineReducers({
 
     Auth: Auth_Reducer,
     Signin: Signin_Reducer,
+
     Profile: Profile_Reducer,
     FirmRegistation: Firm_Reducer,
 
-
 })
+
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
