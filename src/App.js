@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Navbar />
       {/* <Navbar_AL /> */}
-      <AllRoutes></AllRoutes>
+      <AllRoutes/>
       <Footer />
     </div>
   );

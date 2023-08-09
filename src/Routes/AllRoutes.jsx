@@ -135,19 +135,24 @@ import Stor_Reports from '../components/After Login/Billing App/Online_Store/Sto
 import PrivateRoute from '../components/PrivateRoute'
 import AddCompanyForm from '../components/After Login/Billing App/AddCompanyForm/AddCompanyForm'
 
+// admin imports
+import AdminLogin from '../components/admin/AdminLogin'
+import AdminRegister from '../components/admin/AdminRegister'
+import VendorManagement from '../components/admin/VendorManagement'
+import UserManagement from '../components/admin/UserManagement'
 
 
 export default function AllRoutes() {
     return (
         <Routes>
-            <Route element={<Home></Home>} path="/" ></Route>
-            <Route element={<Buisness></Buisness>} path="/buisness" ></Route>
-            <Route element={<Tax></Tax>} path="/tax" ></Route>
-            <Route element={<Fund></Fund>} path="/fund" ></Route>
-            <Route element={<Income></Income>} path="/income" ></Route>
-            <Route element={<Ngo></Ngo>} path="/ngo" ></Route>
-            <Route element={<TradeMark></TradeMark>} path="/trademark" ></Route>
-            <Route element={<Software></Software>} path="/it" ></Route>
+            <Route element={<Home/>} path="/" ></Route>
+            <Route element={<Buisness/>} path="/buisness" ></Route>
+            <Route element={<Tax/>} path="/tax" ></Route>
+            <Route element={<Fund/>} path="/fund" ></Route>
+            <Route element={<Income/>} path="/income" ></Route>
+            <Route element={<Ngo/>} path="/ngo" ></Route>
+            <Route element={<TradeMark/>} path="/trademark" ></Route>
+            <Route element={<Software/>} path="/it" ></Route>
             <Route path="/private_limited_company" element={<PrivateLimitedCompany />} />
             <Route path="/limited_liability_partnership" element={<LimitedLiabilityPartnership />} />
             <Route path="/one_persone_company" element={<OnePersoneCompany />} />
@@ -288,8 +293,11 @@ export default function AllRoutes() {
             <Route element={<AddCompanyForm />} path="/AddCompanyForm"></Route>
 
 
-
-
+            {/* Admin Routes */}
+            <Route path="/admin" element={<AdminLogin/>}/>
+            <Route path="/admin-register" element={<AdminRegister/>}/>
+            <Route path="/vendor-management" element={<VendorManagement/>}/>
+            <Route path="/user-management" element={<UserManagement/>}/>
 
         </Routes>
     );

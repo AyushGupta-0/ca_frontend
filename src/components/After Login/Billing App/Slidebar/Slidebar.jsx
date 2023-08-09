@@ -20,7 +20,6 @@ import {
 
 } from '@chakra-ui/react'
 
-
 import { Link } from "react-router-dom";
 import { color } from 'framer-motion';
 import home from "../../../assets/home.png"
@@ -62,14 +61,20 @@ const Slidebar = () => {
 
     return (
 
-
         <Box minHeight={"600px"} backgroundColor="rgb(1,37,70)" color={"white"} padding={"5px"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
 
-        //     position={"sticky"} left={"0px"} height={"650px"} overflow={"scroll"} 
-        // scrollbarWidth="1px"
+        position="sticky" left={"0px"} top={"0"} height={{base:"100vh",md:"100vh"}} overflowY={"scroll"} 
+        // scrollbarWidth="thin" 
+        css={{
+          scrollbarWidth: 'thin',
+          '&::-webkit-scrollbar': {
+            width: '4px', 
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: '#FFB91D',
+          },
+        }}
         >
-
-
             <Box boxShadow="rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset" p={"2px"} m={"10px"} >
                 <Link to={"/HomeDash"}>
                     <HStack width={{ base: "20px", md: "180px", lg: "180px" }} marginTop={"8px"} p={"2px"} cursor={"pointer"}
@@ -108,7 +113,7 @@ const Slidebar = () => {
                     }} height={"35px"} boxShadow="rgba(0, 0, 0, 0.100) 0px 0px 0px 1px"
                     onClick={collapse.onToggle}
                 >
-                    <Image src={sale} width={"34px"} borderRadius={"50%"} ></Image>
+                    <Image src={sale} width={"34px"} borderRadius={"50%"}></Image>
                     <Text margin="auto" display={{ base: "none", md: "flex", lg: "flex" }} justifyContent={"space-between"}> Sale   </Text>
                     <Text
                         display={{ base: "none", md: "flex", lg: "flex" }}
@@ -285,7 +290,7 @@ const Slidebar = () => {
                         <Image src={Expenses} width={"34px"} borderRadius={"50%"} ></Image>
                         <Text margin="auto" display={{ base: "none", md: "flex", lg: "flex" }}> Expenses</Text>
                     </HStack>
-                </Link >
+                </Link>
                 <Link to={""}>
 
                     <HStack width={{ base: "20px", md: "180px", lg: "180px" }} marginTop={"8px"} p={"2px"} cursor={"pointer"}
