@@ -236,7 +236,7 @@ export default function AllRoutes() {
 
             </PrivateRoute>} */}
             <Route element={<Profile />} path="/Profile" ></Route>
-            <Route element={<Profile />} path="/Profile/:id" ></Route>
+            {/* <Route element={<Profile />} path="/Profile" ></Route> */}
 
             <Route element={<Inventory_Software />} path="/Inventory_Software" ></Route>
             <Route element={<Inventiry_Home />} path="/Inventiry_Home" ></Route>
@@ -261,8 +261,8 @@ export default function AllRoutes() {
             <Route element={<Loan_Account />} path="/Loan_Account" ></Route>
 
             <Route element={<Software1 />} path="/Software" ></Route>
-
-            <Route element={<PrivateRoute><HomeDash /></PrivateRoute>} path="/HomeDash" ></Route>
+            {/* <PrivateRoute><</PrivateRoute> */}
+            <Route element={<HomeDash />} path="/HomeDash" ></Route>
 
             <Route element={<MenuBar />} path="/MenuBar"></Route>
             <Route element={<Estimate />} path="/Estimate"></Route>
