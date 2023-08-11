@@ -28,6 +28,9 @@ import search2 from "../../../assets/search2.png"
 import user from "../../../assets/user.svg"
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../../firebase';
+import axios from "axios";
+import { useSelector } from 'react-redux';
+
 
 
 const Company_name = (ppx) => {
@@ -35,6 +38,8 @@ const Company_name = (ppx) => {
     const [isShown, setIsShown] = useState(false);
     const initialRef = React.useRef(null)
     const finalRef = React.useRef(null)
+
+   
     const handleClick = (event) => {
         setIsShown(current => !current);
     };
@@ -54,7 +59,23 @@ const Company_name = (ppx) => {
     const [bussinessAddress, setBussinessAddress] = useState("");
     const [bussinessCategory, setBussinessCategory] = useState("");
 
-    
+    const [form,setForm]=useState({
+        companyLogo:"",
+        companyName:"",
+        gstinNumber:"",
+        email:"",
+        phoneNumber:"",
+        signature:"",
+        state:"",
+        businessAddress:"",
+        businessCategory:"",
+        businessType:"",
+        businessRegistrationType:"",
+        businessDescription:""
+    })
+
+    const token = localStorage.getItem("token");
+
     const handleImages = () => {
         let count = 0;
         
@@ -84,7 +105,11 @@ const Company_name = (ppx) => {
         }
     }
 
-    console.log(imageURL)
+    const handleChange=(e)=>{
+        const {value,name}=e.target;
+
+        setForm({...form,[name]:value});
+    }
 
     useEffect(() => {
         handleImages()
@@ -92,6 +117,21 @@ const Company_name = (ppx) => {
     const Company = {
         name: "Company Name"
     }
+    
+    const getFirmData=async()=>{
+        const headers={
+            "token":`${token}`
+        }
+          const res=await axios.get(`https://taxservicebackend.onrender.com/firm_registration`,{headers});
+          const data=res.data;
+          console.log("firm Data",data)
+    }
+
+    useEffect(()=>{
+        getFirmData()
+    },[])
+
+
     return (
         <> <Box
         // position={"sticky"} top="132px" zIndex={"10000"}
