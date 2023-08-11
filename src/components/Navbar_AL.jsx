@@ -1,7 +1,7 @@
-import { Box, Flex, Image, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Image, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react";
 import icon from "./assets/icon.png"
 import { GiHamburgerMenu } from "react-icons/gi"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BusinessSetup } from "../Menu/BusinessSetup";
 import { TaxCompliance } from "../Menu/Tax_Compliance";
 import { TrademarkIP } from "../Menu/TrademarkIP";
@@ -11,8 +11,16 @@ import { FundRaising } from "../Menu/FundRaising";
 import { NGO } from "../Menu/NGO";
 import user from "./assets/user.svg"
 import gear from "./assets/gear.svg"
+import { FiUser } from "react-icons/fi";
+import { useState } from "react";
+import { MdAccountCircle } from "react-icons/md";
+import { FaUser } from 'react-icons/fa';
+import { FaSignOutAlt } from 'react-icons/fa'
+
+
 
 export default function Navbar_AL() {
+    const navigate = useNavigate();
 
 
     return (
@@ -55,11 +63,30 @@ export default function Navbar_AL() {
                 <Text display={{ base: "none", lg: "flex" }} _hover={{ backgroundColor: "white", borderRadius: "10px" }} p={"10px"}><Link to="/fund"><FundRaising /></Link></Text>
                 <Text display={{ base: "none", lg: "flex" }} _hover={{ backgroundColor: "white", borderRadius: "10px" }} p={"10px"}><Link to="/Software">SOFTWARE</Link></Text>
 
-                {/* <Link to="/Settings"><Text _hover={{ cursor: "pointer" }} display={{ base: "none", lg: "flex" }}>
-                    <Image src={gear}></Image>
-                SETTINGS</Text></Link> */}
-                <Link to={"/Profile"}><Text _hover={{ cursor: "pointer", backgroundColor: "white", borderRadius: "10px" }} p={"10px"} display={{ base: "none", lg: "flex" }}>
-                    <Image src={user} border={"1px solid black"} margin={"1px"} borderRadius={"50%"}></Image> PROFILE</Text></Link>
+
+                <Menu>
+                <MenuButton as={IconButton} icon={<MdAccountCircle />} colorScheme="teal" />
+                <MenuList>
+                <MenuItem onClick={()=> navigate('/Login')}>
+                    <Flex align='center'>
+                      {/* <FaUser/> */}
+                      <Text ml={2}> LogIn </Text>
+                    </Flex>
+                  </MenuItem>
+                  <MenuItem onClick={()=> navigate('/Signup')}>
+                    <Flex align='center'>
+                      {/* <FaUser/> */}
+                      <Text ml={2}> SignUp </Text>
+                    </Flex>
+                  </MenuItem>
+                  <MenuItem onClick={()=> navigate('/Profile')}>
+                    <Flex align='center'>
+                      <FaUser/>
+                      <Text ml={2}> Profile </Text>
+                    </Flex>
+                  </MenuItem>
+                </MenuList>
+              </Menu>
                 <Box display={{ base: "flex", lg: "none" }}>
                     <Menu>
                         <MenuButton><GiHamburgerMenu style={{ fontSize: "25px" }} /></MenuButton>
