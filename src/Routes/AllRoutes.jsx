@@ -139,12 +139,10 @@ import VendorAllClint from '../components/Vendor/VendorAllClint'
 import AddClientForm from '../components/Vendor/AddClinentForm'
 import Transaction from '../components/After Login/Billing App/Transaction/Transaction'
 import TransactionTable from '../components/After Login/Billing App/Utilities/Export_to_Tally/TransactionTable'
+import VendorDashboard from '../components/VendorDashboard/VendorDashboard'
+import VendorWorkingPerformance from '../components/VendorDashboard/VendorWorkingPerformance'
 
-// admin imports
-import AdminLogin from '../components/admin/AdminLogin'
-import AdminRegister from '../components/admin/AdminRegister'
-import VendorManagement from '../components/admin/VendorManagement'
-import UserManagement from '../components/admin/UserManagement'
+
 
 
 export default function AllRoutes() {
@@ -176,8 +174,6 @@ export default function AllRoutes() {
             <Route path="/legal_metrology" element={<LegalMetrology />} />
             <Route path="/usa_incorporation" element={<US_Incorporation />} />
             <Route path="/singapore_incorporation" element={<SingaporeIncorporation />} />
-
-
             <Route path="/trademark_registration" element={<Trademark_Registration />} />
             <Route path="/search_for_trademark" element={<Search_For_Trademark />} />
             <Route path="/respond_objection" element={<Respond_To_TM_Objection />} />
@@ -304,14 +300,8 @@ export default function AllRoutes() {
             <Route element={<Transaction />} path="/Transaction"></Route>
 
             <Route element={<TransactionTable />} path="/TransactionTable"></Route>
-
-
-            {/* Admin Routes */}
-            <Route path="/admin" element={<AdminLogin/>}/>
-            <Route path="/admin-register" element={<AdminRegister/>}/>
-            <Route path="/vendor-management" element={<VendorManagement/>}/>
-            <Route path="/user-management" element={<UserManagement/>}/>
-
+            <Route element={<VendorDashboard/>} path='/vendor-dashboard'/>
+            <Route element={<VendorWorkingPerformance/>} path='/vendor-working-performance'/>
         </Routes>
     );
 }; 

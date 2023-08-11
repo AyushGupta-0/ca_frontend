@@ -18,7 +18,7 @@ import { store } from "../Store/Store";
 
 
 export default function Navbar() {
-    const {token} = useSelector(store => store.Signin)
+    const token = localStorage.getItem('token');
     // console.log(token);
     // var token = false;
     
