@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   Box,
   Flex,
@@ -12,7 +13,7 @@ import {
   Badge,
   Text,
 } from '@chakra-ui/react';
-import { FiBell, FiUser, FiBriefcase, FiPercent } from 'react-icons/fi';
+import { FiBell, FiUser, FiBriefcase, FiPercent, FiLogOut, FiHome } from 'react-icons/fi';
 
 
 const VendorHeader = () => {
@@ -28,16 +29,23 @@ const VendorHeader = () => {
   };
 
   return (
-    <Flex flex='1'>
-        <Box bg="#FFB91D" p="4" color="white">
+    <Box flex='1' ml='200px'>
+        <Box bg="#FFB91D" p="2" color="white">
         <Flex alignItems="center" justifyContent="space-between">
             <Flex alignItems="center">
-            <Heading as="h1" mr="4">
-                Vendor Dashboard
-            </Heading>
-            <Badge colorScheme="green" px="2" py="1">
-                Online
-            </Badge>
+              <IconButton
+                as={RouterLink}
+                to="/"
+                icon={<FiHome />}
+                variant="outline"
+                aria-label="Home"
+              />
+              <Heading as="h1" mr="4" ml="4">
+                  Vendor Dashboard
+              </Heading>
+              <Badge colorScheme="green" px="2" py="1">
+                  Online
+              </Badge>
             </Flex>
             <Flex alignItems="center">
             {/* <Flex alignItems="center" mr="4">
@@ -69,7 +77,7 @@ const VendorHeader = () => {
                 ml="4"
                 />
                 <MenuList>
-                <MenuItem>
+                <MenuItem color='black'>
                     <label htmlFor="profile-image-upload">
                     Update Profile Picture
                     </label>
@@ -81,13 +89,19 @@ const VendorHeader = () => {
                     onChange={handleProfileImageUpload}
                     />
                 </MenuItem>
-                <MenuItem>Logout</MenuItem>
+                <MenuItem color='black'>
+                  <RouterLink to="/privacy-n-refund-policy">Privacy & Refund Policy</RouterLink>
+                </MenuItem>
+                  <MenuItem color='black'>
+                    <FiLogOut color='red' style={{mr:'4'}}/>
+                    Logout
+                  </MenuItem>
                 </MenuList>
             </Menu>
             </Flex>
         </Flex>
         </Box>
-    </Flex>
+    </Box>
   );
 };
 
