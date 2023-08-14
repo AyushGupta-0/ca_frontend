@@ -23,26 +23,22 @@ import Slidebar from '../../Slidebar/Slidebar';
 import BarcodeGenerator from './Bcg';
 import BarcodeTable from './BCT';
 
-const Barcode_Genarator
-    = () => {
+
+
+const Barcode_Genarator = () => {
         const Company = {
             name: "Company Name"
         }
         return (
 
             <>
-                
-
-                <Flex   >
-
+                <Flex>
                     <Slidebar />
-                    <Box width="100%">
+                    <Box width="80%">
                         <BarcodeGenerator />
-
                         <BarcodeTable />
                         <Button justifyContent={"bottom"} m="20px">Save</Button>
                     </Box>
-
                 </Flex>
 
             </>

@@ -33,8 +33,10 @@ import Slidebar from '../Slidebar/Slidebar';
 import Company_name from '../Company_name/Company_name';
 import remove from '../../../assets/remove.png'
 import print4 from '../../../assets/print4.png'
-const Items
-    = () => {
+
+
+
+const Items = () => {
         const Company = {
             name: "Company Name"
         }
@@ -61,8 +63,8 @@ const Items
 
                     <Slidebar />
                     <Box margin={"auto"} marginTop="20px" overflow={"hidden"} width="80%">
-                        <Button backgroundColor="blue.400" width={"100px"} margin={"10px"}
-                            onClick={modal1.onOpen}>Add +</Button>
+                        <Button backgroundColor="blue.400" margin={"10px"}
+                            onClick={modal1.onOpen} px='4'>Add Items + </Button>
                         <TableContainer width="100%">
                             <Table width="100%">
                                 <Thead>

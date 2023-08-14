@@ -136,7 +136,7 @@ const Oreder_Sale = () => {
 
 
                 <Box width={"80%"} padding="10px" m={"auto"} marginTop={"20px"}>
-                    <h1>Sale Oreder Page</h1>
+                    <h1>Sale Order Page</h1>
                     <Flex justifyContent={"space-between"} flexDirection={{
 
                         base: "column",

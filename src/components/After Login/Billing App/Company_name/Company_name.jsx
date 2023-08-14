@@ -76,10 +76,10 @@ const Company_name = (ppx) => {
 
     const token = localStorage.getItem("token");
 
+    console.log('company name',token)
+
     const handleImages = () => {
         let count = 0;
-        
-
         for (let i = 0; i < images.length; i++) {
             const storageRef = ref(storage, `/files/${images[i].name}`)
             const uploadTask = uploadBytesResumable(storageRef, images[i]);
@@ -105,9 +105,9 @@ const Company_name = (ppx) => {
         }
     }
 
+   
     const handleChange=(e)=>{
         const {value,name}=e.target;
-
         setForm({...form,[name]:value});
     }
 
@@ -138,7 +138,6 @@ const Company_name = (ppx) => {
         >
             <Flex gap={"20px"} justifyContent={"right"} height={"60px"} p={"10px"}
                 bg={"white"}
-
             >
                 <Link to={""}>
                     <Button bg={"red.500"} color={"white"}>

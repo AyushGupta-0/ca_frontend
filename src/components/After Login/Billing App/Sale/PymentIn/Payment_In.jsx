@@ -13,10 +13,9 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  AspectRatio,
+  AspecTratio,
   useDisclosure,
   Table,
-  Thead,
   Tbody,
   Tfoot,
   Tr,
@@ -24,6 +23,7 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Thead,
 
 
 } from '@chakra-ui/react'
@@ -64,17 +64,17 @@ const PaymentIn = () => {
 
 
 
-  const initialData = [{ date: '2022-05-01', refNo: '001', partyName: 'ABC Company', categoryName: 'Furniture', type: 'Sale', total: 5000, received: 2000, balance: 3000, }, { date: '2022-05-02', refNo: '002', partyName: 'XYZ Company', categoryName: 'Electronics', type: 'Purchase', total: 10000, received: 5000, balance: 5000, },];
+  const initialData = [{ date: '2022-05-01', refNo: '001', partyName: 'ABC Company', categoryName: 'Furniture', type: 'Sale', total: 5000, received: 2000, balance: 3000, }, { date: '2022-05-02', refNo: '002', partyName: 'XYZ Company', categoryName: 'ElecTronics', type: 'Purchase', total: 10000, received: 5000, balance: 5000, },];
 
 
-  const [data, setData] = useState(initialData);
+  const [data, seTdata] = useState(initialData);
 
 
 
   const handleChange = (event, index, field) => {
     const newData = [...data];
     newData[index][field] = event.target.value;
-    setData(newData);
+    seTdata(newData);
 
 
   };
@@ -84,7 +84,7 @@ const PaymentIn = () => {
   const handleDelete = (index) => {
     const newData = [...data];
     newData.splice(index, 1);
-    setData(newData);
+    seTdata(newData);
 
   };
 
@@ -102,8 +102,8 @@ const PaymentIn = () => {
 
 
   const handleAddRow = () => {
-    const newRow = { id: data.length + 1, date: '', refNo: '', partyName: '', categoryName: '', type: '', total: 0, received: 0, balance: 0 };
-    setData([...data, newRow]);
+    const newRow = { id: data.lengTh + 1, date: '', refNo: '', partyName: '', categoryName: '', type: '', total: 0, received: 0, balance: 0 };
+    seTdata([...data, newRow]);
 
   };
 
@@ -114,14 +114,12 @@ const PaymentIn = () => {
 
 
       <Flex w="100%" >
-
         <Slidebar />
-
         <Box w="80%" m={"auto"} marginTop={"20px"}>
+        <Heading> Payments </Heading>
           <HStack justifyContent={"space-between"} padding={"50px"} boxShadow="rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px">
             <HStack gap={"20px"} flexDirection={{ base: "column", md: "row", lg: "row" }}>
               <div>
-
                 <Select fontSize="20px" id="select-option" value={selectedOption} onChange={handleOptionChange}>
                   {SelectOptions.map((option) => (
                     <option value={option} key={option}>
@@ -154,55 +152,43 @@ const PaymentIn = () => {
           </HStack>
           {/* table */}
           <Box margin={"10px"}>
-            <input type="text" placeholder="Search" onChange={handleChanges} />
-            <TableContainer width={{ base: "100%", md: "100%", lg: "100%", }}>
+            <Input type="text" placeholder="Search" onChange={handleChanges} mt='4'/>
+            <TableContainer width={{ base: "100%", md: "100%", lg: "100%", }} mt='4'>
               <Table>
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Ref No.</th>
-                    <th>Party Name</th>
-                    <th>Category Name</th>
-                    <th>Type</th>
-                    <th>Total</th>
-                    <th>Received</th>
-                    <th>Balance</th>
-                    <th>Print</th>
-                    <th>Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
+                <Thead>
+                  <Tr>
+                    <Th>Party Name</Th>
+                    <Th>Category Name</Th>
+                    <Th>Type</Th>
+                    <Th>Date</Th>
+                    <Th>Ref No.</Th>
+                    <Th>Received</Th>
+                    <Th>Balance</Th>
+                    <Th>Total</Th>
+                    <Th>Print</Th>
+                    <Th>Delete</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
                   {data.map((item, index) => (
-                    <tr key={index}>
-                      <td>
+                    <Tr key={index}>
+                      <Td>
                         <input
-                          type="date"
-                          value={item.date}
-                          onChange={(event) => handleChange(event, index, 'date')}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          value={item.refNo}
-                          onChange={(event) => handleChange(event, index, 'refNo')}
-                        />
-                      </td>
-                      <td>
-                        <input
+                          style={{ width: '100px' }}
                           type="text"
                           value={item.partyName}
                           onChange={(event) => handleChange(event, index, 'partyName')}
                         />
-                      </td>
-                      <td>
+                      </Td>
+                      <Td>
                         <input
+                          style={{ width: '100px' }}
                           type="text"
                           value={item.categoryName}
                           onChange={(event) => handleChange(event, index, 'categoryName')}
                         />
-                      </td>
-                      <td>
+                      </Td>
+                      <Td>
                         <select
                           value={item.type}
                           onChange={(event) => handleChange(event, index, 'type')}
@@ -210,59 +196,71 @@ const PaymentIn = () => {
                           <option value="Sale">Sale</option>
                           <option value="Purchase">Purchase</option>
                         </select>
-                      </td>
-                      <td isNumber={true}>
+                      </Td>
+                      <Td>
                         <input
-                          type="number"
-                          value={item.total}
-                          onChange={(e) => handleChange(e, index, "total")}
+                        style={{ width: '110px' }}
+                          type="date"
+                          value={item.date}
+                          onChange={(event) => handleChange(event, index, 'date')}
                         />
-                      </td>
-                      <td>
+                      </Td>
+                      <Td>
                         <input
+                          style={{ width: '80px' }}
+                          type="text"
+                          value={item.refNo}
+                          onChange={(event) => handleChange(event, index, 'refNo')}
+                        />
+                      </Td>
+                      <Td>
+                        <input
+                          style={{ width: '80px' }}
                           type="text"
                           value={item.received}
                           onChange={(e) => handleChange(e, index, "received")}
                         />
-                      </td>
-                      <td>
+                      </Td>
+                      <Td>
                         <input
+                          style={{ width: '80px' }}
                           type="text"
                           value={item.balance}
                           onChange={(e) => handleChange(e, index, "balance")}
                         />
-                      </td>
-                      <td>
+                      </Td>
+                      <Td isNumber={true}>
+                        <input
+                          style={{ width: '80px' }}
+                          type="number"
+                          value={item.total}
+                          onChange={(e) => handleChange(e, index, "total")}
+                        />
+                      </Td>
+                      <Td>
                         <Button fontSize={"10px"} bg={"blue.400"} onClick={() => handlePrint(item)}>Print</Button>
-                      </td>
-                      <td>
+                      </Td>
+                      <Td>
                         <Button fontSize={"10px"} bg={"red.500"} onClick={() => handleDelete(item)}>Delete</Button>
-                      </td>
+                      </Td>
 
 
-                    </tr>))}
-                  <tr>
-                    <td >
+                    </Tr>))}
+                  <Tr>
+                    <Td >
                       <Button onClick={handleAddRow}>Add Row</Button>
-                    </td>
+                    </Td>
 
-                  </tr>
-                </tbody>
-
-
+                  </Tr>
+                </Tbody>
               </Table>
             </TableContainer>
             <Box>
-
-
               <p>Total Estimate Amount: ₹{totalAmount}</p>
-
             </Box>
-
           </Box>
         </Box>
       </Flex>
-
     </>
   )
 }

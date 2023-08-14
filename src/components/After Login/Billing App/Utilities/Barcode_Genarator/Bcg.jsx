@@ -49,7 +49,7 @@ const BarcodeGenerator = () => {
     // }
     
     return (
-        <VStack width="100%" margin={"auto"} marginTop="20px" padding="20px">
+        <VStack margin={"auto"} marginTop="20px" padding="20px">
             <Flex width="100%" margin={"auto"} marginTop="0px">
                 <div>
 

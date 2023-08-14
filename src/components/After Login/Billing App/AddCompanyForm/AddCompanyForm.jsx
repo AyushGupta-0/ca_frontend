@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { firmRegisterAction } from '../../../../Redux/Firm/Firm.Action';
 import Company_name from '../Company_name/Company_name';
 
+
+
 const AddCompanyForm = () => {
     const { token } = useSelector((store) => store.Signin);
     const dispatch = useDispatch();
@@ -26,6 +28,7 @@ const AddCompanyForm = () => {
     const { isOpen, onOpen } = useDisclosure();
     const [imageURL, setImageURL] = useState("");
 
+
     const handleChange = (e) => {
         const { name, value, files } = e.target;
         if (files) {
@@ -41,9 +44,11 @@ const AddCompanyForm = () => {
         }
     };
 
+
     const handleRegisterFirm = () => {
         dispatch(firmRegisterAction(formData, token));
     };
+
 
     return (
         <>

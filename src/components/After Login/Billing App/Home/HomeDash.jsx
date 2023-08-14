@@ -90,9 +90,9 @@ const HomeDash
 
         const [isBlur, setIsBlur] = useState(false);
 
-        const handleToggle = () => {
-            setIsBlur(!isBlur);
-        };
+        // const handleToggle = () => {
+        //     setIsBlur(!isBlur);
+        // };
 
         return (
 
@@ -102,8 +102,8 @@ const HomeDash
                 <Flex >
 
                     <Slidebar />
-                    <Flex width={{ base: "83%", md: "90%", lg: "100%" }} >
-                        <VStack width="90%" style={{ filter: isBlur ? "blur(5px)" : "none" }}>
+                    <Flex width={{ base: "83%", md: "100%", lg: "100%" }} flex='1'>
+                        <VStack width="98%" style={{ filter: isBlur ? "blur(5px)" : "none" }}>
                             <AnimatedDiv />
 
                             <HStack width={{ base: "90%" }} height={{ base: "700px", md: "400px", lg: "500px" }}
@@ -150,7 +150,7 @@ const HomeDash
 
 
 
-                        <Button bg="blue.500" width={"10%"} >
+                        {/* <Button bg="blue.500" width={"10%"} >
                             <Flex m={"5px"} fontSize={"8px"}>
                                 Privacy
                                 <label className="switch">
@@ -158,7 +158,7 @@ const HomeDash
                                     <span className="slider round"></span>
                                 </label>
                             </Flex>
-                        </Button>
+                        </Button> */}
 
                     </Flex >
                 </Flex>
