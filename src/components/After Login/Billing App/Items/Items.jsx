@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     Box, Button, Flex, HStack, Image, Input, Select, Text, VStack, Wrap, Heading, List,
     ListItem,
@@ -33,6 +33,8 @@ import Slidebar from '../Slidebar/Slidebar';
 import Company_name from '../Company_name/Company_name';
 import remove from '../../../assets/remove.png'
 import print4 from '../../../assets/print4.png'
+import { useDispatch, useSelector } from 'react-redux';
+import { getStockAction } from '../../../../Redux/Stocks/stock.action';
 const Items
     = () => {
         const Company = {
@@ -51,7 +53,12 @@ const Items
             }
         ]
         const modal1 = useDisclosure()
-
+        const token = localStorage.getItem("token");
+        const dispatch=useDispatch();
+        const {partiesData}=useSelector((store)=>store.stockReducer)
+        useEffect(()=>{
+        dispatch(getStockAction(token));
+        },[])
         return (
 
             <>

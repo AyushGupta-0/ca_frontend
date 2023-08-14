@@ -50,14 +50,14 @@ const Company_name = (ppx) => {
 
     const [imageURL, setImageURL] = useState("");
 
-    const [bussinessName, setBussinessName] = useState("");
-    const [gstinNumber, setGstinNumber] = useState("");
-    const [email, setEmail] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [signature, setSignature] = useState("");
-    const [state, setState] = useState("");
-    const [bussinessAddress, setBussinessAddress] = useState("");
-    const [bussinessCategory, setBussinessCategory] = useState("");
+    // const [bussinessName, setBussinessName] = useState("");
+    // const [gstinNumber, setGstinNumber] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [phoneNumber, setPhoneNumber] = useState("");
+    // const [signature, setSignature] = useState("");
+    // const [state, setState] = useState("");
+    // const [bussinessAddress, setBussinessAddress] = useState("");
+    // const [bussinessCategory, setBussinessCategory] = useState("");
 
     const [form,setForm]=useState({
         companyLogo:"",
