@@ -65,7 +65,7 @@ export default function Navbar_AL() {
 
 
                 <Menu>
-                <MenuButton as={IconButton} icon={<MdAccountCircle />} colorScheme="teal" />
+                <MenuButton as={IconButton} icon={<MdAccountCircle />} />
                 <MenuList>
                 <MenuItem onClick={()=> navigate('/Login')}>
                     <Flex align='center'>
@@ -80,9 +80,9 @@ export default function Navbar_AL() {
                     </Flex>
                   </MenuItem>
                   <MenuItem onClick={()=> navigate('/Profile')}>
-                    <Flex align='center'>
+                    <Flex align='center' alignItems='center' justifyContent='center'>
                       <FaUser/>
-                      <Text ml={2}> Profile </Text>
+                      <Text ml={2}> My Profile </Text>
                     </Flex>
                   </MenuItem>
                 </MenuList>

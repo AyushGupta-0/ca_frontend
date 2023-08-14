@@ -19,8 +19,7 @@ import { store } from "../Store/Store";
 
 export default function Navbar() {
     const token = localStorage.getItem('token');
-    // console.log(token);
-    // var token = false;
+    console.log('navbar',token);
     
     const Company = {
         name: "Company Name"

@@ -5,9 +5,8 @@ const initialState = {
     loading: false,
     Firm_registerData: [],
     error: false,
-
-
 }
+
 
 export const Firm_Reducer = (state = initialState, { type, payload }) => {
 
