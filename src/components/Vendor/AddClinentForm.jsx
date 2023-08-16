@@ -1,39 +1,42 @@
 // src/AddClientForm.js
 
 import { Box, Button, FormControl, FormHelperText, Input, Label } from '@chakra-ui/react';
+import axios from 'axios';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const AddClientForm = ({ onSubmit }) => {
-    const [client, setClient] = useState({
+
+    const { token } = useSelector((store)=> store.Signin)
+    const tokenLocal = localStorage.getItem('token')
+    console.log('local token',tokenLocal)
+
+    const [clientData, setClientData] = useState({
         name: '',
         address: '',
         email: '',
-        phone_number: '',
-        business: '',
+        mobile_no: '',
+        company_name: '',
     });
 
     const handleChange = (e) => {
+        e.preventDefault();
         const { name, value } = e.target;
-        setClient((prevState) => ({ ...prevState, [name]: value }));
+        setClientData({ ...clientData, [name]: value });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(client);
-        setClient({
-            name: '',
-            address: '',
-            email: '',
-            phone_number: '',
-            business: '',
-        });
+        const headers = {
+            'token':`${tokenLocal}`
+        }
+        axios.post(`https://taxservicebackend.onrender.com/client_register`,{headers}).
+        then((res)=>{
+            console.log(res.data)
+        })
     };
-    const [input, setInput] = useState('')
 
-    const handleInputChange = (e) => setInput(e.target.value)
-
-    const isError = input === ''
     return (
         <div>
             <Link to={"/VendorAllClint"} >
@@ -44,31 +47,31 @@ const AddClientForm = ({ onSubmit }) => {
                 <FormControl>
                     <label>
                         Name:
-                        <Input type="text" name="name" value={client.name} onChange={handleChange} />
+                        <Input type="text" name="name" value={clientData.name} onChange={handleChange} />
                     </label>
                 </FormControl>
                 <FormControl>
                     <label>
                         Address:
-                        <Input type="text" name="address" value={client.address} onChange={handleChange} />
+                        <Input type="text" name="address" value={clientData.address} onChange={handleChange} />
                     </label>
                 </FormControl>
                 <FormControl>
                     <label>
                         Email:
-                        <Input type="email" name="email" value={client.email} onChange={handleChange} />
+                        <Input type="email" name="email" value={clientData.email} onChange={handleChange} />
                     </label>
                 </FormControl>
                 <FormControl>
                     <label>
                         Phone Number:
-                        <Input type="tel" name="phone_number" value={client.phone_number} onChange={handleChange} />
+                        <Input type="tel" name="mobile_no" value={clientData.mobile_no} onChange={handleChange} />
                     </label>
                 </FormControl>
                 <FormControl>
                     <label>
                         Business:
-                        <Input type="text" name="business" value={client.business} onChange={handleChange} />
+                        <Input type="text" name="company_name" value={clientData.company_name} onChange={handleChange} />
                     </label>
                 </FormControl>
 
@@ -77,7 +80,9 @@ const AddClientForm = ({ onSubmit }) => {
 
 
 
-                <Button type="submit" bg={"green.400"} m="20px auto">Add Client+</Button>
+                <Button type="submit" bg={"green.400"} m="20px auto"
+                onClick={handleSubmit}
+                >Add Client</Button>
 
             </Box>
         </div>

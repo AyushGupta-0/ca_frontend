@@ -32,14 +32,22 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 
+
 const Company_name = (ppx) => {
+    const [selectedCompany, setSelectedCompany] = useState('');
+    const [companyId, setCompanyId] = useState('');
+    const [companyData, setCompanyData] = useState([])
+
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [isShown, setIsShown] = useState(false);
     const initialRef = React.useRef(null)
     const finalRef = React.useRef(null)
+
+    
     const handleClick = (event) => {
         setIsShown(current => !current);
     };
+
 
     const [moreDetails, setMoreDetails] = useState(false);
 
@@ -47,35 +55,27 @@ const Company_name = (ppx) => {
 
     const [imageURL, setImageURL] = useState("");
 
-    const [bussinessName, setBussinessName] = useState("");
-    const [gstinNumber, setGstinNumber] = useState("");
-    const [email, setEmail] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [signature, setSignature] = useState("");
-    const [state, setState] = useState("");
-    const [bussinessAddress, setBussinessAddress] = useState("");
-    const [bussinessCategory, setBussinessCategory] = useState("");
-    const [companies, setCompanies] = useState([])
-    const [company,setCompany] = useState({})
-    const { token } = useSelector(store => store.Signin)
+    const [form,setForm]=useState({
+        companyLogo:"",
+        companyName:"",
+        gstinNumber:"",
+        email:"",
+        phoneNumber:"",
+        signature:"",
+        state:"",
+        businessAddress:"",
+        businessCategory:"",
+        businessType:"",
+        businessRegistrationType:"",
+        businessDescription:""
+    })
 
-    console.log(token)
-    useEffect(() => {
-        const headers = {
-            "token":`${token}`
-        }
-        axios.get(` https://taxservicebackend.onrender.com/firm_registration`, { headers }).then((res) => {
-            setCompanies(res.data)
-            console.log("sadsd", res.data)
-            console.log("comns",companies)
-        })
-    }, [])
+    const token = localStorage.getItem("token");
+
     const handleImages = () => {
        
        
         let count = 0;
-       
-
         for (let i = 0; i < images.length; i++) {
             const storageRef = ref(storage, `/files/${images[i].name}`)
             const uploadTask = uploadBytesResumable(storageRef, images[i]);
@@ -101,21 +101,41 @@ const Company_name = (ppx) => {
         }
     }
 
-    console.log(imageURL)
+   
+    const handleChange=(e)=>{
+        const {value,name}=e.target;
+        setForm({...form,[name]:value});
+        setSelectedCompany(value)
+        console.log("Handle Change", e.target)
+    }
+
 
     useEffect(() => {
         handleImages()
     }, [images])
-    const Company = {
-        name: "Company Name"
+   
+
+    const getFirmData=async()=>{
+        const headers={
+            "token":`${token}`
+        }
+          const res=await axios.get(`https://taxservicebackend.onrender.com/firm_registration`,{headers});
+          const data=res.data;
+          console.log("firm Data",data)
+          setCompanyData(data)
     }
+
+
+    useEffect(()=>{
+        getFirmData()
+    },[])
+
+
     return (
-        <> <Box
-        // position={"sticky"} top="132px" zIndex={"10000"}
-        >
+        <> 
+        <Box>
             <Flex gap={"20px"} justifyContent={"right"} height={"60px"} p={"10px"}
                 bg={"white"}
-
             >
                 <Link to={""}>
                     <Button bg={"red.500"} color={"white"}>
@@ -136,18 +156,15 @@ const Company_name = (ppx) => {
                 padding={"10px"} alignItems={"center"}
                 boxShadow="rgba(3, 102, 214, 0.3) 0px 0px 0px 3px" >
                 <HStack style={{ margin: "10px" }} height="100%">
-                    {/* <Input type="search" placeholder="search" value={""} onChange={""} marginRight={"10px"} /> */}
-                    {/* <Button style={{ backgroundColor: "orange" }} onClick={() => ""}>Search</Button> */}
                     <Image src={search2} width="25px" height="25px" borderRadius={"50%"}
                         onClick={handleClick}
-
                     ></Image>
                 </HStack>
 
                 <Heading fontSize={{ base: "12px", md: "14px", lg: "20px" }} margin={"auto"} cursor={"pointer"} onClick={onOpen}>
-                    <Image src={company?.logo||ylogo} width="25px" height="25px" borderRadius={"50%"}></Image>
+                        <Image src={form?.logo||ylogo} width="25px" height="25px" borderRadius={"50%"}></Image>
 
-                    {company?.name||"Company Name"}
+                    {selectedCompany}
 
                 </Heading>
                 <HStack>
@@ -171,8 +188,7 @@ const Company_name = (ppx) => {
             {isShown &&
                 (<HStack height="100%" position="relative" background={"blackAlpha.800"}
                     padding={"20px"} color={"white"} >
-                    <Input type="search" placeholder="search" marginRight={"10px"} backgroundColor="rgb(255,185,29)" />
-                    {/* <Button style={{ backgroundColor: "orange" }} onClick={() => ""}>Search</Button> */}
+                <Input type="search" placeholder="search" marginRight={"10px"} backgroundColor="rgb(255,185,29)" />
                     <Image src={search3} width="30px" height="30px" borderRadius={"10px"} backgroundColor={"orange"} ></Image>
                 </HStack>)
             }
@@ -194,9 +210,9 @@ const Company_name = (ppx) => {
                     <ModalCloseButton />
                     <ModalBody pb={10}  >
                         <Box></Box>
-                        <Select>
-                            {companies.map((comp) => (
-                                <option value={comp.companyName}>{comp.companyName}</option>
+                        <Select onChange={handleChange} name="companyName">
+                            {companyData?.map((company) => (
+                                <option value={form.companyName} key={form._id}>{form.companyName}</option>
                             ))}
                         </Select>
 

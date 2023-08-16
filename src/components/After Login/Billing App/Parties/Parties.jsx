@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     Box, Button, Flex, HStack, Image, Input, Select, Text, VStack, Wrap, Heading, List,
     ListItem,
@@ -33,6 +33,9 @@ import Slidebar from '../Slidebar/Slidebar';
 import Company_name from '../Company_name/Company_name';
 import remove from '../../../assets/remove.png'
 import print4 from '../../../assets/print4.png'
+import { getPartiesAction } from '../../../../Redux/Parties/parties.action';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const Parties = () => {
     const Company = {
@@ -51,18 +54,24 @@ const Parties = () => {
             
         }
     ]
+    const token = localStorage.getItem("token");
+const dispatch=useDispatch();
+const {partiesData}=useSelector((store)=>store.partiesReducer)
+useEffect(()=>{
+dispatch(getPartiesAction(token));
+},[])
+
+console.log("I AM HERE",partiesData)
+
     return (
 
         <>
             <Company_name company_name={Company.name} />
-
             <Flex >
-
                 <Slidebar />
-
                 <Box margin={"auto"} marginTop="20px" overflow={"hidden"} width="80%">
-                    <Button backgroundColor="blue.400" width={"100px"} margin={"10px"}
-                        onClick={modal1.onOpen}>Add +</Button>
+                    <Button backgroundColor="blue.400" margin={"10px"}
+                        onClick={modal1.onOpen} px='4'>Add Parties +</Button>
                     <TableContainer>
                         <Table>
                             <Thead>

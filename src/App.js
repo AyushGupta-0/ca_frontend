@@ -8,11 +8,10 @@ function App() {
   const token = true;
         
   return (
-    
     <div className="App">
-      <Navbar />
-      {/* <Navbar_AL /> */}
-      <AllRoutes></AllRoutes>
+      <Navbar/>
+      <Navbar_AL/>
+      <AllRoutes/>
       <Footer />
     </div>
   );

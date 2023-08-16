@@ -2,6 +2,7 @@
 import axios from "axios";
 import { ERROR_FIRM_REGISTER, LOADING_FIRM_REGISTER, SUCCESS_FIRM_REGISTER } from "./Firm.Type";
 
+
 export const firmRegisterAction = (formData, token) => (dispatch) => {
     console.log(formData, "token", token);
     const headers = {

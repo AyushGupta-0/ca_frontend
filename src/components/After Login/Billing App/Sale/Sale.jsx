@@ -53,15 +53,15 @@ const Sale
         return (
 
             <>
-                {/* <Company_name company_name={Company.name} /> */}
+                <Company_name company_name={Company.name} />
 
                 <Flex >
 
                     <Slidebar />
                     <Box margin={"auto"} marginTop="20px" overflow={"hidden"} width="80%">
                         <Link to={"/Inventiry_Home"}>
-                            <Button backgroundColor="blue.400" width={"100px"} margin={"10px"}
-                                onClick={modal1.onOpen}>Add +</Button>
+                            <Button backgroundColor="blue.400" px='2' margin={"10px"}
+                                onClick={modal1.onOpen}>Add Sales +</Button>
                         </Link>
                         <TableContainer width="100%">
                             <Table width="100%">

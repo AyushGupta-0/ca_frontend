@@ -7,10 +7,7 @@ import lg5 from "./assets/lg5.png"
 import lg6 from "./assets/lg6.png"
 
 
-
 export default function Home2() {
-
-
     return (
         <Box padding={{base:"0px 8%", lg:"0px 13%"}} mt={{base:"20px", lg:"-50px"}}>
             <Grid gap="25px" templateColumns={{base:"repeat(2,1fr)",lg:"repeat(4,1fr)"}}>

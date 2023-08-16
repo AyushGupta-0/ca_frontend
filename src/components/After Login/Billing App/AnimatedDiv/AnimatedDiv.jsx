@@ -26,14 +26,22 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleDown, faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons';
 import Arrow from "../Arrow/Arrow";
+
+
 const AnimatedDiv = () => {
     const [showDiv, setShowDiv] = useState(false);
+    const [isUp, setIsUp] = useState(false);
+    const [isBlur, setIsBlur] = useState(false);
+
 
     const handleClick = () => {
         setShowDiv(!showDiv);
         arrowClick();
     };
-    const [isUp, setIsUp] = useState(false);
+
+    const handleToggle = () => {
+        setIsBlur(!isBlur);
+    };
 
     const arrowClick = () => {
         setIsUp(!isUp);
@@ -43,19 +51,33 @@ const AnimatedDiv = () => {
 
     return (
         <>
-            <Button onClick={handleClick} bg={"red.400"} w={"100%"} >More Info <span>
-                <FontAwesomeIcon
-                    icon={arrowIcon}
-                    size="2x"
+            <Flex flexDirection='row' width="100%">
+                <Button onClick={handleClick} bg={"red.400"} w={"90%"} >More Info <span>
+                    <FontAwesomeIcon
+                        icon={arrowIcon}
+                        size="2x"
 
-                    style={{
-                        transition: 'transform 0.4s ease-in-out',
-                        transform: isUp ? 'rotate(-180deg)' : 'rotate(0deg)',
-                        height: "20px"
-                    }}
-                />
-            </span>
-            </Button>
+                        style={{
+                            transition: 'transform 0.4s ease-in-out',
+                            transform: isUp ? 'rotate(-180deg)' : 'rotate(0deg)',
+                            height: "20px"
+                        }}
+                    />
+                </span>
+                </Button>
+                {/* privacy button */}
+                <Button bg="blue.500" width="auto">
+                    <Flex fontSize="auto" color="white" alignItems="center" justifyContent="space-between">
+                        Privacy
+                        <label className="switch" ml='2'>
+                            <input type="checkbox" onChange={handleToggle} />
+                            <span className="slider round"></span>
+                        </label>
+                    </Flex>
+                </Button>
+
+            </Flex>
+
             <CSSTransition
                 in={showDiv}
                 timeout={500}

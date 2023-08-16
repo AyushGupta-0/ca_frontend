@@ -140,19 +140,24 @@ import AddClientForm from '../components/Vendor/AddClinentForm'
 import Transaction from '../components/After Login/Billing App/Transaction/Transaction'
 import TransactionTable from '../components/After Login/Billing App/Utilities/Export_to_Tally/TransactionTable'
 
-
+import VendorDashboard from '../components/VendorDashboard/VendorDashboard'
+import VendorDocuments from '../components/VendorDashboard/VendorDocuments'
+import VendorComplaints from '../components/VendorDashboard/VendorComplaints'
+import Privacy_RefundPolicy from '../components/VendorDashboard/Privacy_RefundPolicy'
+import VendorClientsInformation from '../components/VendorDashboard/VendorClientsInformation'
+import VendorFollowUp from '../components/VendorDashboard/VendorFollowUp'
 
 export default function AllRoutes() {
     return (
         <Routes>
-            <Route element={<Home></Home>} path="/" ></Route>
-            <Route element={<Buisness></Buisness>} path="/buisness" ></Route>
-            <Route element={<Tax></Tax>} path="/tax" ></Route>
-            <Route element={<Fund></Fund>} path="/fund" ></Route>
-            <Route element={<Income></Income>} path="/income" ></Route>
-            <Route element={<Ngo></Ngo>} path="/ngo" ></Route>
-            <Route element={<TradeMark></TradeMark>} path="/trademark" ></Route>
-            <Route element={<Software></Software>} path="/it" ></Route>
+            <Route element={<Home/>} path="/" ></Route>
+            <Route element={<Buisness/>} path="/buisness" ></Route>
+            <Route element={<Tax/>} path="/tax" ></Route>
+            <Route element={<Fund/>} path="/fund" ></Route>
+            <Route element={<Income/>} path="/income" ></Route>
+            <Route element={<Ngo/>} path="/ngo" ></Route>
+            <Route element={<TradeMark/>} path="/trademark" ></Route>
+            <Route element={<Software/>} path="/it" ></Route>
             <Route path="/private_limited_company" element={<PrivateLimitedCompany />} />
             <Route path="/limited_liability_partnership" element={<LimitedLiabilityPartnership />} />
             <Route path="/one_persone_company" element={<OnePersoneCompany />} />
@@ -171,8 +176,6 @@ export default function AllRoutes() {
             <Route path="/legal_metrology" element={<LegalMetrology />} />
             <Route path="/usa_incorporation" element={<US_Incorporation />} />
             <Route path="/singapore_incorporation" element={<SingaporeIncorporation />} />
-
-
             <Route path="/trademark_registration" element={<Trademark_Registration />} />
             <Route path="/search_for_trademark" element={<Search_For_Trademark />} />
             <Route path="/respond_objection" element={<Respond_To_TM_Objection />} />
@@ -299,11 +302,12 @@ export default function AllRoutes() {
             <Route element={<Transaction />} path="/Transaction"></Route>
 
             <Route element={<TransactionTable />} path="/TransactionTable"></Route>
-
-
-
-
-
+            <Route element={<VendorDashboard/>} path='/vendor-dashboard'/>
+            <Route element={<VendorDocuments/>} path='/vendor-documents'/>
+            <Route element={<VendorComplaints/>} path='/vendor-complaints'/>
+            <Route element={<Privacy_RefundPolicy/>} path='/privacy-n-refund-policy'/>
+            <Route element={<VendorClientsInformation/>} path='/vendor-clients'/>
+            <Route element={<VendorFollowUp/>} path='/vendor-follow-up'/>
         </Routes>
     );
 }; 

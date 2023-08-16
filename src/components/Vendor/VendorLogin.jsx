@@ -32,8 +32,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LoginAction } from '../../Redux/Singin/Signin.Action';
 import { VENDOR_LoginAction } from '../../Redux/Vender/Vendor.Action';
 
-
-
 const LoginVendorLogin = () => {
 
     const [form, setForm] = useState({ email: "", password: "", })

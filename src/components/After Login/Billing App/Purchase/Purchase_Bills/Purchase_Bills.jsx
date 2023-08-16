@@ -25,6 +25,7 @@ import {
     Td,
     TableCaption,
     TableContainer,
+    Divider,
 
 } from '@chakra-ui/react'
 import { Link } from "react-router-dom";
@@ -137,7 +138,8 @@ const Purchase_Bills = () => {
 
 
                 <Box width={"80%"} padding="10px" m={"auto"} marginTop={"20px"}>
-                    <h1>Purchase_Bills Page</h1>
+                    <h1>Purchase Bills Page</h1>
+                    <Divider mb='4'/>
                     <Flex justifyContent={"space-between"} flexDirection={{
 
                         base: "column",
