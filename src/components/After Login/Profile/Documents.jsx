@@ -12,6 +12,9 @@ import {
   Badge,
   Input,
   HStack,
+  Select,
+  FormControl,
+  FormLabel,
 } from '@chakra-ui/react';
 import { DownloadIcon } from '@chakra-ui/icons';
 import { RiFileUploadLine } from 'react-icons/ri';
@@ -19,7 +22,7 @@ import pako from 'pako';
 
 const Documents = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-
+  const [selectedValue, setSelectedValue] = useState(null);
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
   };
@@ -68,6 +71,10 @@ const Documents = () => {
   const handleDownloadDocument = (documentName) => {
     // Handle download logic here
   };
+  const handelSelect = (e) => {
+
+    setSelectedValue(e.target.value)
+  }
 
   return (
     <Box m="4" p="4">
@@ -80,11 +87,19 @@ const Documents = () => {
         <Stack spacing="4">
           <Flex flexDirection={{ base: 'column', md: 'row' }} alignItems="flex-start">
             {/* KYC Documents Section */}
-            <Box bg="gray.100" p="4" borderRadius="md" flex="1">
+            <Box bg="gray.100" p="4" borderRadius="md" flex="1" minH={"210px"}>
               <Text fontSize="lg" mb="4" color="blue.500">
                 Upload KYC Document
               </Text>
-              <HStack spacing="2" alignItems="flex-start" justifyContent="space-between">
+              <FormControl isRequired>
+                <FormLabel htmlFor="Documents Upload Type"></FormLabel>
+                <Select placeholder='Select Document Type' onChange={handelSelect}>
+                  <option value="Aadhar">Aadhar</option>
+                  <option value="Pan">Pan</option>
+                  <option value="Driving License">Driving License</option>
+                </Select>
+              </FormControl>
+              <HStack spacing="2" alignItems="flex-start" justifyContent="space-between" mt={"10px"}>
                 <label htmlFor="kyc-upload" className="custom-file-upload">
                   <RiFileUploadLine size={30} />
                   Choose a KYC document
@@ -96,17 +111,25 @@ const Documents = () => {
                   style={{ display: 'none' }}
                   onChange={handleFileSelect}
                 />
+
                 {selectedFile && <Text>{selectedFile.name}</Text>}
-                <Button colorScheme="blue" onClick={handleUpload}>
+                <Button
+                  colorScheme={selectedValue == null ? "disabled" : "blue"}
+                  onClick={handleUpload}
+                  disabled={selectedValue == null}
+                
+                >
                   Upload KYC
                 </Button>
+
+
               </HStack>
             </Box>
 
             {/* Document Upload Section */}
-            <Box bg="gray.100" p="4" borderRadius="md" flex="1" ml={{ md: '4' }}>
+            <Box bg="gray.100" p="4" borderRadius="md" flex="1" ml={{ md: '4' }} minH={"210px"}>
               <Text fontSize="lg" mb="4" color="blue.500">
-                Upload New Document
+                Upload Other Document
               </Text>
               <HStack spacing="2" alignItems="flex-start" justifyContent="space-between">
                 <label htmlFor="file-upload" className="custom-file-upload">

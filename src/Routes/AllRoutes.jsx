@@ -140,11 +140,13 @@ import VendorAllClint from '../components/Vendor/VendorAllClint'
 import AddClientForm from '../components/Vendor/AddClinentForm'
 import Transaction from '../components/After Login/Billing App/Transaction/Transaction'
 import TransactionTable from '../components/After Login/Billing App/Utilities/Export_to_Tally/TransactionTable'
+
 import VendorDashboard from '../components/VendorDashboard/VendorDashboard'
-import VendorWorkingPerformance from '../components/VendorDashboard/VendorWorkingPerformance'
-
-
-
+import VendorDocuments from '../components/VendorDashboard/VendorDocuments'
+import VendorComplaints from '../components/VendorDashboard/VendorComplaints'
+import Privacy_RefundPolicy from '../components/VendorDashboard/Privacy_RefundPolicy'
+import VendorClientsInformation from '../components/VendorDashboard/VendorClientsInformation'
+import VendorFollowUp from '../components/VendorDashboard/VendorFollowUp'
 
 export default function AllRoutes() {
     return (
@@ -302,7 +304,11 @@ export default function AllRoutes() {
 
             <Route element={<TransactionTable />} path="/TransactionTable"></Route>
             <Route element={<VendorDashboard/>} path='/vendor-dashboard'/>
-            <Route element={<VendorWorkingPerformance/>} path='/vendor-working-performance'/>
+            <Route element={<VendorDocuments/>} path='/vendor-documents'/>
+            <Route element={<VendorComplaints/>} path='/vendor-complaints'/>
+            <Route element={<Privacy_RefundPolicy/>} path='/privacy-n-refund-policy'/>
+            <Route element={<VendorClientsInformation/>} path='/vendor-clients'/>
+            <Route element={<VendorFollowUp/>} path='/vendor-follow-up'/>
         </Routes>
     );
 }; 

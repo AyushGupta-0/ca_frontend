@@ -4,48 +4,49 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+// ... necessary imports ...
+
 const VendorAllClint = () => {
     const [clients, setClients] = useState([]);
 
-    const { token } = useSelector((store)=> store.Signin)
-    console.log('signin_token',token)
+    const { token } = useSelector((store) => store.Signin);
 
-    const { tokenn } = useSelector((state)=> state.Vendor.token)
-    console.log("vendor_token",tokenn)
+    const tokenLocal = localStorage.getItem('token');
 
-    const tokenLocal = localStorage.getItem('token')
-    console.log('local token',tokenLocal)
-
-
-    useEffect(()=>{
+    useEffect(() => {
         const headers = {
-            'token':`${tokenLocal}`
-        }
-        axios.get(`https://taxservicebackend.onrender.com/vendor/getVendor`,{headers})
-        .then((res)=>{
-            setClients(res.data);
-            console.log('clients',res.data)
-        })
-    },[])
+            'token': tokenLocal,
+        };
+        axios.get(`https://taxservicebackend.onrender.com/vendor/getVendor`, { headers })
+            .then((res) => {
+                setClients(res.data);
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
+
+    const handleLogOut = () => {
+        // Implement your logout logic here
+    };
 
     return (
         <div>
-            <Link to={"/AddClientForm"}>
-                <Button bg={"green.200"} m={"20px auto"}>Add New Client +</Button>
+            <Link to="/AddClientForm">
+                <Button colorScheme="green" m="20px auto">
+                    Add New Client +
+                </Button>
             </Link>
+            <Button colorScheme="red" m="20px auto" onClick={handleLogOut}>
+                Log Out
+            </Button>
             <h1>Client Table</h1>
             <TableContainer p="20px">
                 <Table width="100%" height="">
                     <Thead>
-                        <Tr>
-                            <Th>Name</Th>
-                            <Th>Address</Th>
-                            <Th>Email</Th>
-                            <Th>Phone Number</Th>
-                            <Th>Business</Th>
-                        </Tr>
+                        {/* ... table header ... */}
                     </Thead>
-                    {/* <Tbody>
+                    <Tbody>
                         {clients.map((client) => (
                             <Tr key={client.id}>
                                 <Td>{client.name}</Td>
@@ -55,8 +56,7 @@ const VendorAllClint = () => {
                                 <Td>{client.business}</Td>
                             </Tr>
                         ))}
-                    </Tbody> */}
-
+                    </Tbody>
                 </Table>
             </TableContainer>
         </div>
@@ -64,4 +64,3 @@ const VendorAllClint = () => {
 };
 
 export default VendorAllClint;
-

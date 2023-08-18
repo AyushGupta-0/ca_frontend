@@ -30,6 +30,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+
 import edit from "../../../assets/edit.svg";
 import search3 from "../../../assets/search3.png";
 import ylogo from "../../../assets/ylogo.jpg";
@@ -96,10 +97,13 @@ const Company_name = (ppx) => {
               setImageURL(url);
             }
           });
+
+
         }
       );
     }
   };
+
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -318,3 +322,6 @@ const Company_name = (ppx) => {
 };
 
 export default Company_name;
+
+   
+ 

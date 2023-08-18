@@ -125,7 +125,7 @@ const Stor_Reports = () => {
 
   return (
     <>
-    {/* <Company_name company_name={Company.name} /> */}
+    <Company_name company_name={Company.name} />
       <Flex>
         <Slidebar/>
         {/* Our Monthly Report */}
