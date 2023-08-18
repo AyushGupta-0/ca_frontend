@@ -57,24 +57,9 @@ const Login = () => {
         if (!form.email && !form.password) {
             return alert('Please Fill All the fields')
         }
-        dispatch(LoginAction(form));
+        dispatch(LoginAction(form,navigate));
 
-        if (loginData.status === 200 && loginData.data.token) {
-
-            // alert("Login successful");
-            // navigate("/HomeDash")
-            if (!loginData.data.token) {
-                navigate("/Login")
-            }
-            else
-                if (loginData.data.token && company.length > 0) {
-                    navigate("/HomeDash")
-
-                } else {
-                    navigate("/AddCompanyForm")
-                }
-
-        }
+       
 
     }
 
