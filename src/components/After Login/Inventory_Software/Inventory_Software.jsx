@@ -46,7 +46,7 @@ const Inventory_Software = () => {
                     </Box>
 
                     <Box>
-                        <Link to="/Inventiry_Home"><Button background={"orange"}>Start Now</Button></Link>
+                        <Link to="/HomeDash"><Button background={"orange"}>Start Now</Button></Link>
                     </Box>
 
 
