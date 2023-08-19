@@ -1,8 +1,7 @@
 import { Box, Flex, FormControl, FormLabel, Input, Textarea, useDisclosure, Button, Image } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Select from 'react-select';
+
 import { FirmRegisterAction } from '../../../../Redux/Firm/Firm.Action';
 
 const AddCompanyForm = () => {

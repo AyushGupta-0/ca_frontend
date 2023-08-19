@@ -1,6 +1,6 @@
 import axios from "axios";
 import {
-    DELETE_STOCKS,
+  DELETE_STOCKS,
   ERROR_STOCKS,
   GET_STOCKS,
   LOADING_STOCKS,
@@ -8,21 +8,62 @@ import {
   UPDATE_STOCKS,
 } from "./stock.types";
 
-
-
-export const postStockAction = (creds,token) => (dispatch) => {
-    const headers={
-        "token":`${token}`
-    }
+export const getStockAction = (token, firmId) => (dispatch) => {
+  const headers = {
+    token: `${token}`,
+  };
   dispatch({ type: LOADING_STOCKS });
-  try {
-    const url=`https://taxservicebackend.onrender.com/firmId/items`
-    axios.post(url, creds, { headers }).then((res) => {
+  console.log("st", token,"safsa:",firmId);
+
+  const url = `https://taxservicebackend.onrender.com/item/${firmId}/products`;
+  axios
+    .post(url, { headers })
+    .then((res) => {
+      // dispatch({ type: GET_STOCKS, payload: res.data });
+      console.log("abcd stock", res.data);
+    })
+    .catch((error) => {
+      console.log("sadfsdfsdgdsgdsg", error);
+      dispatch({ type: ERROR_STOCKS, payload: error });
+    });
+};
+
+export const postStockAction = (creds, token) => (dispatch) => {
+  const headers = {
+    token: `${token}`,
+  };
+  dispatch({ type: LOADING_STOCKS });
+
+  const url = `https://taxservicebackend.onrender.com/item/insertproduct`;
+  axios
+    .post(url, creds, { headers })
+    .then((res) => {
       dispatch({ type: SUCCESS_STOCKS, payload: res.data });
+
       console.log(res);
       if (res.status === 201) {
-        alert(res.data.message);
+        alert("Item added successfully");
+
+        // dispatch(getStockAction(token, Number(creds.firmId)));
       }
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({ type: ERROR_STOCKS, payload: error });
+      alert(error.response.data.message);
+    });
+};
+
+export const updateStockAction = (creds, token) => (dispatch) => {
+  const headers = {
+    token: `${token}`,
+  };
+  dispatch({ type: LOADING_STOCKS });
+  try {
+    const url = `https://taxservicebackend.onrender.com/items/id`;
+    axios.put(url, creds, { headers }).then((res) => {
+      dispatch({ type: UPDATE_STOCKS, payload: res.data });
+      console.log(res);
     });
   } catch (error) {
     console.log(error);
@@ -30,50 +71,10 @@ export const postStockAction = (creds,token) => (dispatch) => {
   }
 };
 
-
-export const getStockAction = (token) => (dispatch) => {
-    const headers={
-        "token":`${token}`
-    }
-    dispatch({ type: LOADING_STOCKS });
-    try {
-      const url=`https://taxservicebackend.onrender.com/firmId/items`
-      axios.get(url,{ headers }).then((res) => {
-        dispatch({ type: GET_STOCKS, payload: res.data });
-        console.log("abcd stock", res.data );
-       
-      });
-    } catch (error) {
-      console.log(error);
-      dispatch({ type: ERROR_STOCKS, payload: error });
-    }
-  };
-  
-
-
-  export const updateStockAction = (creds,token) => (dispatch) => {
-    const headers={
-        "token":`${token}`
-    }
-    dispatch({ type: LOADING_STOCKS });
-    try {
-      const url=`https://taxservicebackend.onrender.com/items/id`
-      axios.put(url,creds,{ headers }).then((res) => {
-        dispatch({ type: UPDATE_STOCKS, payload: res.data });
-        console.log(res);
-    
-      });
-    } catch (error) {
-      console.log(error);
-      dispatch({ type: ERROR_STOCKS, payload: error });
-    }
-  };
-  
-
 //   export const deleteStockAction = (token) => (dispatch) => {
-    // const headers={
-    //     "token":`${token}`
-    // }
+// const headers={
+//     "token":`${token}`
+// }
 //     dispatch({ type: LOADING_STOCKS });
 //     try {
 //       const url=`https://taxservicebackend.onrender.com/items/${id}`

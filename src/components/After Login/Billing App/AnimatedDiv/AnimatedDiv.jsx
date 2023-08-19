@@ -1,23 +1,9 @@
 import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import "./styles.css";
-import {
-    Box, Button, Flex, HStack, Image, Input, Select, Text, VStack, Wrap, Heading, List,
-    ListItem,
-    ListIcon,
-    OrderedList,
 
-    UnorderedList,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    AspectRatio,
-    useDisclosure,
-    FormErrorMessage,
+import {
+    Box, Button, Flex, HStack,  Text, VStack,
+
     FormLabel,
     FormControl,
 
