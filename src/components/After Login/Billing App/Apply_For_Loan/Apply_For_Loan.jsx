@@ -1,21 +1,8 @@
 
 import React from 'react'
 import {
-    Box, Button, Flex, HStack, Image, Input, Select, Text, VStack, Wrap, Heading, List,
-    ListItem,
-    ListIcon,
-    OrderedList,
+    Box, Button, Flex, HStack, Image, Text,  Heading,
 
-    UnorderedList,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    AspectRatio,
-    useDisclosure,
 
 } from '@chakra-ui/react'
 import { Link } from "react-router-dom";

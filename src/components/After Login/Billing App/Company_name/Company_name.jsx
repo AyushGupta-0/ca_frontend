@@ -8,14 +8,7 @@ import {
   Input,
   Select,
   Text,
-  VStack,
-  Wrap,
   Heading,
-  List,
-  ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -23,11 +16,8 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  AspectRatio,
   useDisclosure,
-  FormControl,
-  FormLabel,
-  Textarea,
+
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -39,7 +29,8 @@ import user from "../../../assets/user.svg";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../../firebase";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getFirmData, setFirmId, setFirmName } from "../../../../Redux/Firm/Firm.Action";
 
 const Company_name = (ppx) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -73,6 +64,10 @@ const Company_name = (ppx) => {
   });
 
   const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
+  const { get_firm_data, firmId,firmName } = useSelector(
+    (store) => store.FirmRegistation
+  );
 
   const handleImages = () => {
     let count = 0;
@@ -97,42 +92,30 @@ const Company_name = (ppx) => {
               setImageURL(url);
             }
           });
-
-
         }
       );
     }
   };
 
-
   const handleChange = (e) => {
-    const { value, name } = e.target;
-
+    const { value, name} = e.target;
+ 
     setForm({ ...form, [name]: value });
+
+    dispatch(setFirmId(value));
+    dispatch(setFirmName(name));
+
   };
 
   useEffect(() => {
     handleImages();
   }, [images]);
-  const Company = {
-    name: "Company Name",
-  };
-
-  const getFirmData = async () => {
-    const headers = {
-      token: `${token}`,
-    };
-    const res = await axios.get(
-      `https://taxservicebackend.onrender.com/firm_registration`,
-      { headers }
-    );
-    const data = res.data;
-    console.log("firm Data", data);
-  };
 
   useEffect(() => {
-    getFirmData();
+    
+    dispatch(getFirmData(token));
   }, []);
+  console.log(firmId)
 
   return (
     <>
@@ -211,7 +194,7 @@ const Company_name = (ppx) => {
               borderRadius={"50%"}
             ></Image>
 
-            {Company.name}
+            {firmName}
           </Heading>
           <HStack>
             <HStack justifySelf={"end"} cursor={"pointer"} onClick={onOpen}>
@@ -292,10 +275,10 @@ const Company_name = (ppx) => {
             <ModalCloseButton />
             <ModalBody pb={10}>
               <Box></Box>
-              <Select>
-                <option value="Company1">Company1</option>
-                <option value="Company1">Company2</option>
-                <option value="Company1">Company3</option>
+              <Select placeholder="select you firm"  onChange={handleChange}>
+                {get_firm_data?.map((el) => (
+                  <option value={el._id}  name={el.companyName}>{el.companyName}</option>
+                ))}
               </Select>
               <Link to={"/AddCompanyForm"}>
                 <Button m={"10px auto"} bg={"orange.300"}>
@@ -307,10 +290,8 @@ const Company_name = (ppx) => {
             <ModalFooter>
               <Flex justifyContent={"space-between"}>
                 <Box>
-                  <Button colorScheme="blue" mr={3}>
-                    Save
-                  </Button>
-                  <Button onClick={onClose}>Cancel</Button>
+            
+                  <Button onClick={onClose}>Close</Button>
                 </Box>
               </Flex>
             </ModalFooter>
@@ -322,6 +303,3 @@ const Company_name = (ppx) => {
 };
 
 export default Company_name;
-
-   
- 

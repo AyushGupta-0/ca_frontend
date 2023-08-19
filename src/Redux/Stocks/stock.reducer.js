@@ -11,6 +11,7 @@ import {
     loading: false,
     error: false,
     stockData: [],
+    getStockData:[]
   };
   export const stockReducer = (state = initialState, { type, payload }) => {
     switch (type) {
@@ -21,7 +22,7 @@ import {
         return { ...state, loading: false, error: false, stockData: payload };
       }
       case GET_STOCKS: {
-        return { ...state, loading: false, error: false, stockData: payload };
+        return { ...state, loading: false, error: false, getStockData: payload };
       }
       case UPDATE_STOCKS: {
         return { ...state, loading: false, error: false, stockData: payload };

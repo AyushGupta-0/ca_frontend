@@ -7,3 +7,5 @@ export const UPDATE_PARTIES="parties/UPDATE_PARTIES";
 export const DELETE_PARTIES="parties/DELETE_PARTIES";
 
 
+export const GET_PARTY_ID="party/GET_PARTY_ID";
+
