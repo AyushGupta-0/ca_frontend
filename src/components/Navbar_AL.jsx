@@ -27,29 +27,34 @@ export default function Navbar_AL() {
     return (
         <Box position={"sticky"} top={"0px"} zIndex={"1"} justifyContent='center' alignItems='center'>
         {/* top bar */}
-            <Flex p="0 5%" display={{ base: "none", lg: "flex" }} justifyContent="space-between" backgroundColor="#1E1E1E" fontSize="sm" alignItems="center">
-                <Flex alignItems="center" gap="8px" padding="5px" fontFamily="'Montserrat', sans-serif">
+            <Flex p="0 5%" display={{ base: "none", lg: "flex" }}
+            height='40px'
+            justifyContent="space-between" backgroundColor="#1E1E1E" fontSize="sm" alignItems="center">
+                <Flex alignItems="center" gap="8px" fontFamily="'Montserrat', sans-serif">
                     <Link to="/">
-                        <AiFillHome color="white" size={24} />
+                        <AiFillHome color="white" size={20} />
                     </Link>
-                    <Text color="white">
+                    <Text color="white" mt='5' ml='2'>
                         <Link to="#">info.loremipsum.com</Link>
                     </Text>
                 </Flex>
                 <Flex color="white" alignItems="center" gap="8px" padding="5px" as="b" fontFamily="'Poppins', sans-serif">
-                    <Text><Link to="/profile">Contact Us</Link></Text>
-                    <Text borderRight="1px solid white" paddingRight="5px"><Link to="#">Blog</Link></Text>
+                    <Text mt='5'><Link to="/profile">Contact Us</Link></Text>
+                    <Text borderRight="1px solid white" 
+                        paddingRight="5px" mt='5' mr='4'
+                    >
+                    <Link to="#" mt='5' ml='2'>Blog</Link></Text>
                     <Link to="">
-                        <FiMail color="white" size={20} />
+                        <FiMail color="white" size={18} />
                     </Link>
                     <Link to="">
-                        <FiFacebook color="white" size={20} />
+                        <FiFacebook color="white" size={18} />
                     </Link>
                     <Link to="">
-                        <FiTwitter color="white" size={20} />
+                        <FiTwitter color="white" size={18} />
                     </Link>
                     {/* <Link to="">
-                        <FiRss color="white" size={20} />
+                        <FiRss color="white" size={18} />
                     </Link> */}
                 </Flex>
             </Flex>
@@ -62,35 +67,49 @@ export default function Navbar_AL() {
                     <Box width="85%" ml={2}><Image src={icon}/></Box>
                 </Link>
                 <Flex
-                justifyContent="center" // Align children to center horizontally
+                justifyContent="center" 
                 alignItems="center" // Align children to center vertically
                 gap="15px" // Gap between menu items
                 display={{ base: "none", lg: "flex" }} // Responsive display
                 >
-                    <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }} p={"10px"}>
-                    <Link to="/buisness"><BusinessSetup /></Link>
+                    <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }}
+                        mt='2' p='2'
+                    >
+                        <Link to="/buisness"><BusinessSetup/></Link>
                     </Text>
-                    <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }} p={"10px"}>
+                    <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }} mt='2' p='2'
+                    >
                     <Link to="/tax"><TaxCompliance /></Link>
                     </Text>
-                    <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }} p={"10px"}>
+                    <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }}
+                        mt='2' p='2'
+                    >
                     <Link to="/income"><IncomeTax /></Link>
                     </Text>
-                    <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }} p={"10px"}>
+                    <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }}
+                        mt='2' p='2'
+                    >
                     <Link to="/trademark"><TrademarkIP /></Link>
                     </Text>
-                    <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }} p={"10px"}>
+                    <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }}
+                        mt='2' p='2'
+                    >
                     <Link to="/ngo"><NGO /></Link>
                     </Text>
-                    <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }} p={"10px"}>
+                    <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }}
+                        mt='2' p='2'
+                    >
                     <Link to="/fund"><FundRaising /></Link>
                     </Text>
-                    <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }} p={"10px"}>
+                    <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }}
+                        mt='2' p='2'
+                    >
                     <Link to="/Software">SOFTWARE</Link>
                     </Text>
                     {/* user icon */}
                     <Menu alignItems='center'>
                         <MenuButton as={IconButton} icon={<FaUser />} 
+                            mb='3'
                             size='lg'
                             style={{backgroundColor:'transparent'}}
                             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'white'}
@@ -111,8 +130,8 @@ export default function Navbar_AL() {
                             </MenuItem>
                             <MenuItem onClick={()=> navigate('/Profile')}>
                                 <Flex align='center' alignItems='center' justifyContent='center'>
-                                <FaUser/>
-                                <Text ml={2}> My Profile </Text>
+                                    <FaUser/>
+                                    <Text ml={2}> My Profile </Text>
                                 </Flex>
                             </MenuItem>
                         </MenuList>
