@@ -19,18 +19,14 @@ import {
 
 } from '@chakra-ui/react';
 
-
-
-
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-
-import new_ from "../assets/new_.webp"
-import happy_customer from "../assets/happy_customer.webp"
-import multi_device from "../assets/multi_device.webp"
-import multi_user from "../assets/multi_user.webp"
+import new_ from "../assets/new_.webp";
+import happy_customer from "../assets/happy_customer.webp";
+import multi_device from "../assets/multi_device.webp";
+import multi_user from "../assets/multi_user.webp";
 import phone_icon from "../assets/phone_icon.webp"
 import make_gst_bills from "../assets/make_gst_bills.webp"
 import check_inventory_instantly from "../assets/check_inventory_instantly.webp"
@@ -54,6 +50,7 @@ import data from "./data";
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { store } from '../../Store/Store';
+import Navbar_AL from '../Navbar_AL';
 
 
 
@@ -134,15 +131,17 @@ const Software1 = () => {
 
   return (
     <>
+
+      <Navbar_AL/>
       <HStack gap={"30px"} padding={"20px"} flexDirection={{ base: "column", md: "row", lg: "row" }}>
         <VStack gap={"50px"} width={{ base: "100%", md: "50%", lg: "50%" }}>
           <Heading color={"blackAlpha.700"} fontWeight={"extrabold"}>
             GST Billing Software in India for Small Businesses
           </Heading>
           <Text>Manage your business professionally with us. Using the best software for your billing, inventory & accounting needs. Be a part of 1 Cr+ SMEs in India who trust us.</Text>
-          {/* <Link to='/profile'> */}
-          <Button bg={"orange"} padding={"30px 50px"} onClick={freeHandle}>Start For Free</Button>
-          {/* </Link> */}
+          <Link to='/software-login'>
+            <Button bg={"orange"} padding={"30px 50px"} onClick={freeHandle}>Start For Free</Button>
+          </Link>
         </VStack>
         <VStack width={{ base: "100%", md: "50%", lg: "50%" }}>
           <Image src={new_} width={{ base: "100%", md: "70%", lg: "70%" }}></Image>

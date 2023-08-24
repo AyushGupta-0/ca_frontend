@@ -9,7 +9,6 @@ function App() {
 
   return (
     <div className="App">
-      {token ? <Navbar_AL /> : <Navbar />}
       <AllRoutes />
       <Footer />
     </div>

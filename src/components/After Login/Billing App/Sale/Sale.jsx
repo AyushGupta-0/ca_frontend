@@ -1,40 +1,24 @@
 import React from 'react'
 import {
-    Box, Button, Flex, HStack, Image, Input, Select, Text, VStack, Wrap, Heading, List,
-    ListItem,
-    ListIcon,
-    OrderedList,
-
-    UnorderedList,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    AspectRatio,
+    Box, Button, Flex,
     useDisclosure,
-    FormControl,
-    FormLabel,
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCaption,
     TableContainer,
-
+    Icon,
+    Link,
 } from '@chakra-ui/react'
-import { Link } from "react-router-dom";
+import { Link as RouterLink} from "react-router-dom";
 import Slidebar from '../Slidebar/Slidebar';
 import Company_name from '../Company_name/Company_name';
-import remove from '../../../assets/remove.png'
-import print4 from '../../../assets/print4.png'
-const Sale
-    = () => {
+import { FiDownload, FiShare2 } from 'react-icons/fi';
+
+
+const Sale = () => {
         const Company = {
             name: "Company Name"
         }
@@ -54,41 +38,48 @@ const Sale
 
             <>
                 <Company_name company_name={Company.name} />
-
                 <Flex >
-
                     <Slidebar />
                     <Box margin={"auto"} marginTop="20px" overflow={"hidden"} width="80%">
-                        <Link to={"/Inventiry_Home"}>
+                        <Link as={RouterLink} to={"/billing-software"}>
                             <Button backgroundColor="blue.400" px='2' margin={"10px"}
                                 onClick={modal1.onOpen}>Add Sales +</Button>
                         </Link>
-                        <TableContainer width="100%">
+                        <TableContainer width="100%" alignItems='center'
+                        justifyContent='center'
+                        bg="white" boxShadow="md" p="4"
+                        >
                             <Table width="100%">
                                 <Thead>
                                     <Tr>
-                                        <Th isNumeric>Invoice No</Th>
-                                        <Th>Item Name</Th>
-                                        <Th isNumeric>Quantity</Th>
-                                        <Th isNumeric>Price/Unit <br /> With Out Tax</Th>
-                                        <Th isNumeric>Tax</Th>
-                                        <Th isNumeric>Amount</Th>
-                                        <Th>Print</Th>
-                                        <Th>Delete</Th>
+                                        <Th style={{ border: '1px solid gray' }}>Invoice No</Th>
+                                        <Th style={{ border: '1px solid gray' }}>Date</Th>
+                                        <Th style={{ border: '1px solid gray' }}>Amount</Th>
+                                        <Th style={{ border: '1px solid gray' }}>Tax</Th>
+                                        <Th style={{ border: '1px solid gray' }}>Total Amount</Th>
+                                        <Th style={{ border: '1px solid gray' }}>Actions</Th>
                                     </Tr>
                                 </Thead>
                                 <Tbody>
                                     {
                                         Items.map((data) =>
                                             <Tr key={data.id}>
-                                                <Td isNumeric>{data.id}</Td>
-                                                <Td>{data.Name}</Td>
-                                                <Td isNumeric>{data.quantity}</Td>
-                                                <Td isNumeric>{data.price}</Td>
-                                                <Td isNumeric>{data.tax}</Td>
-                                                <Td isNumeric>{data.total}</Td>
-                                                <Td><Image src={print4} width={"20px"} borderRadius={"50%"}></Image></Td>
-                                                <Td><Image src={remove} width={"20px"} borderRadius={"50%"}></Image></Td>
+                                                <Td style={{ border: '1px solid gray' }}>{data.invoiceNumber}</Td>
+                                                <Td style={{ border: '1px solid gray' }}>{data.date}</Td>
+                                                <Td style={{ border: '1px solid gray' }}>{data.amount}</Td>
+                                                <Td style={{ border: '1px solid gray' }}>{data.tax}</Td>
+                                                <Td style={{ border: '1px solid gray' }}>{data.total}</Td>
+                                                <Td style={{ border: '1px solid gray' }}>
+                                                    <Link color="blue.500" mr="2" textDecoration='underline'>
+                                                    view
+                                                    </Link>
+                                                    <Link color="blue.500" mr="2">
+                                                        <Icon as={FiDownload} />
+                                                    </Link>
+                                                    <Link color="blue.500">
+                                                        <Icon as={FiShare2} />
+                                                    </Link>
+                                                </Td>
                                             </Tr>
                                         )
 
