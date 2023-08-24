@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import img1 from "./assets/img1.png";
 import css from "./animate.css";
 import React, { useState, useEffect } from "react";
-
 import { MdReadMore } from "react-icons/md";
 import data from "./data";
 

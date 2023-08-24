@@ -36,6 +36,7 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Slidebar from "../Slidebar/Slidebar";
@@ -49,6 +50,7 @@ import {
   setPartyId,
 } from "../../../../Redux/Parties/parties.action";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Parties = () => {
   const Company = {
@@ -95,6 +97,19 @@ const Parties = () => {
 
   console.log("I AM HERE",getPartiesData);
 
+  // validate gst no.
+  const isValidGSTNo = (gstNo) => {
+    const gstPattern = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9A-Z]{1}[Z]{1}[0-9A-Z]{1}$/;
+    return gstPattern.test(gstNo);
+  }
+  // handle row click
+  const navigate = useNavigate();
+
+  const handleRowClick = (partyId) => {
+    // Handle row click to navigate to respective page
+    navigate(`/partyInvoice`);
+  };
+
   return (
     <>
       <Company_name company_name={Company.name} />
@@ -109,87 +124,92 @@ const Parties = () => {
           >
             Add Parties +
           </Button>
-          <TableContainer>
-            <Table>
-              <Thead>
+          <TableContainer 
+          style={{ margin: '20px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', 
+          borderRadius: '8px'}}
+          >
+            <Table style={{ borderCollapse: 'collapse', width: '100%' }}>
+              <Thead style={{ textAlign: 'center' }}>
                 <Tr>
-                  <Th isNumeric>Party Id</Th>
-                  <Th>Party Name</Th>
-                  <Th>GSTIN</Th>
-                  <Th isNumeric>Phone No.</Th>
-                  <Th isEmail>Email</Th>
-                  <Th>Billing Address</Th>
-                  <Th>Shipping Address</Th>
-                  {/* <Th isNumeric>Amount</Th> */}
-                  {/* <Th>Print</Th> */}
-                  {/* <Th>Delete</Th> */}
+                  <Th isNumeric style={{ border: '1px solid gray' }}>Party ID</Th>
+                  <Th style={{ border: '1px solid gray' }}>Party Name</Th>
+                  <Th style={{ border: '1px solid gray' }}>Due Amount </Th>
+                  <Th style={{ border: '1px solid gray' }}>Paid Amount </Th>
+                  <Th style={{ border: '1px solid gray' }}>Total Invoice</Th>
                 </Tr>
               </Thead>
               <Tbody>
-                {getPartiesData?.map((data) => (
-                  <Tr key={data._id}>
-                    <Td isNumeric>{data._id}</Td>
-                    <Td>{data.partyName}</Td>
-                    <Td>{data.GSTNo}</Td>
-                    <Td isNumeric>{data.phoneNumber}</Td>
-                    <Td isEmail>{data.email}</Td>
-                    <Td>{data.billingAddress}</Td>
-                    <Td>{data.shippingAddress}</Td>
-                    {/* <Td><Image src={print4} width={"20px"} borderRadius={"50%"}></Image></Td> */}
-                    {/* <Td>
-                      <Image
-                        src={remove}
-                        width={"20px"}
-                        borderRadius={"50%"}
-                        onClick={()=>removeParty(token,data._id,firmId)}
-                      ></Image>
-                    </Td> */}
-                  </Tr>
-                ))}
+              {getPartiesData?.map((data) => (
+              <Tr key={data._id} onClick={() => handleRowClick(data._id)} style={{ cursor: 'pointer' }}>
+                <Td isNumeric style={{ border: '1px solid gray' }}>{data._id}</Td>
+                <Td style={{ border: '1px solid gray' }}>{data.partyName}</Td>
+                <Td style={{ border: '1px solid gray' }}>{data.paidAmount}</Td>
+                <Td style={{ border: '1px solid gray' }}>{data.dueAmount}</Td>
+                <Td style={{ border: '1px solid gray' }}>{data.totalInvoice}</Td>
+              </Tr>
+              ))}
               </Tbody>
             </Table>
           </TableContainer>
         </Box>
+
+        {/* Add new party */}
         <Modal isOpen={modal1.isOpen} onClose={modal1.onClose}>
           <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Add New Party</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <FormControl margin={"10px"}>
-                <FormLabel>Party Name :</FormLabel>
+          <ModalContent
+            maxW="70%"
+            margin="10px"
+            borderRadius="8px"
+            boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
+            paddingLeft="20px"
+            paddingRight="40px"
+          >
+
+            <ModalHeader style={{ borderBottom: '1px solid #E2E8F0', padding: '16px' }}>
+              Add New Party
+            </ModalHeader>
+            <ModalCloseButton style={{ padding: '12px' }}/>
+            <ModalBody style={{ padding: '16px' }}>
+              <Flex direction='row'>
+                <FormControl margin={"10px"}>
+                  <FormLabel>Party Name :</FormLabel>
+                  <Input
+                    type="text"
+                    placeholder="Party Name"
+                    value={form.partyName}
+                    name="partyName"
+                    onChange={handleChangeParty}
+                  />
+                </FormControl>
+                <FormControl margin={"10px"}>
+                <FormLabel>Email :</FormLabel>
                 <Input
-                  type="text"
-                  placeholder="Party Name"
-                  value={form.partyName}
-                  name="partyName"
+                  type="email"
+                  placeholder="Email"
+                  value={form.email}
+                  name="email"
                   onChange={handleChangeParty}
                 />
-              </FormControl>
-
-              <FormControl margin={"10px"}>
+                </FormControl>
+              </Flex>
+              
+              <Flex>
+                {/* GST no. */}
+                <FormControl margin={"10px"}>
                 <FormLabel>GST NO :</FormLabel>
                 <Input
-                  type="text"
-                  placeholder="GST NO"
-                  value={form.GSTNo}
-                  name="GSTNo"
-                  onChange={handleChangeParty}
+                type="text"
+                placeholder="GST NO"
+                value={form.GSTNo}
+                name="GSTNo"
+                onChange={handleChangeParty}
+                isInvalid={!isValidGSTNo(form.GSTNo) && form.GSTNo !== ""}
                 />
-              </FormControl>
-
-              <FormControl margin={"10px"}>
-                <FormLabel>Phone Number :</FormLabel>
-                <Input
-                  type="number"
-                  placeholder="Phone Number "
-                  value={form.phoneNumber}
-                  name="phoneNumber"
-                  onChange={handleChangeParty}
-                />
-              </FormControl>
-
-              <FormControl margin={"10px"}>
+                {!isValidGSTNo(form.GSTNo) && form.GSTNo !== "" && (
+                <FormErrorMessage>Please enter a valid GST number</FormErrorMessage>
+                )}
+                </FormControl>
+                <FormControl margin={"10px"}>
                 <FormLabel>GST Type :</FormLabel>
                 <Select
                   placeholder="GST Type"
@@ -199,54 +219,57 @@ const Parties = () => {
                   <option value="c_gst">cgst</option>
                   <option value="s_gst">sgst</option>
                 </Select>
-              </FormControl>
-
-              <FormControl margin={"10px"}>
-                <FormLabel>State :</FormLabel>
-                <Input
-                  type="text"
-                  placeholder="State"
-                  value={form.state}
-                  name="state"
-                  onChange={handleChangeParty}
-                />
-              </FormControl>
-
-              <FormControl margin={"10px"}>
-                <FormLabel>Email :</FormLabel>
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  value={form.email}
-                  name="email"
-                  onChange={handleChangeParty}
-                />
-              </FormControl>
-
-              <FormControl margin={"10px"}>
-                <FormLabel>Billing Address:</FormLabel>
-                <Input
-                  type="text"
-                  placeholder="Billing Address"
-                  value={form.billingAddress}
-                  name="billingAddress"
-                  onChange={handleChangeParty}
-                />
-              </FormControl>
-
-              <FormControl margin={"10px"}>
-                <FormLabel>Shipping Address :</FormLabel>
-                <Input
-                  type="text"
-                  placeholder="Shipping Address"
-                  value={form.shippingAddress}
-                  name="shippingAddress"
-                  onChange={handleChangeParty}
-                />
-              </FormControl>
+                </FormControl>
+              </Flex>
+              
+              <Flex>
+                <FormControl margin={"10px"}>
+                  <FormLabel>Phone Number :</FormLabel>
+                  <Input
+                    type="number"
+                    placeholder="Phone Number "
+                    value={form.phoneNumber}
+                    name="phoneNumber"
+                    onChange={handleChangeParty}
+                  />
+                </FormControl>
+                <FormControl margin={"10px"}>
+                  <FormLabel>State :</FormLabel>
+                  <Input
+                    type="text"
+                    placeholder="State"
+                    value={form.state}
+                    name="state"
+                    onChange={handleChangeParty}
+                  />
+                </FormControl>
+              </Flex>
+              
+              <Flex>
+                <FormControl margin={"10px"}>
+                  <FormLabel>Billing Address:</FormLabel>
+                  <Input
+                    type="text"
+                    placeholder="Billing Address"
+                    value={form.billingAddress}
+                    name="billingAddress"
+                    onChange={handleChangeParty}
+                  />
+                </FormControl>
+                <FormControl margin={"10px"}>
+                  <FormLabel>Shipping Address :</FormLabel>
+                  <Input
+                    type="text"
+                    placeholder="Shipping Address"
+                    value={form.shippingAddress}
+                    name="shippingAddress"
+                    onChange={handleChangeParty}
+                  />
+                </FormControl>
+              </Flex>
             </ModalBody>
 
-            <ModalFooter>
+            <ModalFooter style={{ borderTop: '1px solid #E2E8F0', padding: '16px' }}>
               <Button colorScheme="blue" mr={3} onClick={modal1.onClose}>
                 Close
               </Button>

@@ -77,6 +77,7 @@ import Shops_and_Establishments_License from '../components/Tax & Compilance/Sho
 import ESOP from '../components/Tax & Compilance/ESOP/ESOP'
 import Posh from '../components/Tax & Compilance/Posh/Posh '
 import Login from '../components/Login/Login'
+import SoftwareLogin from '../components/SoftWare/SoftwareLogin'
 
 import Signup from '../components/Signup/Signup'
 
@@ -89,7 +90,6 @@ import Changes_to_LLP_Agreement from '../components/Tax & Compilance/Changes_to_
 import Close_the_LLP from '../components/Tax & Compilance/Close_the_LLP/Close_the_LLP'
 import Profile from '../components/After Login/Profile/Profile'
 import Inventory_Software from '../components/After Login/Inventory_Software/Inventory_Software'
-import Inventiry_Home from '../components/After Login/Billing App/Home/Inventiry_Home'
 import Slidebar from '../components/After Login/Billing App/Slidebar/Slidebar'
 import Company_name from '../components/After Login/Billing App/Company_name/Company_name'
 import Parties from '../components/After Login/Billing App/Parties/Parties'
@@ -147,6 +147,8 @@ import VendorComplaints from '../components/VendorDashboard/VendorComplaints'
 import Privacy_RefundPolicy from '../components/VendorDashboard/Privacy_RefundPolicy'
 import VendorClientsInformation from '../components/VendorDashboard/VendorClientsInformation'
 import VendorFollowUp from '../components/VendorDashboard/VendorFollowUp'
+import PartyInvoice from '../components/After Login/Billing App/Parties/PartyInvoice'
+import BillingSoftware from '../components/After Login/Billing App/billingSoftware/BillingSoftware'
 
 export default function AllRoutes() {
     return (
@@ -243,10 +245,13 @@ export default function AllRoutes() {
             {/* <Route element={<Profile />} path="/Profile" ></Route> */}
 
             <Route element={<Inventory_Software />} path="/Inventory_Software" ></Route>
-            <Route element={<Inventiry_Home />} path="/Inventiry_Home" ></Route>
+            {/* <Route element={<Inventiry_Home />} path="/Inventiry_Home" ></Route> */}
             <Route element={<Slidebar />} path="/Slidebar" ></Route>
             <Route element={<Company_name />} path="/Company_name" ></Route>
+            {/* parties */}
             <Route element={<Parties />} path="/Parties" ></Route>
+            <Route element={<PartyInvoice/>} path='/partyInvoice'/>
+
             <Route element={<Items />} path="/Items" ></Route>
             <Route element={<Sale />} path="/Sale" ></Route>
             <Route element={<Purchase />} path="/Purchase" ></Route>
@@ -265,6 +270,7 @@ export default function AllRoutes() {
             <Route element={<Loan_Account />} path="/Loan_Account" ></Route>
 
             <Route element={<Software1 />} path="/Software" ></Route>
+            <Route element={< SoftwareLogin/>} path='/software-login'/>
             {/* <PrivateRoute><</PrivateRoute> */}
             <Route element={<HomeDash />} path="/HomeDash" ></Route>
 
@@ -289,19 +295,14 @@ export default function AllRoutes() {
             <Route element={<Close_Financial_Year />} path="/Close_Financial_Year"></Route>
             <Route element={<Auto />} path="/Auto"></Route>
             <Route element={<DashOS />} path="/DashOS"></Route>
-
             <Route element={<Manage_Item />} path="/Manage_Item"></Route>
-
             <Route element={<Manage_Orders />} path="/Manage_Orders"></Route>
-
             <Route element={<Stor_Reports />} path="/Stor_Reports"></Route>
-
             <Route element={<AddCompanyForm />} path="/AddCompanyForm"></Route>
             <Route element={<LoginVendorLogin />} path="/LoginVendorLogin"></Route>
             <Route element={<VendorAllClint />} path="/VendorAllClint"></Route>
             <Route element={<AddClientForm />} path="/AddClientForm"></Route>
             <Route element={<Transaction />} path="/Transaction"></Route>
-
             <Route element={<TransactionTable />} path="/TransactionTable"></Route>
             <Route element={<VendorDashboard/>} path='/vendor-dashboard'/>
             <Route element={<VendorDocuments/>} path='/vendor-documents'/>
@@ -309,6 +310,7 @@ export default function AllRoutes() {
             <Route element={<Privacy_RefundPolicy/>} path='/privacy-n-refund-policy'/>
             <Route element={<VendorClientsInformation/>} path='/vendor-clients'/>
             <Route element={<VendorFollowUp/>} path='/vendor-follow-up'/>
+            <Route element={<BillingSoftware/>} path='/billing-software'/>
         </Routes>
     );
 }; 

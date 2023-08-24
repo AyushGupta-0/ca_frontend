@@ -3,6 +3,7 @@ import Home5 from "../components/SoftWare/Home5"
 import Home6 from "../components/SoftWare/Home6"
 import Customer from "../components/Customers";
 import { Box, Flex, Heading, HStack, Image, Text } from '@chakra-ui/react';
+import Navbar_AL from '../components/Navbar_AL';
 let images = ["https://images.pexels.com/photos/955402/pexels-photo-955402.jpeg?auto=compress&cs=tinysrgb&w=600",
     "https://images.pexels.com/photos/450035/pexels-photo-450035.jpeg?auto=compress&cs=tinysrgb&w=600",
     "https://images.pexels.com/photos/845451/pexels-photo-845451.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -20,6 +21,7 @@ export default function SoftWare() {
 
     return (
         <>
+            <Navbar_AL/>
             <Box
                 maxWidth={"99vw"}
                 overflowX="hidden"
@@ -45,11 +47,11 @@ export default function SoftWare() {
                         ))
                     }
                 </HStack>
-                <Home4></Home4>
+                <Home4/>
             </Box>
-            <Home5></Home5>
-            <Home6></Home6>
-            <Customer></Customer>
+            <Home5/>
+            <Home6/>
+            <Customer/>
         </>
     )
 }
