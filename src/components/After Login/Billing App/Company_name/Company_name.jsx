@@ -202,6 +202,7 @@ const Company_name = (ppx) => {
                 src={edit}
                 backgroundColor={"white"}
                 width="20px"
+                padding='4px'
                 borderRadius={"50%"}
               ></Image>
               <Text
@@ -217,6 +218,7 @@ const Company_name = (ppx) => {
                   src={user}
                   backgroundColor={"white"}
                   width="20px"
+                  padding='4px'
                   borderRadius={"50%"}
                 ></Image>
                 <Text

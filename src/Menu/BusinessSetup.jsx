@@ -18,14 +18,14 @@ const BusinessSetup = () => {
 
     return (
         <Box>
-            <Box 
+            <div 
                 onMouseEnter={() => setDownArrow(true)} 
                 onMouseLeave={() => setDownArrow(false)} 
                 className="Trademark_Menu" 
                 onClick={() => toggleFunc()}
-            >
+            >   
                 BUSINESS SETUP
-            </Box>
+            </div>
             {
                 isActive ? (
                     <Box mt="90px" className="hover_Box_Container1" onMouseLeave={() => ChangeActive()}>

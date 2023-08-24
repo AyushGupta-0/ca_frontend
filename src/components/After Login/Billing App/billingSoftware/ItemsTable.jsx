@@ -28,31 +28,35 @@ const ItemsTable = () => {
   ];
 
   return (
-    <TableContainer bg='white'>
+    <TableContainer bg='white'
+      margin= '15px'
+      border= '0.1px solid lightgray'
+      boxShadow= 'rgba(149, 157, 165, 0.2) 0px 8px 24px'
+    >
       <Table variant="simple">
         <Thead>
         <Tr>
-          <Th style={{ border: '1px solid gray' }}>Item ID</Th>
-          <Th style={{ border: '1px solid gray' }}>Item Name</Th>
-          <Th style={{ border: '1px solid gray' }}>Category</Th>
-          <Th style={{ border: '1px solid gray' }}>Quantity</Th>
-          <Th style={{ border: '1px solid gray' }}>Item Price</Th>
-          <Th style={{ border: '1px solid gray' }}>GST</Th>
-          <Th style={{ border: '1px solid gray' }}>HSN/SSN Code</Th>
-          <Th style={{ border: '1px solid gray' }}>Total Price</Th>
+          <Th style={{ border: '1px solid lightgray' }}>Item ID</Th>
+          <Th style={{ border: '1px solid lightgray' }}>Item Name</Th>
+          <Th style={{ border: '1px solid lightgray' }}>Category</Th>
+          <Th style={{ border: '1px solid lightgray' }}>Quantity</Th>
+          <Th style={{ border: '1px solid lightgray' }}>Item Price</Th>
+          <Th style={{ border: '1px solid lightgray' }}>GST</Th>
+          <Th style={{ border: '1px solid lightgray' }}>HSN/SSN Code</Th>
+          <Th style={{ border: '1px solid lightgray' }}>Total Price</Th>
         </Tr>
         </Thead>
         <Tbody>
         {items.map(item => (
           <Tr key={item.id} height='50px'>
-            <Td style={{ border: '1px solid gray' }}>{item.id}</Td>
-            <Td style={{ border: '1px solid gray' }}>{item.name}</Td>
-            <Td style={{ border: '1px solid gray' }}>{item.category}</Td>
-            <Td style={{ border: '1px solid gray' }}>{item.quantity}</Td>
-            <Td style={{ border: '1px solid gray' }}>{item.price}</Td>
-            <Td style={{ border: '1px solid gray' }}>{item.gst}</Td>
-            <Td style={{ border: '1px solid gray' }}>{item.hsnCode}</Td>
-            <Td style={{ border: '1px solid gray' }}>{item.totalPrice}</Td>
+            <Td style={{ border: '1px solid lightgray' }}>{item.id}</Td>
+            <Td style={{ border: '1px solid lightgray' }}>{item.name}</Td>
+            <Td style={{ border: '1px solid lightgray' }}>{item.category}</Td>
+            <Td style={{ border: '1px solid lightgray' }}>{item.quantity}</Td>
+            <Td style={{ border: '1px solid lightgray' }}>{item.price}</Td>
+            <Td style={{ border: '1px solid lightgray' }}>{item.gst}</Td>
+            <Td style={{ border: '1px solid lightgray' }}>{item.hsnCode}</Td>
+            <Td style={{ border: '1px solid lightgray' }}>{item.totalPrice}</Td>
           </Tr>
         ))}
         </Tbody>

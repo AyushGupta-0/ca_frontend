@@ -4,7 +4,7 @@ import { Box, Heading, Input, Flex, Text, Select } from '@chakra-ui/react';
 const Invoice = () => {
   return (
     <Box p="2">
-      <Heading size="md" mb="2">
+      <Heading size="md" mb="4">
         INVOICE
       </Heading>
       <Flex mb="2">
