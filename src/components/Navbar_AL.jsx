@@ -94,7 +94,7 @@ export default function Navbar_AL() {
                     <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }}
                         mt='2' p='2'
                     >
-                    <Link to="/ngo"><NGO /></Link>
+                    <Link to="/ngo"><NGO/></Link>
                     </Text>
                     <Text _hover={{ backgroundColor: "white", borderRadius: "10px" }}
                         mt='2' p='2'

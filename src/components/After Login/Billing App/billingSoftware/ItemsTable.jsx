@@ -54,7 +54,7 @@ const ItemsTable = () => {
             <Td style={{ border: '1px solid lightgray' }}>{item.category}</Td>
             <Td style={{ border: '1px solid lightgray' }}>{item.quantity}</Td>
             <Td style={{ border: '1px solid lightgray' }}>{item.price}</Td>
-            <Td style={{ border: '1px solid lightgray' }}>{item.gst}</Td>
+            <Td style={{ border: '1px solid lightgray' }}>{item.gst}%</Td>
             <Td style={{ border: '1px solid lightgray' }}>{item.hsnCode}</Td>
             <Td style={{ border: '1px solid lightgray' }}>{item.totalPrice}</Td>
           </Tr>

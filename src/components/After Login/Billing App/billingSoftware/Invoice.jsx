@@ -19,12 +19,12 @@ const Invoice = () => {
         <Text flex="0 0 120px">Payment Mode:</Text>
         <Select placeholder="Mode" size="sm" flex="1" />
       </Flex>
-      <Flex mb="2">
+      {/* <Flex mb="2">
         <Text flex="0 0 120px">Tax:</Text>
         <Input flex="1" size="sm" />
-      </Flex>
+      </Flex> */}
       <Flex mb="2">
-        <Text flex="0 0 120px">GST:</Text>
+        <Text flex="0 0 120px">GST Number:</Text>
         <Input flex="1" size="sm" />
       </Flex>
       <Flex mb="2">

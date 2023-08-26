@@ -149,6 +149,9 @@ import VendorClientsInformation from '../components/VendorDashboard/VendorClient
 import VendorFollowUp from '../components/VendorDashboard/VendorFollowUp'
 import PartyInvoice from '../components/After Login/Billing App/Parties/PartyInvoice'
 import BillingSoftware from '../components/After Login/Billing App/billingSoftware/BillingSoftware'
+import Reports from '../components/After Login/Billing App/reports/Reports'
+import IndividualReport from '../components/After Login/Billing App/reports/IndividualReport'
+import EditReport from '../components/After Login/Billing App/reports/EditReport'
 
 export default function AllRoutes() {
     return (
@@ -311,6 +314,9 @@ export default function AllRoutes() {
             <Route element={<VendorClientsInformation/>} path='/vendor-clients'/>
             <Route element={<VendorFollowUp/>} path='/vendor-follow-up'/>
             <Route element={<BillingSoftware/>} path='/billing-software'/>
+            <Route element={<Reports/>} path='/reports'/>
+            <Route element={<IndividualReport/>} path='/individual-report'/>
+            <Route element={<EditReport/>} path='/edit-report'/>
         </Routes>
     );
 }; 

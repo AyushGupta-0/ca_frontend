@@ -33,6 +33,7 @@ import {
   postStockAction,
 } from "../../../../Redux/Stocks/stock.action";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 
 const Items = () => {
@@ -151,7 +152,7 @@ const Items = () => {
             <Table style={{ width: '100%' }}>
               <Thead>
                 <Tr>
-                  <Th>ID</Th>
+                  <Th>Product Code</Th>
                   <Th>Name</Th>
                   <Th>Brand</Th>
                   <Th>Stock Qty</Th>
@@ -162,7 +163,7 @@ const Items = () => {
                   <Th>Expiry Date</Th>
                   <Th>GST Rate</Th>
                   <Th>Description</Th>
-                  <Th> Update </Th>
+                  <Th> Actions </Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -178,7 +179,11 @@ const Items = () => {
                     <Td>{data.manufactureDate}</Td>
                     <Td>{data.expiryDate}</Td>
                     <Td>{data.description}</Td>
-                    <Td><Link>Update</Link></Td>
+                    <Td>
+                      <Link><FaEdit/></Link>
+                      <Link>more</Link>
+                      <Link><FaTrash/></Link>
+                    </Td>
                   </Tr>
                 ))}
               </Tbody>
@@ -230,12 +235,12 @@ const Items = () => {
                   />
                 </FormControl>
                 <FormControl margin={"10px"}>
-                  <FormLabel>Stock Quantity :</FormLabel>
+                  <FormLabel>Unit :</FormLabel>
                   <Input
                     type="number"
-                    placeholder="Stock Quantity"
-                    value={form.stockQuantity}
-                    name="stockQuantity"
+                    placeholder="Unit"
+                    value={form.unit}
+                    name="unit"
                     onChange={handleChangeItems}
                   />
                 </FormControl>
@@ -274,6 +279,23 @@ const Items = () => {
                   />
                 </FormControl>
                 <FormControl margin={"10px"}>
+                    <FormLabel> GST Rate:</FormLabel>
+                    <Select
+                      type="number"
+                      placeholder="select gst Rate"
+                      onChange={handleChangeItems}
+                    >
+                      <option value={0}>0%</option>
+                      <option value={3}>3%</option>
+                      <option value={5}>5%</option>
+                      <option value={12}>12%</option>
+                      <option value={18}>18%</option>
+                      <option value={28}>28%</option>
+                    </Select>
+                </FormControl>
+              </Flex>
+              <Flex>
+                <FormControl margin={"10px"}>
                   <FormLabel>Manufacture Date:</FormLabel>
                   <Input
                     type="date"
@@ -283,8 +305,6 @@ const Items = () => {
                     onChange={handleChangeItems}
                   />
                 </FormControl>
-              </Flex>
-              <Flex>
                 <FormControl margin={"10px"}>
                   <FormLabel>Expiry Date:</FormLabel>
                   <Input
@@ -295,31 +315,29 @@ const Items = () => {
                     onChange={handleChangeItems}
                   />
                 </FormControl>
+              </Flex>
+              <Flex>
                 <FormControl margin={"10px"}>
-                  <FormLabel> GST Rate:</FormLabel>
-                  <Select
+                  <FormLabel>Stock Quantity :</FormLabel>
+                  <Input
                     type="number"
-                    placeholder="select gst Rate"
+                    placeholder="Stock Quantity"
+                    value={form.stockQuantity}
+                    name="stockQuantity"
                     onChange={handleChangeItems}
-                  >
-                    <option value={0}>0%</option>
-                    <option value={5}>5%</option>
-                    <option value={12}>12%</option>
-                    <option value={18}>18%</option>
-                    <option value={28}>28%</option>
-                  </Select>
+                  />
+                </FormControl>
+                <FormControl margin={"10px"}>
+                  <FormLabel>Description :</FormLabel>
+                  <Input
+                    type="text"
+                    placeholder="description"
+                    value={form.description}
+                    name="description"
+                    onChange={handleChangeItems}
+                  />
                 </FormControl>
               </Flex>
-              <FormControl margin={"10px"}>
-                <FormLabel>Description :</FormLabel>
-                <Input
-                  type="text"
-                  placeholder="description"
-                  value={form.description}
-                  name="description"
-                  onChange={handleChangeItems}
-                />
-              </FormControl>
             </ModalBody>
 
             <ModalFooter>
