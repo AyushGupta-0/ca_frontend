@@ -32,6 +32,22 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getFirmData, setFirmId, setFirmName } from "../../../../Redux/Firm/Firm.Action";
 
+
+const FYData = [
+  {
+    year:'2023-24'
+  },
+  {
+    year:'2022-23'
+  },
+  {
+    year:'2021-22'
+  },
+  {
+    year:'2020-21'
+  }
+]
+
 const Company_name = (ppx) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isShown, setIsShown] = useState(false);
@@ -197,7 +213,7 @@ const Company_name = (ppx) => {
             {firmName}
           </Heading>
           <HStack>
-            <HStack justifySelf={"end"} cursor={"pointer"} onClick={onOpen}>
+            {/* <HStack justifySelf={"end"} cursor={"pointer"} onClick={onOpen}>
               <Image
                 src={edit}
                 backgroundColor={"white"}
@@ -211,7 +227,7 @@ const Company_name = (ppx) => {
               >
                 Edit
               </Text>
-            </HStack>
+            </HStack> */}
             <Link to={"/Profile"}>
               <HStack justifySelf={"end"} cursor={"pointer"}>
                 <Image
@@ -257,7 +273,7 @@ const Company_name = (ppx) => {
             ></Image>
           </HStack>
         )}
-        {/* edit from */}
+        {/* edit company */}
 
         <Modal
           initialFocusRef={initialRef}
@@ -272,17 +288,26 @@ const Company_name = (ppx) => {
                 marginTop: "70px",
               }}
             >
-              Edit Firm
+              Edit Company
             </ModalHeader>
             <ModalCloseButton />
             <ModalBody pb={10}>
               <Box></Box>
-              <Select placeholder="select you firm"  onChange={handleChange}>
-                {get_firm_data?.map((el) => (
-                  <option value={el._id}  name={el.companyName}>{el.companyName}</option>
-                ))}
-              </Select>
-              <Link to={"/AddCompanyForm"}>
+              <Flex alignItems='center' gap='20px'>
+                <Select placeholder="select you company"  onChange={handleChange}>
+                  {get_firm_data?.map((el) => (
+                    <option value={el._id}  name={el.companyName}>{el.companyName}</option>
+                  ))}
+                </Select>
+                <Select placeholder="select financial year"
+                  onChange={handleChange}
+                >
+                  {FYData?.map((FY)=>(
+                    <option>{FY.year}</option>
+                  ))}
+                </Select>
+              </Flex>
+              <Link to={"/AddCompanyForm"} mt='2'>
                 <Button m={"10px auto"} bg={"orange.300"}>
                   Add New Company +
                 </Button>
@@ -292,8 +317,7 @@ const Company_name = (ppx) => {
             <ModalFooter>
               <Flex justifyContent={"space-between"}>
                 <Box>
-            
-                  <Button onClick={onClose}>Close</Button>
+                  <Button onClick={onClose}>Done</Button>
                 </Box>
               </Flex>
             </ModalFooter>

@@ -37,6 +37,9 @@ import {
   TableCaption,
   TableContainer,
   FormErrorMessage,
+  InputGroup,
+  InputRightElement,
+  InputRightAddon,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Slidebar from "../Slidebar/Slidebar";
@@ -51,17 +54,29 @@ import {
 } from "../../../../Redux/Parties/parties.action";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { SearchIcon } from "@chakra-ui/icons";
+
+
 
 const Parties = () => {
   const Company = {
     name: "Company Name",
   };
   const modal1 = useDisclosure();
-
   const token = localStorage.getItem("token");
   const { firmId } = useSelector((store) => store.FirmRegistation);
   const dispatch = useDispatch();
   const { getPartiesData } = useSelector((store) => store.partiesReducer);
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredData, setFilteredData] = useState(getPartiesData);
+
+  const handleSearch = (e) =>{
+    setSearchQuery(e.target.value);
+    setFilteredData(getPartiesData.filter((data)=>
+      data.partyName.toLowerCase().includes(searchQuery.toLowerCase())
+    ))
+  }
 
   const [form, setForm] = useState({
     partyName: "",
@@ -78,7 +93,6 @@ const Parties = () => {
     e.preventDefault();
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
-
   };
 
   const handleAddParty = () => {
@@ -116,17 +130,30 @@ const Parties = () => {
       <Flex>
         <Slidebar />
         <Box margin={"auto"} marginTop="20px" overflow={"hidden"} width="80%">
-          <Button
-            backgroundColor="blue.400"
-            margin={"10px"}
-            onClick={modal1.onOpen}
-            px="4"
-          >
-            Add Parties +
-          </Button>
+          <Flex margin='15px' justifyContent='space-between' alignItems='center'>
+            <InputGroup>
+              <Input
+                placeholder="search..."
+                value={searchQuery}
+                onChange={handleSearch}
+                size='sm'
+                width='40%'
+              />
+              <InputRightAddon size='sm' outline='none' height='32px'>
+                <SearchIcon color='black'/>
+              </InputRightAddon>
+            </InputGroup>
+            <Button
+              backgroundColor="blue.400"
+              margin={"10px"}
+              onClick={modal1.onOpen}
+              px="4"
+            >
+              Add Parties +
+            </Button>
+          </Flex>
           <TableContainer 
-          style={{ margin: '20px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', 
-          borderRadius: '8px'}}
+          style={{ margin: '20px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'}}
           >
             <Table style={{ borderCollapse: 'collapse', width: '100%' }}>
               <Thead style={{ textAlign: 'center' }}>
@@ -139,7 +166,7 @@ const Parties = () => {
                 </Tr>
               </Thead>
               <Tbody>
-              {getPartiesData?.map((data) => (
+              {filteredData?.map((data) => (
               <Tr key={data._id} onClick={() => handleRowClick(data._id)} style={{ cursor: 'pointer' }}>
                 <Td isNumeric style={{ border: '1px solid gray' }}>{data._id}</Td>
                 <Td style={{ border: '1px solid gray' }}>{data.partyName}</Td>
