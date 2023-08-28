@@ -54,9 +54,7 @@ const Expenses
 
             <>
                 <Company_name company_name={Company.name} />
-
                 <Flex >
-
                     <Slidebar />
                     <Box margin={"auto"} marginTop="20px" overflow={"hidden"} width="80%">
                         <Button backgroundColor="blue.400" width={"100px"} margin={"10px"}
