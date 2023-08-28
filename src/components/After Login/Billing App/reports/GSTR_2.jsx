@@ -55,7 +55,7 @@ const tableData = [
 
 ]
 
-const GSTR_1 = () => {
+const GSTR_2 = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [searchData, setSearchData] = useState(tableData);
@@ -75,7 +75,7 @@ const GSTR_1 = () => {
 
       <Box Flex='1' padding='15px'
       >
-        <Heading size='md' mt='2'> GSTR1 Reports</Heading>
+        <Heading size='md' mt='2'> GSTR2 Reports</Heading>
         <Flex alignItems='right' position='absolute' right="230" top="140">
                     <Text ml="10">pdf</Text>
                     <Text ml="10">xls</Text>
@@ -111,18 +111,26 @@ const GSTR_1 = () => {
           <Table>
             <Thead>
               <Tr>
+
               <Th style={{ border: '1px solid gray' }}>GSTIN/UIN of Recipient</Th>
-                <Th style={{ border: '1px solid gray' }}>Receiver Name</Th>
                 <Th style={{ border: '1px solid gray' }}>Invoice date</Th>
                 <Th style={{ border: '1px solid gray' }}>Invoice Value</Th>
                 <Th style={{ border: '1px solid gray' }}>Place Of Supply</Th>
                 <Th style={{ border: '1px solid gray' }}>Reverse Charge</Th>
-                <Th style={{ border: '1px solid gray' }}>Applicable % of Tax Rate</Th>
                 <Th style={{ border: '1px solid gray' }}>Invoice Type</Th>
-                <Th style={{ border: '1px solid gray' }}>E-Commerce GSTIN</Th>
                 <Th style={{ border: '1px solid gray' }}>Rate</Th>
                 <Th style={{ border: '1px solid gray' }}>Taxable Value</Th>
-                <Th style={{ border: '1px solid gray' }}>Cess Amount</Th>
+                <Th style={{ border: '1px solid gray' }}>Integrated Tax Paid</Th>
+                <Th style={{ border: '1px solid gray' }}>Central Tax Paid</Th>
+                <Th style={{ border: '1px solid gray' }}>State/UT Tax Paid</Th>
+                <Th style={{ border: '1px solid gray' }}>Cess Tax Paid</Th>
+                <Th style={{ border: '1px solid gray' }}>Eligibility For ITC</Th>
+                <Th style={{ border: '1px solid gray' }}>Availed ITC Integrated Tax</Th>
+                <Th style={{ border: '1px solid gray' }}>Availed ITC Central Tax</Th>
+                <Th style={{ border: '1px solid gray' }}>Availed ITC State/UT Tax</Th>
+                <Th style={{ border: '1px solid gray' }}>Availed ITC State/UT Tax</Th>
+
+    
               </Tr>
             </Thead>
             <Tbody>
@@ -141,6 +149,11 @@ const GSTR_1 = () => {
                   <Td style={{ border: '1px solid gray' }}>{data.rate}</Td>
                   <Td style={{ border: '1px solid gray' }}>{data.taxableValue}</Td>
                   <Td style={{ border: '1px solid gray' }}>{data.cessAmount}</Td>
+                  <Td style={{ border: '1px solid gray' }}>{data.invoiceType}</Td>
+                  <Td style={{ border: '1px solid gray' }}>{data.invoiceType}</Td>
+                  <Td style={{ border: '1px solid gray' }}>{data.invoiceType}</Td>
+                  <Td style={{ border: '1px solid gray' }}>{data.invoiceType}</Td>
+                  <Td style={{ border: '1px solid gray' }}>{data.invoiceType}</Td>
                 </Tr>
               ))}
             </Tbody>
@@ -151,4 +164,4 @@ const GSTR_1 = () => {
   )
 }
 
-export default GSTR_1
+export default GSTR_2

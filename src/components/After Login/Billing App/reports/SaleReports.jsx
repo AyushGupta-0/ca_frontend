@@ -62,6 +62,10 @@ const SaleReports = () => {
                 <Box Flex='1' padding='15px'
                 >
                     <Heading size='md' mt='2'> Sale Reports</Heading>
+                    <Flex alignItems='right' position='absolute' right="230" top="140">
+                    <Text ml="10">pdf</Text>
+                    <Text ml="10">xls</Text>
+                    </Flex>
 
                     <Flex justifyContent='space-between' alignItems='center'
                         margin='30px'

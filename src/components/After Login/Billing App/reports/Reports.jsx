@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom'
 import SaleReports from './SaleReports'
 import PurchaseReport from './PurchaseReport'
 import GSTR_1 from './GSTR_1'
+import GSTR_3B from './GSTR_3B'
+import GSTR_2 from './GSTR_2'
 
 
 const Company = {
@@ -14,34 +16,34 @@ const Company = {
 }
 const tableData = [
     {
-        reportNo:'1',
-        customerName:'aa',
-        amount:50,
-        balance:20,
-        date:'25-08-2023'
+        reportNo: '1',
+        customerName: 'aa',
+        amount: 50,
+        balance: 20,
+        date: '25-08-2023'
     },
     {
-        reportNo:'2',
-        customerName:'bb',
-        amount:40,
-        balance:20,
-        date:'23-08-2023'
+        reportNo: '2',
+        customerName: 'bb',
+        amount: 40,
+        balance: 20,
+        date: '23-08-2023'
     },
     {
-        reportNo:'3',
-        customerName:'cc',
-        amount:40,
-        balance:20,
-        date:'22-08-2023'
+        reportNo: '3',
+        customerName: 'cc',
+        amount: 40,
+        balance: 20,
+        date: '22-08-2023'
     },
     {
-        reportNo:'4',
-        customerName:'zz',
-        amount:70,
-        balance:20,
-        date:'21-08-2023'
+        reportNo: '4',
+        customerName: 'zz',
+        amount: 70,
+        balance: 20,
+        date: '21-08-2023'
     },
-    
+
 ]
 
 const Reports = () => {
@@ -59,32 +61,40 @@ const Reports = () => {
         navigate('/individual-report')
     }
 
-    switch(selectedReportType){
-        case 'SALE_REPORT':
-            <SaleReports/>
-        case 'PURCHASE_REPORT':
-            <PurchaseReport/>
-        case 'GSTR-1':
-            <GSTR_1/>
+    const ReportAsPerType = () => {
+        switch (selectedReportType) {
+            case 'SALE_REPORT':
+                return <SaleReports />
+            case 'PURCHASE_REPORT':
+                return <PurchaseReport />
+            case 'GSTR-1':
+                return <GSTR_1 />
+                case 'GSTR-2':
+                    return <GSTR_2/>
+            case 'GSTR-3B':
+                return <GSTR_3B />
+        }
     }
+
     return (
         <>
-            <Company_name company_name={Company.name}/>
+            <Company_name company_name={Company.name} />
             <Flex>
-                <Slidebar/>
-                <Box Flex='1' padding='15px'
+                <Slidebar />
+                <Box Flex='1' padding='15px' width="100%"
                 >
-                    <Flex justifyContent='space-between' alignItems='center'
-                    width='300px'
-                    margin='auto'
+                    <Flex justifyContent='center' alignItems='center'
+                        margin='auto'
+                        flexDirection="column"
+                        width="100%"
                     >
                         <Heading size='md'>Reports</Heading>
-                        <Select placeholder='Select Report Type' 
-                        value={selectedReportType}
-                        onChange={handleReportType}
-                        size='sm'
-                        ml='4'
-                        width='250px'
+                        <Select placeholder='Select Report Type'
+                            value={selectedReportType}
+                            onChange={handleReportType}
+                            size='sm'
+                            ml='4'
+                            width='250px'
                         >
                             <optgroup label='Transaction'>
                                 <option value='SALE_REPORT'>Sale Report</option>
@@ -133,8 +143,11 @@ const Reports = () => {
                                 <option>TCS Recievable</option>
                             </optgroup>
                         </Select>
-                    </Flex>
+                        <Box margin="auto">
+                            {ReportAsPerType()}
 
+                        </Box>
+                    </Flex>
                 </Box>
             </Flex>
         </>
