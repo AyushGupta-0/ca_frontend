@@ -43,7 +43,6 @@ import restore from "../../../assets/restore.png";
 import "./Slidbar.css";
 import BackdropExample from './pop';
 
-
 const Slidebar = () => {
 
     const { isOpen, onToggle } = useDisclosure()
@@ -61,7 +60,9 @@ const Slidebar = () => {
 
 
     return (
+
         <Box minHeight={"600px"} backgroundColor="rgb(1,37,70)" color={"white"} padding={"5px"} boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
+
         position="sticky" left={"0px"} top={"0"} height={{base:"100vh",md:"100vh"}} overflowY={"scroll"} 
         // scrollbarWidth="thin" 
         css={{
@@ -367,7 +368,7 @@ const Slidebar = () => {
 
                 </Link>
 
-                <Link to={"/reports"}>
+                <Link to={""}>
                     <HStack width={{ base: "20px", md: "180px", lg: "180px" }} marginTop={"8px"} p={"2px"} cursor={"pointer"}
                         _hover={{
                             backgroundColor: "orange", borderRadius: "10px",
