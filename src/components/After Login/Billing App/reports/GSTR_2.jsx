@@ -4,7 +4,16 @@ import Slidebar from '../Slidebar/Slidebar'
 import { Box, Flex, Heading, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Button, Input, InputRightAddon, InputGroup, Select, Text } from '@chakra-ui/react'
 import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons'
 import { useNavigate } from 'react-router-dom'
-
+import GSTR2_b2b from "./GstR2_Reports/GSTR2_b2b";
+import GSTR2_b2bur from "./GstR2_Reports/GSTR2_b2bur";
+import GSTR2_cdnr from "./GstR2_Reports/GSTR2_cdnr";
+import GSTR2_cdnur from "./GstR2_Reports/GSTR2_cdnur";
+import GSTR2_exemp from "./GstR2_Reports/GSTR2_exemp";
+import GSTR2_hsnsum from "./GstR2_Reports/GSTR2_hsnsum";
+import GSTR2_impg from "./GstR2_Reports/GSTR2_impg";
+import GSTR2_imps from "./GstR2_Reports/GSTR2_imps";
+import GSTR2_itcr from "./GstR2_Reports/GSTR2_itcr";
+import GSTR2_at from "./GstR2_Reports/GSTR2_at";
 
 const Company = {
   name: "Company Name"
@@ -82,7 +91,7 @@ const GSTR_2 = () => {
 
       <Box Flex='1' padding='15px'
       >
-        <Heading size='md' mt='2'> GSTR2 Reports</Heading>
+        {/* <Heading size='md' mt='2'>GSTR2 Reports</Heading> */}
         <Flex alignItems='right' position='absolute' right="230" top="140">
           <Button fontSize={"10px"} bg={"blue.400"} marginLeft="10px">Print</Button>
           <Button fontSize={"10px"} bg={"blue.400"} marginLeft="10px">Excel</Button>
@@ -110,36 +119,27 @@ const GSTR_2 = () => {
             GSTR2 AT
           </Button>
           <Button onClick={() => handleOpenScreen("screen8")} mb={2} mr={2}>
-            GSTR1 EXEMP
+            GSTR2 EXEMP
           </Button>
           <Button onClick={() => handleOpenScreen("screen9")} mb={2} mr={2}>
-            GSTR1 ITCR
+            GSTR2 ITCR
           </Button>
           <Button onClick={() => handleOpenScreen("screen10")} mb={2} mr={2}>
-            GSTR1 HSNSUM
+            GSTR2 HSNSUM
           </Button>
-          {/* {currentScreen === null && <GSTR1_b2b />}
-          {currentScreen === "screen1" && <GSTR1_b2b />}
-          {currentScreen === "screen2" && <GSTR1_b2ba />}
-          {currentScreen === "screen3" && <GSTR1_b2cl />}
-          {currentScreen === "screen4" && <GSTR1_b2cla />}
-          {currentScreen === "screen5" && <GSTR1_b2cs />}
-          {currentScreen === "screen6" && <GSTR1_b2csa />}
-          {currentScreen === "screen7" && <GSTR1_cdnr />}
-          {currentScreen === "screen8" && <GSTR1_cdnra />}
-          {currentScreen === "screen9" && <GSTR1_cdnur />}
-          {currentScreen === "screen10" && <GSTR1_cdnura />}
-          {currentScreen === "screen11" && <GSTR1_exp />}
-          {currentScreen === "screen12" && <GSTR1_expa />}
-          {currentScreen === "screen13" && <GSTR1_at />}
-          {currentScreen === "screen14" && <GSTR1_ata />}
-          {currentScreen === "screen15" && <GSTR1_atadj />}
-          {currentScreen === "screen16" && <GSTR1_atadja />}
-          {currentScreen === "screen17" && <GSTR1_exemp />}
-          {currentScreen === "screen18" && <GSTR1_hsn />}
-          {currentScreen === "screen19" && <GSTR1_docs />} */}
+          {currentScreen === null && <GSTR2_b2b />}
+          {currentScreen === "screen1" && <GSTR2_b2b />}
+          {currentScreen === "screen2" && <GSTR2_b2bur />}
+          {currentScreen === "screen3" && <GSTR2_imps />}
+          {currentScreen === "screen4" && <GSTR2_impg />}
+          {currentScreen === "screen5" && <GSTR2_cdnr />}
+          {currentScreen === "screen6" && <GSTR2_cdnur />}
+          {currentScreen === "screen7" && <GSTR2_at />}
+          {currentScreen === "screen8" && <GSTR2_exemp />}
+          {currentScreen === "screen9" && <GSTR2_itcr />}
+          {currentScreen === "screen10" && <GSTR2_hsnsum />}
         </Box>
-        <Flex justifyContent='space-between' alignItems='center'
+        {/* <Flex justifyContent='space-between' alignItems='center'
           margin='30px'
           flexDirection={{ base: 'column', md: 'row' }}
         >
@@ -217,7 +217,7 @@ const GSTR_2 = () => {
               ))}
             </Tbody>
           </Table>
-        </TableContainer>
+        </TableContainer> */}
       </Box>
     </>
   )
