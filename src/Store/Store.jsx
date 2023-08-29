@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
     Auth: Auth_Reducer,
     Signin: Signin_Reducer,
     Profile: Profile_Reducer,
-    FirmRegistation: Firm_Reducer,
+    FirmRegistration: Firm_Reducer,
 
     Vendor: Vendor_Reducer,
     partiesReducer: partiesReducer,

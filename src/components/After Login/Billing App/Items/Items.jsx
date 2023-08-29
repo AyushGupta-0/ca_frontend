@@ -56,7 +56,7 @@ const Items = () => {
   const modal1 = useDisclosure();
   const modal2 = useDisclosure();
   const token = localStorage.getItem("token");
-  const { firmId } = useSelector((store) => store.FirmRegistation);
+  const { firmId } = useSelector((store) => store.FirmRegistration);
   const { getStockData } = useSelector((store) => store.stockReducer);
   const dispatch = useDispatch();
   const [form, setForm] = useState({

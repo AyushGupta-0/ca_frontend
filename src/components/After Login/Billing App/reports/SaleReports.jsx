@@ -63,8 +63,8 @@ const SaleReports = () => {
                 >
                     <Heading size='md' mt='2'> Sale Reports</Heading>
                     <Flex alignItems='right' position='absolute' right="230" top="140">
-                    <Text ml="10">pdf</Text>
-                    <Text ml="10">xls</Text>
+                    <Button fontSize={"10px"} bg={"blue.400"} marginLeft="10px">Print</Button>
+                    <Button fontSize={"10px"} bg={"blue.400"} marginLeft="10px">Excel</Button>
                     </Flex>
 
                     <Flex justifyContent='space-between' alignItems='center'

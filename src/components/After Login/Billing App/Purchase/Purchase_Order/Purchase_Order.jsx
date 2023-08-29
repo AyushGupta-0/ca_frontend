@@ -1,306 +1,118 @@
-
-
-
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import {
-    Box, Button, Flex, HStack, Image, Input, Select, Text, VStack, Wrap, Heading, List,
-    ListItem,
-    ListIcon,
-    OrderedList,
-
-    UnorderedList,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    AspectRatio,
-    useDisclosure,
-    Table,
-    Thead,
-    Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    TableCaption,
-    TableContainer,
-
+    Box, Button, Flex, Input, Select, Text, Heading,
+    Table, Thead, Tbody, Tr, Th, Td, TableContainer, InputGroup, InputLeftElement,
 } from '@chakra-ui/react'
-import { Link } from "react-router-dom";
 import Slidebar from '../../Slidebar/Slidebar';
 import Company_name from '../../Company_name/Company_name';
+import { useNavigate } from 'react-router-dom';
+import { FaPrint, FaSearch, FaShare } from 'react-icons/fa';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 
+
+const company = {
+    name : 'Company Name'
+}
+const parties = [
+    { id: 1, name: "Party 1", dueDate:'28-08-2023', advanced: 1500, balance: 300 },
+    { id: 2, name: "Party 2", dueDate:'27-08-2023', advanced: 2000, balance: 400 },
+    { id: 3, name: "Party 3", dueDate:'27-08-2023', advanced: 1200, balance: 100 },
+    { id: 4, name: "Party 4", dueDate:'25-08-2023', advanced: 800, balance: 200 },
+];
 
 const Purchase_Order = () => {
-    const clientsData = [
-        { id: 1, name: "John Doe", phone: "123-456-7890" },
-        { id: 2, name: "ane Doe", phone: "234-567-8901" },
-        { id: 3, name: "Bob Smith", phone: "345-678-9012" },
-        { id: 4, name: "ohn Doe", phone: "663-456-7890" },
-        { id: 5, name: "Jane Doe", phone: "534-567-8901" },
-        { id: 6, name: "ob Smith", phone: "945-678-9012" },
-    ];
+        const navigate = useNavigate();
+        const [selectedOrderType, setSelectedOrderType] = useState('All');
 
-    const [searchQuery, setSearchQuery] = useState("");
-    const [selectedClient, setSelectedClient] = useState(null);
-    const [referenceNumber, setReferenceNumber] = useState("");
-    const [invoiceDate, setInvoiceDate] = useState("");
-    const [supplyDate, setSupplyDate] = useState("");
-
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
-
-    const handleClientSelect = (client) => {
-        setSelectedClient(client);
-    };
-
-    const handleCalculatorClick = () => {
-        // handle calculator button click
-        window.open("calc.exe");
-    };
-
-    const filteredClients = clientsData.filter(
-        (client) =>
-            client.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            client.phone.includes(searchQuery)
-    );
-
-
-    ////
-    const [tableData, setTableData] = useState([
-        { id: 1, item: 'Item 1', quantity: 1, unitPrice: 10, taxPercent: 10, amount: 11 },
-        { id: 2, item: 'Item 2', quantity: 2, unitPrice: 20, taxPercent: 10, amount: 44 },
-        { id: 3, item: 'Item 3', quantity: 3, unitPrice: 30, taxPercent: 10, amount: 99 },
-    ]);
-
-    const [newRowData, setNewRowData] = useState({
-        id: null,
-        item: '',
-        quantity: 0,
-        unitPrice: 0,
-        taxPercent: 0,
-        amount: 0,
-    });
-
-    const handleTableInputChange = (event, index, key) => {
-        const newData = [...tableData];
-        newData[index][key] = event.target.value;
-        setTableData(newData);
-    };
-
-    const handleAddRow = () => {
-        const newId = Math.max(...tableData.map((data) => data.id)) + 1;
-        setTableData([...tableData, { ...newRowData, id: newId }]);
-    };
-
-    const handleDeleteRow = (index) => {
-        const newData = [...tableData];
-        newData.splice(index, 1);
-        setTableData(newData);
-    };
-
-    const handleSaveTableData = () => {
-        console.log(tableData);
-        // Perform save logic here
-    };
-
-    const calculateAmount = (quantity, unitPrice, taxPercent) => {
-        const amount = quantity * unitPrice;
-        const taxAmount = (taxPercent / 100) * amount;
-        return amount + taxAmount;
-    };
-    const calop = () => {
-        window.href = ("%WINDOWS%\system32\calc.exe");
-    }
-    const calculateTotalPurchase_OrderAmount = () => {
-        const Purchase_OrderAmounts = tableData.map((row) => {
-            const amount = row.quantity * row.unitPrice;
-            const taxAmount = (row.taxPercent / 100) * amount;
-            return amount + taxAmount;
-        });
-        const totalPurchase_OrderAmount = Purchase_OrderAmounts.reduce((total, amount) => total + amount, 0);
-        return totalPurchase_OrderAmount;
-    };
-const Company={name:"Company Name"}
-    return (
-
-        <>
-            <Company_name company_name={Company.name} />
-
-            <Flex  >
-                
-
-                <Slidebar />
-
-
-
-                <Box width={"80%"} padding="10px" m={"auto"} marginTop={"20px"}>
-                    <h1>Purchase_Order Page</h1>
-                    <Flex justifyContent={"space-between"} flexDirection={{
-
-                        base: "column",
-                        md: "row",
-                        lg: "row"
-                    }}>
-
-                        <Box >
-                            <div>
-
-                                <Input
-                                    type="text"
-                                    id="searchQuery"
-                                    placeholder='Search by name or phone number'
-                                    value={searchQuery}
-                                    onChange={handleSearchChange}
-                                />
-                            </div>
-                            <h2>Client List</h2>
-                            <VStack h={"130px"} overflow={"scroll"} p={"5px"} scroll={{
-
-                            }} >
-
-                                {filteredClients.map((client) => (
-                                    <Box key={client.id} onClick={() => handleClientSelect(client)}
-                                        style={{
-                                            border: "1px solid black",
-                                            boxShadow: "2px black",
-                                            padding: "5px",
-                                            width: "90%",
-                                            borderRadius: "10px"
-                                        }}
-                                    >
-                                        <Text>
-                                            {client.id} <br /> {client.name} <br /> {client.phone}
-                                        </Text>
-                                    </Box>
-                                ))}
-                            </VStack>
-
-                        </Box>
-
-                        <Box>
-                            <h2>Selected Client</h2>
-                            {selectedClient ? (
-                                <div>
-                                    <p>id: {selectedClient.id}</p>
-                                    <p>Name: {selectedClient.name}</p>
-                                    <p>Phone: {selectedClient.phone}</p>
-                                </div>
-                            ) : (
-                                <p>No client selected.</p>
-                            )}
-                        </Box>
-                        <Box>
-                            <div>
-                                <label htmlFor="referenceNumber">Reference Number:</label>
-                                <input
-                                    type="text"
-                                    id="referenceNumber"
-                                    value={referenceNumber}
-                                    onChange={(e) => setReferenceNumber(e.target.value)}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="invoiceDate">Invoice Date:</label>
-                                <input
-                                    type="date"
-                                    id="invoiceDate"
-                                    value={invoiceDate}
-                                    onChange={(e) => setInvoiceDate(e.target.value)}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="supplyDate">Supply Date:</label>
-                                <input
-                                    type="date"
-                                    id="supplyDate"
-                                    value={supplyDate}
-                                    onChange={(e) => setSupplyDate(e.target.value)}
-                                />
-                            </div>
-                        </Box>
-                    </Flex>
-
-                    {/* {table} */}
-
-                    <Box width="100%" height="">
-
-
-                        <h2>Items</h2>
-                        <TableContainer width="100%" margin={"auto"} height="" overflow="scroll">
-                            <Table >
+        return (
+            <>
+                <Company_name company_name={company.name}/>
+                <Flex>
+                    <Slidebar/>
+                    <Box flex='1' width='100%'>
+                        <Flex p='4'justifyContent='center'>
+                            <Heading size='md'>Purchase Order</Heading>
+                        </Flex>
+                        
+                        <Flex alignItems='center'
+                        justifyContent='space-between'
+                        margin='15px'
+                        flexDirection={{base:'column', md:'row'}}
+                        >
+                            {/* select to view */}
+                            <Flex width={{ base: '100%', md: '150px' }} margin={{ base: '0 0 10px 0', md: '0' }}>
+                                <Select
+                                size='sm'
+                                rightIcon={<ChevronDownIcon />}
+                                placeholder="Choose to View"
+                                defaultValue='All'
+                                value={selectedOrderType}
+                                onChange={(e)=>setSelectedOrderType(e.target.value)}
+                                >
+                                    <option value='All'>All</option>
+                                    <option value='Open Orders'>Open Orders</option>
+                                    <option value='Closed Orders'>Closed Orders</option>
+                                </Select>
+                            </Flex>
+                            <Flex width={{ base: '100%', md: '300px' }} margin={{ base: '0 0 10px 0', md: '0' }}>
+                                <InputGroup>
+                                    <InputLeftElement>
+                                        <FaSearch mt='-1'/>
+                                    </InputLeftElement>
+                                    <Input placeholder='Search Order' size='sm'/>
+                                </InputGroup>
+                            </Flex>
+                            <Button colorScheme='red' onClick={()=>navigate('/add-purchase-order')}
+                                width={{ base: '100%', md: '200px' }}
+                                size='md'
+                            >
+                                Add Purchase Order + 
+                            </Button>
+                        </Flex>
+                        
+                        {/* table */}
+                        <TableContainer marginX='15px' boxShadow='md' mt='2'
+                        >
+                            <Table>
                                 <Thead>
                                     <Tr>
-                                        <Th>Item No</Th>
-                                        <Th>Item</Th>
-                                        <Th>Quantity</Th>
-                                        <Th>Per Unit Price</Th>
-                                        <Th>Tax %</Th>
-                                        <Th>Amount</Th>
-                                        <Th>Delete</Th>
+                                        <Th style={{border:'0.1px solid lightgray'}}>Party Name</Th>
+                                        <Th style={{border:'0.1px solid lightgray'}}>Advanced</Th>
+                                        <Th style={{border:'0.1px solid lightgray'}}>Balance</Th>
+                                        <Th style={{border:'0.1px solid lightgray'}}>Due Date</Th>
+                                        <Th style={{border:'0.1px solid lightgray'}}>Actions</Th>
                                     </Tr>
                                 </Thead>
                                 <Tbody>
-                                    {tableData.map((data, index) => (
-                                        <Tr key={data.id}>
-                                            <Td>{data.id}</Td>
-                                            <Td>
-                                                <input type="text" value={data.item} onChange={(e) => handleTableInputChange(e, index, 'item')} />
+                                    {parties.map((party)=>(
+                                        <Tr>
+                                            <Td style={{border:'0.1px solid lightgray'}}>
+                                                {party.name}
                                             </Td>
-                                            <Td>
-                                                <input type="number" value={data.quantity} onChange={(e) => handleTableInputChange(e, index, 'quantity')} />
+                                            <Td style={{border:'0.1px solid lightgray'}}>
+                                                ₹ {party.advanced}
                                             </Td>
-                                            <Td>
-                                                <input type="number" value={data.unitPrice} onChange={(e) => handleTableInputChange(e, index, 'unitPrice')} />
+                                            <Td style={{border:'0.1px solid lightgray'}}>
+                                                ₹ {party.balance} 
                                             </Td>
-                                            <Td>
-                                                <input type="number" value={data.taxPercent} onChange={(e) => handleTableInputChange(e, index, 'taxPercent')} />
+                                            <Td style={{border:'0.1px solid lightgray'}}>
+                                                {party.dueDate}
                                             </Td>
-                                            <Td> {calculateAmount(data.quantity, data.unitPrice, data.taxPercent)}</Td>
-                                            <Td>
-                                                <button onClick={() => handleDeleteRow(index)}>Delete</button>
+                                            <Td style={{border:'0.1px solid lightgray'}}>
+                                                <Flex gap='8px'>
+                                                    <FaShare/>
+                                                    <FaPrint/>
+                                                </Flex>
                                             </Td>
                                         </Tr>
-
                                     ))}
                                 </Tbody>
-                                <Tfoot>
-                                    <Tr>
-                                        <Td>
-                                            <Button onClick={handleAddRow}>Add Row +</Button>
-                                        </Td>
-                                        <Td colSpan="3"></Td>
-                                        <Td>Total Purchase_Order Amount: </Td>
-                                        <Td>
-                                            ₹{calculateTotalPurchase_OrderAmount()}
-                                        </Td>
-
-                                    </Tr>
-
-                                </Tfoot>
-
                             </Table>
                         </TableContainer>
-                        <Box margin="10px" >
-                            <Button width="100%" onClick={handleSaveTableData} bg={"gold"}>Save</Button>
-                        </Box>
                     </Box>
-                </Box>
-
-
-
-
-
-
-            </Flex>
-
-        </>
-    )
-}
-
+                </Flex>
+            </>
+        )
+    }
 
 export default Purchase_Order

@@ -97,6 +97,7 @@ import Items from '../components/After Login/Billing App/Items/Items'
 import Sale from '../components/After Login/Billing App/Sale/Sale'
 import Purchase from '../components/After Login/Billing App/Purchase/Purchase'
 import Expenses from '../components/After Login/Billing App/Expenses/Expenses'
+import AddExpenseItem from '../components/After Login/Billing App/Expenses/AddExpenseItem'
 import Cash_Bank from '../components/After Login/Billing App/Cash_Bank/Cash_Bank'
 import Apply_For_Loan from '../components/After Login/Billing App/Apply_For_Loan/Apply_For_Loan'
 import Other_Products from '../components/After Login/Billing App/Other_Products/Other_Products'
@@ -152,18 +153,22 @@ import BillingSoftware from '../components/After Login/Billing App/billingSoftwa
 import Reports from '../components/After Login/Billing App/reports/Reports'
 import IndividualReport from '../components/After Login/Billing App/reports/IndividualReport'
 import EditReport from '../components/After Login/Billing App/reports/EditReport'
+import AddPurchase from '../components/After Login/Billing App/Purchase/Purchase_Bills/AddPurchase'
+import AddPurchaseReturn from '../components/After Login/Billing App/Purchase/Purchase_Return/AddPurchaseReturn'
+import AddPaymentOut from '../components/After Login/Billing App/Purchase/Payment_Out/AddPaymentOut'
+import AddPurchaseOrder from '../components/After Login/Billing App/Purchase/Purchase_Order/AddPurchaseOrder'
 
 export default function AllRoutes() {
     return (
         <Routes>
-            <Route element={<Home/>} path="/" ></Route>
-            <Route element={<Buisness/>} path="/buisness" ></Route>
-            <Route element={<Tax/>} path="/tax" ></Route>
-            <Route element={<Fund/>} path="/fund" ></Route>
-            <Route element={<Income/>} path="/income" ></Route>
-            <Route element={<Ngo/>} path="/ngo" ></Route>
-            <Route element={<TradeMark/>} path="/trademark" ></Route>
-            <Route element={<Software/>} path="/it" ></Route>
+            <Route element={<Home />} path="/" ></Route>
+            <Route element={<Buisness />} path="/buisness" ></Route>
+            <Route element={<Tax />} path="/tax" ></Route>
+            <Route element={<Fund />} path="/fund" ></Route>
+            <Route element={<Income />} path="/income" ></Route>
+            <Route element={<Ngo />} path="/ngo" ></Route>
+            <Route element={<TradeMark />} path="/trademark" ></Route>
+            <Route element={<Software />} path="/it" ></Route>
             <Route path="/private_limited_company" element={<PrivateLimitedCompany />} />
             <Route path="/limited_liability_partnership" element={<LimitedLiabilityPartnership />} />
             <Route path="/one_persone_company" element={<OnePersoneCompany />} />
@@ -253,12 +258,13 @@ export default function AllRoutes() {
             <Route element={<Company_name />} path="/Company_name" ></Route>
             {/* parties */}
             <Route element={<Parties />} path="/Parties" ></Route>
-            <Route element={<PartyInvoice/>} path='/partyInvoice'/>
+            <Route element={<PartyInvoice />} path='/partyInvoice' />
 
             <Route element={<Items />} path="/Items" ></Route>
             <Route element={<Sale />} path="/Sale" ></Route>
             <Route element={<Purchase />} path="/Purchase" ></Route>
             <Route element={<Expenses />} path="/Expenses" ></Route>
+            <Route element={<AddExpenseItem />} path='/add-expense-item' />
             <Route element={<Cash_Bank />} path="/Cash_Bank" ></Route>
             <Route element={<Apply_For_Loan />} path="/Apply_For_Loan" ></Route>
             <Route element={<Other_Products />} path="/Other_Products" ></Route>
@@ -273,7 +279,7 @@ export default function AllRoutes() {
             <Route element={<Loan_Account />} path="/Loan_Account" ></Route>
 
             <Route element={<Software1 />} path="/Software" ></Route>
-            <Route element={< SoftwareLogin/>} path='/software-login'/>
+            <Route element={< SoftwareLogin />} path='/software-login' />
             {/* <PrivateRoute><</PrivateRoute> */}
             <Route element={<HomeDash />} path="/HomeDash" ></Route>
 
@@ -307,16 +313,20 @@ export default function AllRoutes() {
             <Route element={<AddClientForm />} path="/AddClientForm"></Route>
             <Route element={<Transaction />} path="/Transaction"></Route>
             <Route element={<TransactionTable />} path="/TransactionTable"></Route>
-            <Route element={<VendorDashboard/>} path='/vendor-dashboard'/>
-            <Route element={<VendorDocuments/>} path='/vendor-documents'/>
-            <Route element={<VendorComplaints/>} path='/vendor-complaints'/>
-            <Route element={<Privacy_RefundPolicy/>} path='/privacy-n-refund-policy'/>
-            <Route element={<VendorClientsInformation/>} path='/vendor-clients'/>
-            <Route element={<VendorFollowUp/>} path='/vendor-follow-up'/>
-            <Route element={<BillingSoftware/>} path='/billing-software'/>
-            <Route element={<Reports/>} path='/reports'/>
-            <Route element={<IndividualReport/>} path='/individual-report'/>
-            <Route element={<EditReport/>} path='/edit-report'/>
+            <Route element={<VendorDashboard />} path='/vendor-dashboard' />
+            <Route element={<VendorDocuments />} path='/vendor-documents' />
+            <Route element={<VendorComplaints />} path='/vendor-complaints' />
+            <Route element={<Privacy_RefundPolicy />} path='/privacy-n-refund-policy' />
+            <Route element={<VendorClientsInformation />} path='/vendor-clients' />
+            <Route element={<VendorFollowUp />} path='/vendor-follow-up' />
+            <Route element={<BillingSoftware />} path='/billing-software' />
+            <Route element={<Reports />} path='/reports' />
+            <Route element={<IndividualReport />} path='/individual-report' />
+            <Route element={<EditReport />} path='/edit-report' />
+            <Route element={<AddPurchase />} path='/add-purchase' />
+            <Route element={<AddPaymentOut />} path='/add-payment-out' />
+            <Route element={<AddPurchaseOrder />} path='/add-purchase-order' />
+            <Route element={<AddPurchaseReturn />} path='add-purchase-return' />
         </Routes>
     );
 }; 

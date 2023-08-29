@@ -16,13 +16,13 @@ const tableData = [
     invoiceDate: '20-08-2023',
     invoiceValue: 20,
     placeOfSupply: 'SAMSDDSN',
-    reverseCharge:'10%',
-    taxRate:'20%',
-    invoiceType:'XYZ',
-    eCommerceGSTIN:'SAMSDDSN',
+    reverseCharge: '10%',
+    taxRate: '20%',
+    invoiceType: 'XYZ',
+    eCommerceGSTIN: 'SAMSDDSN',
     rate: 10,
-    taxableValue:100,
-    cessAmount:1020
+    taxableValue: 100,
+    cessAmount: 1020
   },
   {
     gstIn_UIN_No: '1',
@@ -30,13 +30,13 @@ const tableData = [
     invoiceDate: '20-08-2023',
     invoiceValue: 20,
     placeOfSupply: 'SAMSDDSN',
-    reverseCharge:'10%',
-    taxRate:'20%',
-    invoiceType:'XYZ',
-    eCommerceGSTIN:'SAMSDDSN',
+    reverseCharge: '10%',
+    taxRate: '20%',
+    invoiceType: 'XYZ',
+    eCommerceGSTIN: 'SAMSDDSN',
     rate: 10,
-    taxableValue:100,
-    cessAmount:1020
+    taxableValue: 100,
+    cessAmount: 1020
   },
   {
     gstIn_UIN_No: '1',
@@ -44,13 +44,13 @@ const tableData = [
     invoiceDate: '20-08-2023',
     invoiceValue: 20,
     placeOfSupply: 'SAMSDDSN',
-    reverseCharge:'10%',
-    taxRate:'20%',
-    invoiceType:'XYZ',
-    eCommerceGSTIN:'SAMSDDSN',
+    reverseCharge: '10%',
+    taxRate: '20%',
+    invoiceType: 'XYZ',
+    eCommerceGSTIN: 'SAMSDDSN',
     rate: 10,
-    taxableValue:100,
-    cessAmount:1020
+    taxableValue: 100,
+    cessAmount: 1020
   },
 
 ]
@@ -70,6 +70,13 @@ const GSTR_2 = () => {
   const handleRowClick = (reportNo) => {
     navigate('/individual-report')
   }
+
+  const [currentScreen, setCurrentScreen] = useState(null);
+
+  const handleOpenScreen = (screen) => {
+    setCurrentScreen(screen);
+  };
+
   return (
     <>
 
@@ -77,9 +84,61 @@ const GSTR_2 = () => {
       >
         <Heading size='md' mt='2'> GSTR2 Reports</Heading>
         <Flex alignItems='right' position='absolute' right="230" top="140">
-                    <Text ml="10">pdf</Text>
-                    <Text ml="10">xls</Text>
-                    </Flex>
+          <Button fontSize={"10px"} bg={"blue.400"} marginLeft="10px">Print</Button>
+          <Button fontSize={"10px"} bg={"blue.400"} marginLeft="10px">Excel</Button>
+        </Flex>
+        <Box p={4}>
+          <Button onClick={() => handleOpenScreen("screen1")} mb={2} mr={2}>
+            GSTR2 B2B
+          </Button>
+          <Button onClick={() => handleOpenScreen("screen2")} mb={2} mr={2}>
+            GSTR2 B2BUR
+          </Button>
+          <Button onClick={() => handleOpenScreen("screen3")} mb={2} mr={2}>
+            GSTR2 IMPS
+          </Button>
+          <Button onClick={() => handleOpenScreen("screen4")} mb={2} mr={2}>
+            GSTR2 IMPG
+          </Button>
+          <Button onClick={() => handleOpenScreen("screen5")} mb={2} mr={2}>
+            GSTR2 CDNR
+          </Button>
+          <Button onClick={() => handleOpenScreen("screen6")} mb={2} mr={2}>
+            GSTR2 CDNUR
+          </Button>
+          <Button onClick={() => handleOpenScreen("screen7")} mb={2} mr={2}>
+            GSTR2 AT
+          </Button>
+          <Button onClick={() => handleOpenScreen("screen8")} mb={2} mr={2}>
+            GSTR1 EXEMP
+          </Button>
+          <Button onClick={() => handleOpenScreen("screen9")} mb={2} mr={2}>
+            GSTR1 ITCR
+          </Button>
+          <Button onClick={() => handleOpenScreen("screen10")} mb={2} mr={2}>
+            GSTR1 HSNSUM
+          </Button>
+          {/* {currentScreen === null && <GSTR1_b2b />}
+          {currentScreen === "screen1" && <GSTR1_b2b />}
+          {currentScreen === "screen2" && <GSTR1_b2ba />}
+          {currentScreen === "screen3" && <GSTR1_b2cl />}
+          {currentScreen === "screen4" && <GSTR1_b2cla />}
+          {currentScreen === "screen5" && <GSTR1_b2cs />}
+          {currentScreen === "screen6" && <GSTR1_b2csa />}
+          {currentScreen === "screen7" && <GSTR1_cdnr />}
+          {currentScreen === "screen8" && <GSTR1_cdnra />}
+          {currentScreen === "screen9" && <GSTR1_cdnur />}
+          {currentScreen === "screen10" && <GSTR1_cdnura />}
+          {currentScreen === "screen11" && <GSTR1_exp />}
+          {currentScreen === "screen12" && <GSTR1_expa />}
+          {currentScreen === "screen13" && <GSTR1_at />}
+          {currentScreen === "screen14" && <GSTR1_ata />}
+          {currentScreen === "screen15" && <GSTR1_atadj />}
+          {currentScreen === "screen16" && <GSTR1_atadja />}
+          {currentScreen === "screen17" && <GSTR1_exemp />}
+          {currentScreen === "screen18" && <GSTR1_hsn />}
+          {currentScreen === "screen19" && <GSTR1_docs />} */}
+        </Box>
         <Flex justifyContent='space-between' alignItems='center'
           margin='30px'
           flexDirection={{ base: 'column', md: 'row' }}
@@ -103,7 +162,7 @@ const GSTR_2 = () => {
             </InputRightAddon>
           </InputGroup>
         </Flex>
-              <TableContainer m='2' margin='15px'
+        <TableContainer m='2' margin='15px'
           border='0.1px solid lightgray'
           boxShadow='rgba(149, 157, 165, 0.2) 0px 8px 24px'
           width="1000px"
@@ -112,7 +171,7 @@ const GSTR_2 = () => {
             <Thead>
               <Tr>
 
-              <Th style={{ border: '1px solid gray' }}>GSTIN/UIN of Recipient</Th>
+                <Th style={{ border: '1px solid gray' }}>GSTIN/UIN of Recipient</Th>
                 <Th style={{ border: '1px solid gray' }}>Invoice date</Th>
                 <Th style={{ border: '1px solid gray' }}>Invoice Value</Th>
                 <Th style={{ border: '1px solid gray' }}>Place Of Supply</Th>
@@ -130,7 +189,7 @@ const GSTR_2 = () => {
                 <Th style={{ border: '1px solid gray' }}>Availed ITC State/UT Tax</Th>
                 <Th style={{ border: '1px solid gray' }}>Availed ITC State/UT Tax</Th>
 
-    
+
               </Tr>
             </Thead>
             <Tbody>

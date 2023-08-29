@@ -16,13 +16,13 @@ const tableData = [
     invoiceDate: '20-08-2023',
     invoiceValue: 20,
     placeOfSupply: 'SAMSDDSN',
-    reverseCharge:'10%',
-    taxRate:'20%',
-    invoiceType:'XYZ',
-    eCommerceGSTIN:'SAMSDDSN',
+    reverseCharge: '10%',
+    taxRate: '20%',
+    invoiceType: 'XYZ',
+    eCommerceGSTIN: 'SAMSDDSN',
     rate: 10,
-    taxableValue:100,
-    cessAmount:1020
+    taxableValue: 100,
+    cessAmount: 1020
   },
   {
     gstIn_UIN_No: '1',
@@ -30,13 +30,13 @@ const tableData = [
     invoiceDate: '20-08-2023',
     invoiceValue: 20,
     placeOfSupply: 'SAMSDDSN',
-    reverseCharge:'10%',
-    taxRate:'20%',
-    invoiceType:'XYZ',
-    eCommerceGSTIN:'SAMSDDSN',
+    reverseCharge: '10%',
+    taxRate: '20%',
+    invoiceType: 'XYZ',
+    eCommerceGSTIN: 'SAMSDDSN',
     rate: 10,
-    taxableValue:100,
-    cessAmount:1020
+    taxableValue: 100,
+    cessAmount: 1020
   },
   {
     gstIn_UIN_No: '1',
@@ -44,16 +44,24 @@ const tableData = [
     invoiceDate: '20-08-2023',
     invoiceValue: 20,
     placeOfSupply: 'SAMSDDSN',
-    reverseCharge:'10%',
-    taxRate:'20%',
-    invoiceType:'XYZ',
-    eCommerceGSTIN:'SAMSDDSN',
+    reverseCharge: '10%',
+    taxRate: '20%',
+    invoiceType: 'XYZ',
+    eCommerceGSTIN: 'SAMSDDSN',
     rate: 10,
-    taxableValue:100,
-    cessAmount:1020
+    taxableValue: 100,
+    cessAmount: 1020
   },
 
 ]
+
+const screens = [
+  "Screen 1",
+  "Screen 2",
+  "Screen 3",
+  "Screen 4",
+  "Screen 5",
+];
 
 const GSTR_3B = () => {
   const navigate = useNavigate();
@@ -70,20 +78,26 @@ const GSTR_3B = () => {
   const handleRowClick = (reportNo) => {
     navigate('/individual-report')
   }
+  const [currentScreen, setCurrentScreen] = useState(null);
+
+  const handleOpenScreen = (screen) => {
+    setCurrentScreen(screen);
+  };
   return (
     <>
-
       <Box Flex='1' padding='15px'
       >
         <Heading size='md' mt='2'> GSTR_3B Reports</Heading>
         <Flex alignItems='right' position='absolute' right="230" top="140">
-                    <Text ml="10">pdf</Text>
-                    <Text ml="10">xls</Text>
-                    </Flex>
+          <Button fontSize={"10px"} bg={"blue.400"} marginLeft="10px">Print</Button>
+          <Button fontSize={"10px"} bg={"blue.400"} marginLeft="10px">Excel</Button>
+        </Flex>
+        
         <Flex justifyContent='space-between' alignItems='center'
           margin='30px'
           flexDirection={{ base: 'column', md: 'row' }}
         >
+      
           <Flex>
             <Input type='date' size='sm' mr='2' />
             <Text size='lg' mr='2'>to</Text>
@@ -103,12 +117,12 @@ const GSTR_3B = () => {
             </InputRightAddon>
           </InputGroup>
         </Flex>
-              <TableContainer m='2' margin='15px'
+        <TableContainer m='2' margin='15px'
           border='0.1px solid lightgray'
           boxShadow='rgba(149, 157, 165, 0.2) 0px 8px 24px'
           width="1000px"
         >
-        <h4 style={{ margin : "10px"}}>Details of outward Supplies and Inward Supplies Liable to reverse charge</h4>
+          <h4 style={{ margin: "10px" }}>Details of outward Supplies and Inward Supplies Liable to reverse charge</h4>
           <Table>
             <Thead>
               <Tr>
@@ -140,22 +154,22 @@ const GSTR_3B = () => {
           boxShadow='rgba(149, 157, 165, 0.2) 0px 8px 24px'
           width="1000px"
         >
-        <h4 style={{ margin : "10px"}}>Details of Inter-State Supplies Made to Unregistered Persons,Composition dealer and UIN holders</h4>
+          <h4 style={{ margin: "10px" }}>Details of Inter-State Supplies Made to Unregistered Persons,Composition dealer and UIN holders</h4>
           <Table>
             <Thead>
               <Tr>
                 <Th style={{ border: '1px solid gray' }}>Place of Supply(State/UT)</Th>
-                <Th style={{ border: '1px solid gray' , textAlign:"center"}}>Supplies Made to Unregisted Persons
-                 <Th  style={{ border: '1px solid gray'}}>Total Taxable Value</Th>
-                 <Th  style={{ border: '1px solid gray' }}>Amount of Integrated Tax</Th>
+                <Th style={{ border: '1px solid gray', textAlign: "center" }}>Supplies Made to Unregisted Persons
+                  <Th style={{ border: '1px solid gray' }}>Total Taxable Value</Th>
+                  <Th style={{ border: '1px solid gray' }}>Amount of Integrated Tax</Th>
                 </Th>
-                <Th style={{ border: '1px solid gray' , textAlign:"center"}}>Supplies Made to Composition Taxable Persons
-                 <Th  style={{ border: '1px solid gray'}}>Total Taxable Value</Th>
-                 <Th  style={{ border: '1px solid gray' }}>Amount of Integrated Tax</Th>
+                <Th style={{ border: '1px solid gray', textAlign: "center" }}>Supplies Made to Composition Taxable Persons
+                  <Th style={{ border: '1px solid gray' }}>Total Taxable Value</Th>
+                  <Th style={{ border: '1px solid gray' }}>Amount of Integrated Tax</Th>
                 </Th>
-                <Th style={{ border: '1px solid gray' , textAlign:"center"}}>Supplies Made to UIN Holders
-                 <Th  style={{ border: '1px solid gray'}}>Total Taxable Value</Th>
-                 <Th  style={{ border: '1px solid gray' }}>Total Taxable Value</Th>
+                <Th style={{ border: '1px solid gray', textAlign: "center" }}>Supplies Made to UIN Holders
+                  <Th style={{ border: '1px solid gray' }}>Total Taxable Value</Th>
+                  <Th style={{ border: '1px solid gray' }}>Total Taxable Value</Th>
                 </Th>
               </Tr>
             </Thead>
@@ -178,7 +192,7 @@ const GSTR_3B = () => {
           boxShadow='rgba(149, 157, 165, 0.2) 0px 8px 24px'
           width="1000px"
         >
-        <h4 style={{ margin : "10px"}}>Details of Eligible Input Tax Credit</h4>
+          <h4 style={{ margin: "10px" }}>Details of Eligible Input Tax Credit</h4>
           <Table>
             <Thead>
               <Tr>
@@ -209,7 +223,7 @@ const GSTR_3B = () => {
           boxShadow='rgba(149, 157, 165, 0.2) 0px 8px 24px'
           width="1000px"
         >
-        <h4 style={{ margin : "10px"}}>Details of Exempt , nil-rated and non-GST inward Supplies</h4>
+          <h4 style={{ margin: "10px" }}>Details of Exempt , nil-rated and non-GST inward Supplies</h4>
           <Table>
             <Thead>
               <Tr>
@@ -219,18 +233,18 @@ const GSTR_3B = () => {
               </Tr>
             </Thead>
             <Tbody>
-                <Tr style={{ cursor: 'pointer' }}
-                >
-                  <Td style={{ border: '1px solid gray' }}>From a Supplier under composition scheme,Exempt and Nil Rated Supply</Td>
-                  <Td style={{ border: '1px solid gray' }}>0.0</Td>
-                  <Td style={{ border: '1px solid gray' }}>0.0</Td>
-                </Tr>
-                <Tr style={{ cursor: 'pointer' }}
-                >
-                  <Td style={{ border: '1px solid gray' }}>Non GST Supply</Td>
-                  <Td style={{ border: '1px solid gray' }}>0.0</Td>
-                  <Td style={{ border: '1px solid gray' }}>0.0</Td>
-                </Tr>
+              <Tr style={{ cursor: 'pointer' }}
+              >
+                <Td style={{ border: '1px solid gray' }}>From a Supplier under composition scheme,Exempt and Nil Rated Supply</Td>
+                <Td style={{ border: '1px solid gray' }}>0.0</Td>
+                <Td style={{ border: '1px solid gray' }}>0.0</Td>
+              </Tr>
+              <Tr style={{ cursor: 'pointer' }}
+              >
+                <Td style={{ border: '1px solid gray' }}>Non GST Supply</Td>
+                <Td style={{ border: '1px solid gray' }}>0.0</Td>
+                <Td style={{ border: '1px solid gray' }}>0.0</Td>
+              </Tr>
             </Tbody>
           </Table>
         </TableContainer>

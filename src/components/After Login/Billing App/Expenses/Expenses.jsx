@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Box, Button, Flex, HStack, Image, Input, Select, Text, VStack, Wrap, Heading, List,
     ListItem,
@@ -28,27 +28,63 @@ import {
     TableContainer,
 
 } from '@chakra-ui/react'
-import { Link } from "react-router-dom";
 import Slidebar from '../Slidebar/Slidebar';
 import Company_name from '../Company_name/Company_name';
-import remove from '../../../assets/remove.png'
-import print4 from '../../../assets/print4.png'
-const Expenses
-    = () => {
+import ExpenseTab from './ExpenseTab';
+import { useNavigate } from 'react-router-dom';
+
+const itemExpense = [
+    {
+        description:'Item 1',
+        amount:30
+    },
+    {
+        description:'Item 2',
+        amount:47
+    },
+    {
+        description:'Item 3',
+        amount:70
+    },
+    {
+        description:'Item 4',
+        amount:45
+    },
+    {
+        description:'Item 5',
+        amount:30
+    }
+]
+
+const CategoryExpense = [
+    {
+        description:'Petrol',
+        amount:10
+    },
+    {
+        description:'Tea',
+        amount:40
+    },
+    {
+        description:'Electronics',
+        amount:400
+    },
+    {
+        description:'Decor',
+        amount:40
+    },
+    {
+        description:'Books',
+        amount:30
+    }
+]
+
+const Expenses = () => {
+        const navigate = useNavigate();
+        const [tab, setTab] = useState('categories')
         const Company = {
             name: "Company Name"
         }
-        const Items = [
-            {
-                id: 1,
-                Name: "name",
-                quantity: 10,
-                price: 1000,
-                tax: 0,
-                total: 1000,
-            }
-        ]
-        const modal1 = useDisclosure()
 
         return (
 
@@ -56,87 +92,32 @@ const Expenses
                 <Company_name company_name={Company.name} />
                 <Flex >
                     <Slidebar />
-                    <Box margin={"auto"} marginTop="20px" overflow={"hidden"} width="80%">
-                        <Button backgroundColor="blue.400" width={"100px"} margin={"10px"}
-                            onClick={modal1.onOpen}>Add +</Button>
-                        <TableContainer width="100%">
-                            <Table width="100%">
-                                <Thead>
-                                    <Tr>
-                                        <Th isNumeric>Invoice No</Th>
-                                        <Th>Item Name</Th>
-                                        <Th isNumeric>Quantity</Th>
-                                        <Th isNumeric>Price/Unit <br /> With Out Tax</Th>
-                                        <Th isNumeric>Tax</Th>
-                                        <Th isNumeric>Amount</Th>
-                                        <Th>Print</Th>
-                                        <Th>Delete</Th>
-                                    </Tr>
-                                </Thead>
-                                <Tbody>
-                                    {
-                                        Items.map((data) =>
-                                            <Tr key={data.id}>
-                                                <Td isNumeric>{data.id}</Td>
-                                                <Td>{data.Name}</Td>
-                                                <Td isNumeric>{data.quantity}</Td>
-                                                <Td isNumeric>{data.price}</Td>
-                                                <Td isNumeric>{data.tax}</Td>
-                                                <Td isNumeric>{data.total}</Td>
-                                                <Td><Image src={print4} width={"20px"} borderRadius={"50%"}></Image></Td>
-                                                <Td><Image src={remove} width={"20px"} borderRadius={"50%"}></Image></Td>
-                                            </Tr>
-                                        )
-
-                                    }
-
-                                </Tbody>
-
-                            </Table>
-                        </TableContainer>
-                    </Box>
-                    <Modal isOpen={modal1.isOpen} onClose={modal1.onClose}>
-                        <ModalOverlay />
-                        <ModalContent>
-                            <ModalHeader>Add New Item</ModalHeader>
-                            <ModalCloseButton />
-                            <ModalBody>
-
-                                <FormControl margin={"10px"}>
-
-                                    <FormLabel>Item Name :</FormLabel>
-                                    <Input type="text" placeholder="Item Name" />
-                                </FormControl>
-                                <FormControl margin={"10px"}>
-
-                                    <FormLabel>Item Quantity :</FormLabel>
-                                    <Input type="number" placeholder="Item Quantity" />
-                                </FormControl>
-                                <FormControl margin={"10px"}>
-
-                                    <FormLabel>Item Price :</FormLabel>
-                                    <Input type="number" placeholder="Item Price" />
-                                </FormControl>
-                                <FormControl margin={"10px"}>
-
-                                    <FormLabel>Tax :</FormLabel>
-                                    <Input type="number" placeholder="Tax" />
-                                </FormControl>
-                                <FormControl margin={"10px"}>
-
-                                    <FormLabel>Total :</FormLabel>
-                                    <Input type="number" placeholder="Total" />
-                                </FormControl>
-                            </ModalBody>
-
-                            <ModalFooter>
-                                <Button colorScheme='blue' mr={3} onClick={modal1.onClose}>
-                                    Close
+                    <Box flex='1' margin='15px'>
+                        <Flex p='4' justifyContent='space-between'>
+                            <Flex>
+                                <Button onClick={()=>setTab('categories')} size='sm'
+                                    colorScheme={tab === 'categories'?'blue':'gray'}
+                                    borderRadius='0'
+                                    width='200px'
+                                >
+                                    Categories
                                 </Button>
-                                <Button colorScheme='green'>Add</Button>
-                            </ModalFooter>
-                        </ModalContent>
-                    </Modal>
+                                <Button onClick={()=> setTab('items')} size='sm'
+                                    colorScheme={tab === 'items'?'blue':'gray'}
+                                    borderRadius='0'
+                                    width='200px'
+                                >
+                                    Items
+                                </Button>
+                            </Flex>
+                            <Button colorScheme='red' onClick={()=>navigate('/add-expense-item')}>Add Expense + </Button>
+                        </Flex>
+                        <Box p='4' border='1px solid lightgray'>
+                            {tab === 'categories' && <ExpenseTab expenses={CategoryExpense}/>}
+                            {tab === 'items' && <ExpenseTab expenses={itemExpense}/>}
+                        </Box>
+                    </Box>
+                    
                 </Flex>
 
             </>

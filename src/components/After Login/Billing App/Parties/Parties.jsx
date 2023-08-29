@@ -64,7 +64,7 @@ const Parties = () => {
   };
   const modal1 = useDisclosure();
   const token = localStorage.getItem("token");
-  const { firmId } = useSelector((store) => store.FirmRegistation);
+  const { firmId } = useSelector((store) => store.FirmRegistration);
   const dispatch = useDispatch();
   const { getPartiesData } = useSelector((store) => store.partiesReducer);
 
