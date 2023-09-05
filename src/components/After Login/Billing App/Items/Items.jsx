@@ -20,7 +20,7 @@ import {
   Tr,
   Th,
   Td,
-  TableContainer,Button, Menu, MenuButton, MenuList, MenuItem, Checkbox, Text
+  TableContainer, Button, Menu, MenuButton, MenuList, MenuItem, Checkbox, Text
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Slidebar from "../Slidebar/Slidebar";
@@ -32,6 +32,10 @@ import {
   getStockAction,
   postStockAction,
 } from "../../../../Redux/Stocks/stock.action";
+import {
+  postCategoryAction,
+  getCategoriesAction
+} from "../../../../Redux/Category/category.actions"
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
@@ -58,6 +62,8 @@ const Items = () => {
   const token = localStorage.getItem("token");
   const { firmId } = useSelector((store) => store.FirmRegistration);
   const { getStockData } = useSelector((store) => store.stockReducer);
+  const Categories   = useSelector((store) => store.categoryReducer);
+  
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     name: "",
@@ -74,6 +80,20 @@ const Items = () => {
     firmId: `${firmId}`,
   });
 
+  const [categoryForm, setCategoryForm] = useState({
+    name: '', // Input field value
+    codeType: 'default', // Select field value
+    firmId: `${firmId}`,
+  });
+
+  const handleCategoryInputChange = (e) => {
+    const { name, value } = e.target;
+    setCategoryForm({
+      ...categoryForm,
+      [name]: value,
+    });
+  };
+
   const handleChangeItems = (e) => {
     e.preventDefault();
 
@@ -87,6 +107,7 @@ const Items = () => {
 
   useEffect(() => {
     dispatch(getStockAction(token, firmId));
+    dispatch(getCategoriesAction(token, firmId));
   }, [firmId]);
 
   console.log("stock ka get", getStockData);
@@ -101,7 +122,8 @@ const Items = () => {
   const handleAddCategory = () => {
     // Logic to add the new category
     // ...
-    setNewCategory(""); // Clear input field
+    dispatch(postCategoryAction(categoryForm, token, firmId));
+    modal2.onClose();
   };
   return (
     <>
@@ -110,19 +132,19 @@ const Items = () => {
       <Flex>
         <Slidebar />
         <Box margin={"auto"} marginTop="20px" overflow={"hidden"} width="80%">
-        {/* buttons */}
+          {/* buttons */}
           <Box display="flex" justifyContent="space-between" alignItems="center">
             {/* select categories */}
             <Menu>
               <MenuButton as={Button} backgroundColor='gray.100' margin="10px" px="4"
                 rightIcon={<ChevronDownIcon />}
-              >                
+              >
                 category
               </MenuButton>
               <MenuList>
-                {dummyCategories.map((category) => (
-                  <MenuItem key={category}>
-                    <Checkbox>{category}</Checkbox>
+                {Categories?.categories?.map((category,id) => (
+                  <MenuItem key={id}>
+                    <Checkbox>{category.name}</Checkbox>
                   </MenuItem>
                 ))}
               </MenuList>
@@ -146,7 +168,7 @@ const Items = () => {
               Add Category +{" "}
             </Button>
           </Box>
-          
+
           {/* table data */}
           <TableContainer style={{ margin: '20px', padding: '20px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
             <Table style={{ width: '100%' }}>
@@ -180,9 +202,9 @@ const Items = () => {
                     <Td>{data.expiryDate}</Td>
                     <Td>{data.description}</Td>
                     <Td>
-                      <Link><FaEdit/></Link>
+                      <Link><FaEdit /></Link>
                       <Link>more</Link>
-                      <Link><FaTrash/></Link>
+                      <Link><FaTrash /></Link>
                     </Td>
                   </Tr>
                 ))}
@@ -194,7 +216,7 @@ const Items = () => {
         {/* Add new item modal */}
         <Modal isOpen={modal1.isOpen} onClose={modal1.onClose}>
           <ModalOverlay />
-          <ModalContent 
+          <ModalContent
             maxWidth='80%'
           >
             <ModalHeader>Add New Item</ModalHeader>
@@ -265,8 +287,8 @@ const Items = () => {
                     name="price"
                     onChange={handleChangeItems}
                   />
-                </FormControl> 
-              </Flex>   
+                </FormControl>
+              </Flex>
               <Flex>
                 <FormControl margin={"10px"}>
                   <FormLabel>Supplier Name :</FormLabel>
@@ -279,19 +301,19 @@ const Items = () => {
                   />
                 </FormControl>
                 <FormControl margin={"10px"}>
-                    <FormLabel> GST Rate:</FormLabel>
-                    <Select
-                      type="number"
-                      placeholder="select gst Rate"
-                      onChange={handleChangeItems}
-                    >
-                      <option value={0}>0%</option>
-                      <option value={3}>3%</option>
-                      <option value={5}>5%</option>
-                      <option value={12}>12%</option>
-                      <option value={18}>18%</option>
-                      <option value={28}>28%</option>
-                    </Select>
+                  <FormLabel> GST Rate:</FormLabel>
+                  <Select
+                    type="number"
+                    placeholder="select gst Rate"
+                    onChange={handleChangeItems}
+                  >
+                    <option value={0}>0%</option>
+                    <option value={3}>3%</option>
+                    <option value={5}>5%</option>
+                    <option value={12}>12%</option>
+                    <option value={18}>18%</option>
+                    <option value={28}>28%</option>
+                  </Select>
                 </FormControl>
               </Flex>
               <Flex>
@@ -363,10 +385,13 @@ const Items = () => {
                 backgroundColor='gray.100'
                 rightIcon={<ChevronDownIcon />}
                 defaultValue='default'
-                placeholder="select category"
+                placeholder="Select category"
+                name="name"
+                value={categoryForm.name}
+                onChange={handleCategoryInputChange}
               >
                 {dummyCategories.map((category) => (
-                    <option key={category}>{category}</option>
+                  <option key={category}>{category}</option>
                 ))}
               </Select>
 
@@ -378,8 +403,9 @@ const Items = () => {
                 <Input
                   type="text"
                   placeholder="Enter New Category"
-                  value={form.category}
                   name="name"
+                  value={categoryForm.name}
+                  onChange={handleCategoryInputChange}
                 />
               </FormControl>
 
@@ -389,6 +415,9 @@ const Items = () => {
                 defaultValue='default'
                 placeholder="Select HSN/SSN code"
                 mt='8'
+                name="codeType"
+                value={categoryForm.codeType}
+                onChange={handleCategoryInputChange}
               >
                 {/* Options for HSN code */}
                 <optgroup label="HSN Code">
@@ -408,7 +437,7 @@ const Items = () => {
               <Button colorScheme="blue" mr={3} onClick={modal2.onClose}>
                 Close
               </Button>
-              <Button colorScheme="green">
+              <Button colorScheme="green" onClick={handleAddCategory}>
                 Add
               </Button>
             </ModalFooter>
