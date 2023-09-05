@@ -8,6 +8,7 @@ import { Vendor_Reducer } from "../Redux/Vender/Vendor.Reducer";
 
 import { partiesReducer } from "../Redux/Parties/parties.reducer";
 import { stockReducer } from "../Redux/Stocks/stock.reducer";
+import { categoryReducer } from "../Redux/Category/category.reducer";
 
 
 const rootReducer = combineReducers({
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
 
     Vendor: Vendor_Reducer,
     partiesReducer: partiesReducer,
-    stockReducer: stockReducer
+    stockReducer: stockReducer,
+    categoryReducer:categoryReducer
 
 })
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));

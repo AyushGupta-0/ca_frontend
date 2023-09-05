@@ -63,7 +63,7 @@ const Items = () => {
   const { firmId } = useSelector((store) => store.FirmRegistration);
   const { getStockData } = useSelector((store) => store.stockReducer);
   const Categories   = useSelector((store) => store.categoryReducer);
-  
+
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     name: "",
@@ -110,8 +110,6 @@ const Items = () => {
     dispatch(getCategoriesAction(token, firmId));
   }, [firmId]);
 
-  console.log("stock ka get", getStockData);
-
   // handle add new category
   const [newCategory, setNewCategory] = useState("");
 
@@ -142,11 +140,15 @@ const Items = () => {
                 category
               </MenuButton>
               <MenuList>
-                {Categories?.categories?.map((category,id) => (
+                {Categories.categories.length > 0 ? Categories?.categories.map((category,id) => (
                   <MenuItem key={id}>
                     <Checkbox>{category.name}</Checkbox>
                   </MenuItem>
-                ))}
+                )) : 
+                <MenuItem>
+                    Not Found
+                  </MenuItem>
+                }
               </MenuList>
             </Menu>
             {/* add new item */}
