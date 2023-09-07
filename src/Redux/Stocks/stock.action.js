@@ -13,17 +13,14 @@ export const getStockAction = (token, firmId) => (dispatch) => {
     token: `${token}`,
   };
   dispatch({ type: LOADING_STOCKS });
-  console.log("st", token,"safsa:",firmId);
 
-  const url = `https://taxservicebackend.onrender.com/item/${firmId}/products`;
+  const url = `http://localhost:8080/item/${firmId}/products`;
   axios
-    .post(url, { headers })
+    .get(url, { headers })
     .then((res) => {
-      // dispatch({ type: GET_STOCKS, payload: res.data });
-      console.log("abcd stock", res.data);
+      dispatch({ type: GET_STOCKS, payload: res.data });
     })
     .catch((error) => {
-      console.log("sadfsdfsdgdsgdsg", error);
       dispatch({ type: ERROR_STOCKS, payload: error });
     });
 };
@@ -34,7 +31,7 @@ export const postStockAction = (creds, token) => (dispatch) => {
   };
   dispatch({ type: LOADING_STOCKS });
 
-  const url = `https://taxservicebackend.onrender.com/item/insertproduct`;
+  const url = `http://localhost:8080/item/insertproduct`;
   axios
     .post(url, creds, { headers })
     .then((res) => {
@@ -60,7 +57,7 @@ export const updateStockAction = (creds, token) => (dispatch) => {
   };
   dispatch({ type: LOADING_STOCKS });
   try {
-    const url = `https://taxservicebackend.onrender.com/items/id`;
+    const url = `http://localhost:8080/items/id`;
     axios.put(url, creds, { headers }).then((res) => {
       dispatch({ type: UPDATE_STOCKS, payload: res.data });
       console.log(res);
@@ -71,19 +68,19 @@ export const updateStockAction = (creds, token) => (dispatch) => {
   }
 };
 
-//   export const deleteStockAction = (token) => (dispatch) => {
-// const headers={
-//     "token":`${token}`
-// }
-//     dispatch({ type: LOADING_STOCKS });
-//     try {
-//       const url=`https://taxservicebackend.onrender.com/items/${id}`
-//       axios.post(url,{ headers }).then((res) => {
-//         dispatch({ type: DELETE_STOCKS, payload: res.data });
-//         console.log(res)
-//       });
-//     } catch (error) {
-//       console.log(error);
-//       dispatch({ type: ERROR_STOCKS, payload: error });
-//     }
-//   };
+  export const deleteStockAction = (token,id) => (dispatch) => {
+const headers={
+    "token":`${token}`
+}
+    dispatch({ type: LOADING_STOCKS });
+    try {
+      const url=`http://localhost:8080/items/product/${id}`
+      axios.post(url,{ headers }).then((res) => {
+        dispatch({ type: DELETE_STOCKS, payload: res.data });
+        console.log(res)
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: ERROR_STOCKS, payload: error });
+    }
+  };

@@ -15,7 +15,7 @@ export const getPartiesAction = (token, firmId) => (dispatch) => {
   };
   dispatch({ type: LOADING_PARTIES });
   try {
-    const url = `https://taxservicebackend.onrender.com/${firmId}/party`;
+    const url = `http://localhost:8080/${firmId}/party`;
     axios.get(url, { headers }).then((res) => {
       dispatch({ type: GET_PARTIES, payload: res.data.party });
       console.log("abcd", res.data.party);
@@ -32,7 +32,7 @@ export const postPartiesAction = (creds, token, firmId) => (dispatch) => {
   };
   dispatch({ type: LOADING_PARTIES });
   try {
-    const url = `https://taxservicebackend.onrender.com/${firmId}/party`;
+    const url = `http://localhost:8080/${firmId}/party`;
     axios.post(url, creds, { headers }).then((res) => {
       dispatch({ type: SUCCESS_PARTIES, payload: res.data });
       console.log(res);
@@ -53,7 +53,7 @@ export const updatePartiesAction = (creds, token) => (dispatch) => {
   };
   dispatch({ type: LOADING_PARTIES });
   try {
-    const url = `https://taxservicebackend.onrender.com/party/id`;
+    const url = `http://localhost:8080/party/id`;
     axios.put(url, creds, { headers }).then((res) => {
       dispatch({ type: UPDATE_PARTIES, payload: res.data });
       console.log(res);

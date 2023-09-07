@@ -67,6 +67,7 @@ const Parties = () => {
   const { firmId } = useSelector((store) => store.FirmRegistration);
   const dispatch = useDispatch();
   const { getPartiesData } = useSelector((store) => store.partiesReducer);
+  console.log("🚀 ~ file: Parties.jsx:70 ~ Parties ~ getPartiesData:", getPartiesData)
 
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredData, setFilteredData] = useState(getPartiesData);
@@ -88,6 +89,7 @@ const Parties = () => {
     billingAddress: "",
     shippingAddress: "",
   });
+
 
   const handleChangeParty = (e) => {
     e.preventDefault();

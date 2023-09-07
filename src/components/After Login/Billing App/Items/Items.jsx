@@ -31,6 +31,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getStockAction,
   postStockAction,
+  deleteStockAction
 } from "../../../../Redux/Stocks/stock.action";
 import {
   postCategoryAction,
@@ -60,9 +61,12 @@ const Items = () => {
   const modal1 = useDisclosure();
   const modal2 = useDisclosure();
   const token = localStorage.getItem("token");
+  console.log("🚀 ~ file: Items.jsx:63 ~ Items ~ token:", token)
   const { firmId } = useSelector((store) => store.FirmRegistration);
   const { getStockData } = useSelector((store) => store.stockReducer);
-  const Categories   = useSelector((store) => store.categoryReducer);
+  console.log("🚀 ~ file: Items.jsx:65 ~ Items ~ getStockData:", getStockData)
+  const Categories = useSelector((store) => store.categoryReducer);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const dispatch = useDispatch();
   const [form, setForm] = useState({
@@ -74,11 +78,17 @@ const Items = () => {
     price: "",
     cost: "",
     supplier: "",
-    reorderThreshold: "",
     expiryDate: "",
     gstRate: "",
     firmId: `${firmId}`,
   });
+  console.log("🚀 ~ file: Items.jsx:85 ~ Items ~ form:", form)
+
+  useEffect(() => {
+    // Join the selected categories into a comma-separated string (you can adjust the format as needed)
+    const category = selectedCategories;
+    setForm(prevForm => ({ ...prevForm, category }));
+  }, [selectedCategories]);
 
   const [categoryForm, setCategoryForm] = useState({
     name: '', // Input field value
@@ -110,19 +120,25 @@ const Items = () => {
     dispatch(getCategoriesAction(token, firmId));
   }, [firmId]);
 
-  // handle add new category
-  const [newCategory, setNewCategory] = useState("");
-
-  const handleNewCategoryChange = (event) => {
-    setNewCategory(event.target.value);
-  };
-
   const handleAddCategory = () => {
     // Logic to add the new category
-    // ...
     dispatch(postCategoryAction(categoryForm, token, firmId));
     modal2.onClose();
   };
+
+  const handleCategoryChange = (categoryName) => {
+    if (selectedCategories.includes(categoryName)) {
+      // If category is already selected, remove it
+      setSelectedCategories(selectedCategories.filter(name => name !== categoryName));
+    } else {
+      // If category is not selected, add it
+      setSelectedCategories([...selectedCategories, categoryName]);
+    }
+  };
+
+  const handleDelete = (id) =>{
+    dispatch(deleteStockAction(token, id));
+  }
   return (
     <>
       <Company_name company_name={Company.name} />
@@ -140,12 +156,17 @@ const Items = () => {
                 category
               </MenuButton>
               <MenuList>
-                {Categories.categories.length > 0 ? Categories?.categories.map((category,id) => (
+                {Categories.categories.length > 0 ? Categories?.categories.map((category, id) => (
                   <MenuItem key={id}>
-                    <Checkbox>{category.name}</Checkbox>
-                  </MenuItem>
-                )) : 
-                <MenuItem>
+                    <Checkbox
+                      onChange={() => handleCategoryChange(category.name)}
+                      checked={selectedCategories.includes(category.name)}
+                    >
+                      {category.name}
+                    </Checkbox>                  
+                    </MenuItem>
+                )) :
+                  <MenuItem>
                     Not Found
                   </MenuItem>
                 }
@@ -206,7 +227,7 @@ const Items = () => {
                     <Td>
                       <Link><FaEdit /></Link>
                       <Link>more</Link>
-                      <Link><FaTrash /></Link>
+                      <Link onClick={handleDelete(data._id)}><FaTrash /></Link>
                     </Td>
                   </Tr>
                 ))}
