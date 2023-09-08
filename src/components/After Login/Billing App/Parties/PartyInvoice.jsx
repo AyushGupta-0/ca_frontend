@@ -1,8 +1,13 @@
 import { Box, Text, Flex, Link, Table, Thead, Tbody, Tr, Th, Td, Icon, TableContainer, TableCaption, Heading, Divider } from '@chakra-ui/react';
 import { FiDownload, FiShare2 } from 'react-icons/fi'; // Import the icons
-import React from 'react';
+import React, { useEffect } from 'react';
 import Company_name from '../Company_name/Company_name';
 import Slidebar from '../Slidebar/Slidebar';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  getInduvidualPartiesAction
+} from "../../../../Redux/Parties/parties.action";
+import { useParams } from 'react-router-dom';
 
 const PartyInvoice = () => {
   const Company = {
@@ -38,12 +43,26 @@ const PartyInvoice = () => {
     return partyData.invoices.reduce((total, invoice) => total + invoice[key], 0);
   };
 
+  const { firmId } = useSelector((store) => store.FirmRegistration);
+  const dispatch = useDispatch();
+  const { induvidualParty } = useSelector((store) => store.partiesReducer);
+  console.log("🚀 ~ file: PartyInvoice.jsx:49 ~ PartyInvoice ~ getPartiesData:", induvidualParty)
+  const token = localStorage.getItem("token");
+  const { id } = useParams();
+
   const totalPaidAmount = calculateTotal("paidAmount");
   const totalDueAmount = calculateTotal("dueAmount");
 
+  useEffect(() => {
+    dispatch(getInduvidualPartiesAction(token, firmId , id));
+  }, [firmId]);
+
   return (
     <>
+     
       <Company_name company_name={Company.name} />
+   
+
       <Flex>
         <Slidebar />
         <Box bg="white" py="4" px="6" minH="80vh" flex="1" boxShadow="md">
@@ -53,19 +72,19 @@ const PartyInvoice = () => {
             <Box flex="1" textAlign='left' justifyContent='space-between'>
               {/* <Text fontSize="lg" fontWeight="semibold">Party Details</Text> */}
               <Text mt="2">
-                <strong>Party ID: </strong> {partyData.id}
+                <strong>Party ID: </strong> {induvidualParty?._id}
               </Text>
               <Text>
-                <strong>Party Name: </strong> {partyData.name}
+                <strong>Party Name: </strong> {induvidualParty?.partyName}
               </Text>
               <Text>
-                <strong>GST No.: </strong> {partyData.gst} (gst type)
+                <strong>GST No.: </strong> {induvidualParty?.GSTNo} (gst type)
               </Text>
               <Text>
-                <strong>Phone: </strong> {partyData.phone}
+                <strong>Phone: </strong> {induvidualParty?.phoneNumber}
               </Text>
               <Text>
-                <strong>Email: </strong> {partyData.email}
+                <strong>Email: </strong> {induvidualParty?.email}
               </Text>
             </Box>
             {/* total paid & due amounts */}
@@ -109,15 +128,15 @@ const PartyInvoice = () => {
             {/* addresses */}
             <Box flex="1" textAlign='center'>
               <Flex direction='column'>
-                <Text fontSize='md' fontWeight='semibold'> Billing Address</Text>
+                <Text fontSize='md' fontWeight='semibold'>Billing Address</Text>
                 <Text mt="2" px='12'>
-                  {partyData.billingAddress}
+                  {induvidualParty?.billingAddress}
                 </Text>
               </Flex>
               <Flex direction='column'>
                 <Text fontSize='md' fontWeight='semibold'> Shipping Address</Text>
                 <Text px='12'>
-                  {partyData.shippingAddress}
+                  {induvidualParty?.shippingAddress}
                 </Text>
               </Flex>
             </Box>
@@ -137,7 +156,7 @@ const PartyInvoice = () => {
               </Tr>
             </Thead>
             <Tbody>
-            {partyData.invoices.map((invoice, index) => (
+            {induvidualParty?.invoices?.map((invoice, index) => (
             <Tr key={index}>
               <Td style={{ border: '1px solid gray' }}>{invoice.invoiceNo}</Td>
               <Td style={{ border: '1px solid gray' }}>{invoice.invoiceDate}</Td>
@@ -161,6 +180,8 @@ const PartyInvoice = () => {
           </TableContainer>
         </Box>
       </Flex>
+    
+      
     </>
   );
 }

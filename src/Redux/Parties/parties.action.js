@@ -7,6 +7,9 @@ import {
   LOADING_PARTIES,
   SUCCESS_PARTIES,
   UPDATE_PARTIES,
+  INDUVIDUAL_PARTY,
+  SEARCH_PARTIES,
+  
 } from "./parties.types";
 
 export const getPartiesAction = (token, firmId) => (dispatch) => {
@@ -18,6 +21,23 @@ export const getPartiesAction = (token, firmId) => (dispatch) => {
     const url = `http://localhost:8080/${firmId}/party`;
     axios.get(url, { headers }).then((res) => {
       dispatch({ type: GET_PARTIES, payload: res.data.party });
+      console.log("abcd", res.data.party);
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: ERROR_PARTIES, payload: error });
+  }
+};
+
+export const getInduvidualPartiesAction = (token, firmId , id) => (dispatch) => {
+  const headers = {
+    token: `${token}`,
+  };
+  dispatch({ type: LOADING_PARTIES });
+  try {
+    const url = `http://localhost:8080/${firmId}/party/${id}`;
+    axios.get(url, { headers }).then((res) => {
+      dispatch({ type: INDUVIDUAL_PARTY, payload: res.data.party });
       console.log("abcd", res.data.party);
     });
   } catch (error) {
@@ -64,24 +84,41 @@ export const updatePartiesAction = (creds, token) => (dispatch) => {
   }
 };
 
-//   export const deletePartiesAction = (token,id,firmId) => (dispatch) => {
-// const headers={
-//     "token":`${token}`
-// }
-//     dispatch({ type: LOADING_PARTIES });
-//     try {
-//       const url=`https://taxservicebackend.onrender.com/party/${id}`
-//       axios.post(url,{ headers }).then((res) => {
-//         dispatch({ type: DELETE_PARTIES, payload: res.data.party });
-//            console.log("del::::",res.data.party)
-//         dispatch(getPartiesAction(token, firmId));
+export const searchParty = (partyName, token , firmId) => (dispatch) => {
+  const headers = {
+    token: `${token}`,
+  };
+  dispatch({ type: LOADING_PARTIES });
+  try {
+    const url = `http://localhost:8080/${firmId}/party/search?name=${partyName}`;
+    axios.put(url, partyName, { headers }).then((res) => {
+      dispatch({ type: SEARCH_PARTIES, payload: res.data });
+      console.log(res);
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: ERROR_PARTIES, payload: error });
+  }
+};
+
+export const deletePartiesAction = (token,id,firmId) => (dispatch) => {
+const headers={
+    "token":`${token}`
+}
+    dispatch({ type: LOADING_PARTIES });
+    try {
+      const url=`https://taxservicebackend.onrender.com/party/${id}`
+      axios.post(url,{ headers }).then((res) => {
+        dispatch({ type: DELETE_PARTIES, payload: res.data.party });
+           console.log("del::::",res.data.party)
+        dispatch(getPartiesAction(token, firmId));
      
-//       });
-//     } catch (error) {
-//       console.log(error);
-//       dispatch({ type: ERROR_PARTIES, payload: error });
-//     }
-//   };
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: ERROR_PARTIES, payload: error });
+    }
+  };
 
 
 

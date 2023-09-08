@@ -5,6 +5,8 @@ import {
   LOADING_PARTIES,
   SUCCESS_PARTIES,
   UPDATE_PARTIES,
+  SEARCH_PARTIES,
+  INDUVIDUAL_PARTY
 } from "./parties.types";
 
 const initialState = {
@@ -12,6 +14,8 @@ const initialState = {
   error: false,
   partiesData: [],
   getPartiesData:[],
+  induvidualParty:[],
+  searchPartiesData:[],
   partyId:"",
 }
 export const partiesReducer = (state = initialState, { type, payload }) => {
@@ -27,6 +31,12 @@ export const partiesReducer = (state = initialState, { type, payload }) => {
     }
     case UPDATE_PARTIES: {
       return { ...state, loading: false, error: false, partiesData: payload };
+    }
+    case SEARCH_PARTIES: {
+      return { ...state, loading: false, error: false, searchPartiesData: payload };
+    }
+    case INDUVIDUAL_PARTY: {
+      return { ...state, loading: false, error: false, induvidualParty: payload };
     }
     // case DELETE_PARTIES: {
     //   return { ...state, loading: false, error: false };

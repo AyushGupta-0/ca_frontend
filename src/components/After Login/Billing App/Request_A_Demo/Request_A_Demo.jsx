@@ -23,6 +23,7 @@ import { Link } from "react-router-dom";
 import Slidebar from '../Slidebar/Slidebar';
 import Company_name from '../Company_name/Company_name';
 import demo1  from "../../../assets/demo1.gif"
+
 const Request_A_Demo
     = () => {
         const Company = {

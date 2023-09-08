@@ -200,7 +200,6 @@ export default function AllRoutes() {
             <Route path="/trademark_infringement" element={<Trademark_Infringement />} />
             <Route path="/design_registration" element={<Design_Registration />} />
             <Route path='/copyright_registration' element={<Copyright_Registration />} />
-
             <Route element={<GST_registration />} path="/gst_registration" ></Route>
             <Route element={<GST_filinig />} path="/gst_filinig" ></Route>
             <Route element={<GST_advisory_portal />} path="/gst_advisory_portal" ></Route>
@@ -247,19 +246,16 @@ export default function AllRoutes() {
             <Route element={<Changes_to_LLP_Agreement />} path="/Changes_to_LLP_Agreement" ></Route>
             <Route element={<Close_the_LLP />} path="/Close_the_LLP" ></Route>
             {/* {<PrivateRoute>
-
             </PrivateRoute>} */}
             <Route element={<Profile />} path="/Profile" ></Route>
             {/* <Route element={<Profile />} path="/Profile" ></Route> */}
-
             <Route element={<Inventory_Software />} path="/Inventory_Software" ></Route>
             {/* <Route element={<Inventiry_Home />} path="/Inventiry_Home" ></Route> */}
             <Route element={<Slidebar />} path="/Slidebar" ></Route>
             <Route element={<Company_name />} path="/Company_name" ></Route>
             {/* parties */}
             <Route element={<Parties />} path="/Parties" ></Route>
-            <Route element={<PartyInvoice />} path='/partyInvoice' />
-
+            <Route element={<PartyInvoice />} path='/party/:id' />
             <Route element={<Items />} path="/Items" ></Route>
             <Route element={<Sale />} path="/Sale" ></Route>
             <Route element={<Purchase />} path="/Purchase" ></Route>
@@ -272,17 +268,14 @@ export default function AllRoutes() {
             <Route element={<Share_Feedback />} path="/Share_Feedback" ></Route>
             <Route element={<Trial_Info />} path="/Trial_Info" ></Route>
             <Route element={<Online_Store />} path="/Online_Store" ></Route>
-
             <Route element={<Bank_Account />} path="/Bank_Account" ></Route>
             <Route element={<Cash_In_Hand />} path="/Cash_In_Hand" ></Route>
             <Route element={<Cheques />} path="/Cheques" ></Route>
             <Route element={<Loan_Account />} path="/Loan_Account" ></Route>
-
             <Route element={<Software1 />} path="/Software" ></Route>
             <Route element={< SoftwareLogin />} path='/software-login' />
             {/* <PrivateRoute><</PrivateRoute> */}
             <Route element={<HomeDash />} path="/HomeDash" ></Route>
-
             <Route element={<MenuBar />} path="/MenuBar"></Route>
             <Route element={<Estimate />} path="/Estimate"></Route>
             <Route element={<Payment_In />} path="/PaymentIn"></Route>
@@ -296,7 +289,6 @@ export default function AllRoutes() {
             <Route element={<Barcode_Genarator />} path="/Generate_Barcode"></Route>
             <Route element={<Import_Items />} path="/Import_Items"></Route>
             <Route element={<Bulk_Update_Items />} path="/Bulk_Update_Items"></Route>
-
             <Route element={<Import_Parties />} path="/Import_Parties"></Route>
             <Route element={<Export_to_Tally />} path="/Export_to_Tally"></Route>
             <Route element={<Export_Items />} path="/Export_Items"></Route>
@@ -319,7 +311,8 @@ export default function AllRoutes() {
             <Route element={<Privacy_RefundPolicy />} path='/privacy-n-refund-policy' />
             <Route element={<VendorClientsInformation />} path='/vendor-clients' />
             <Route element={<VendorFollowUp />} path='/vendor-follow-up' />
-            <Route element={<BillingSoftware />} path='/billing-software' />
+            <Route element={<BillingSoftware />} path="/billing-software/:invoiceId" />
+            <Route element={<BillingSoftware />} path="/billing-software" />            
             <Route element={<Reports />} path='/reports' />
             <Route element={<IndividualReport />} path='/individual-report' />
             <Route element={<EditReport />} path='/edit-report' />

@@ -2,6 +2,7 @@ import {
     DELETE_INVOICE,
     ERROR_INVOICE,
     GET_INVOICE,
+    GET_ONE_INVOICE,
     LOADING_INVOICE,
     SUCCESS_INVOICE,
     UPDATE_INVOICE,
@@ -11,8 +12,11 @@ import {
     loading: false,
     error: false,
     invoiceData: [],
+    getAllInvoice:[],
+    getOneInvoice:[]
   };
   export const invoiceReducer = (state = initialState, { type, payload }) => {
+    console.log("🚀 ~ file: invoice.reducer.js:16 ~ invoiceReducer ~ payload:", payload)
     switch (type) {
       case LOADING_INVOICE: {
         return { ...state, loading: true, error: false };
@@ -21,7 +25,10 @@ import {
         return { ...state, loading: false, error: false, invoiceData: payload };
       }
       case GET_INVOICE: {
-        return { ...state, loading: false, error: false, invoiceData: payload };
+        return { ...state, loading: false, error: false, getAllInvoice: payload };
+      }
+      case GET_ONE_INVOICE: {
+        return { ...state, loading: false, error: false, getOneInvoice: payload };
       }
       case UPDATE_INVOICE: {
         return { ...state, loading: false, error: false, invoiceData: payload };

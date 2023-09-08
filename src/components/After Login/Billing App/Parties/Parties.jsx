@@ -47,10 +47,11 @@ import Company_name from "../Company_name/Company_name";
 import remove from "../../../assets/remove.png";
 import print4 from "../../../assets/print4.png";
 import {
-    deletePartiesAction,
+  deletePartiesAction,
   getPartiesAction,
   postPartiesAction,
   setPartyId,
+  searchParty
 } from "../../../../Redux/Parties/parties.action";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -67,16 +68,16 @@ const Parties = () => {
   const { firmId } = useSelector((store) => store.FirmRegistration);
   const dispatch = useDispatch();
   const { getPartiesData } = useSelector((store) => store.partiesReducer);
-  console.log("🚀 ~ file: Parties.jsx:70 ~ Parties ~ getPartiesData:", getPartiesData)
-
+  const { searchPartiesData } = useSelector((store) => store.partiesReducer);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredData, setFilteredData] = useState(getPartiesData);
 
-  const handleSearch = (e) =>{
+  const handleSearch = (e) => {
     setSearchQuery(e.target.value);
-    setFilteredData(getPartiesData.filter((data)=>
+    setFilteredData(getPartiesData.filter((data) =>
       data.partyName.toLowerCase().includes(searchQuery.toLowerCase())
     ))
+    dispatch(searchParty(e.target.value, token, firmId))
   }
 
   const [form, setForm] = useState({
@@ -103,15 +104,15 @@ const Parties = () => {
   };
 
 
-//   const removeParty=(token,id,firmId)=>{
-//       dispatch(deletePartiesAction(token,id,firmId))
-//   }
+  //   const removeParty=(token,id,firmId)=>{
+  //       dispatch(deletePartiesAction(token,id,firmId))
+  //   }
 
   useEffect(() => {
     dispatch(getPartiesAction(token, firmId));
   }, [firmId]);
 
-  console.log("I AM HERE",getPartiesData);
+  console.log("I AM HERE", getPartiesData);
 
   // validate gst no.
   const isValidGSTNo = (gstNo) => {
@@ -123,7 +124,7 @@ const Parties = () => {
 
   const handleRowClick = (partyId) => {
     // Handle row click to navigate to respective page
-    navigate(`/partyInvoice`);
+    navigate(`/party/${partyId}`);
   };
 
   return (
@@ -142,7 +143,7 @@ const Parties = () => {
                 width='40%'
               />
               <InputRightAddon size='sm' outline='none' height='32px'>
-                <SearchIcon color='black'/>
+                <SearchIcon color='black' />
               </InputRightAddon>
             </InputGroup>
             <Button
@@ -154,8 +155,8 @@ const Parties = () => {
               Add Parties +
             </Button>
           </Flex>
-          <TableContainer 
-          style={{ margin: '20px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'}}
+          <TableContainer
+            style={{ margin: '20px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}
           >
             <Table style={{ borderCollapse: 'collapse', width: '100%' }}>
               <Thead style={{ textAlign: 'center' }}>
@@ -168,15 +169,34 @@ const Parties = () => {
                 </Tr>
               </Thead>
               <Tbody>
-              {filteredData?.map((data) => (
-              <Tr key={data._id} onClick={() => handleRowClick(data._id)} style={{ cursor: 'pointer' }}>
-                <Td isNumeric style={{ border: '1px solid gray' }}>{data._id}</Td>
-                <Td style={{ border: '1px solid gray' }}>{data.partyName}</Td>
-                <Td style={{ border: '1px solid gray' }}>{data.paidAmount}</Td>
-                <Td style={{ border: '1px solid gray' }}>{data.dueAmount}</Td>
-                <Td style={{ border: '1px solid gray' }}>{data.totalInvoice}</Td>
-              </Tr>
-              ))}
+                {searchQuery.length> 0 ? (
+                  // Render search results if a search query is present
+                  searchPartiesData
+                    .filter((data) => {
+                      // Your filtering logic here based on the search query
+                      return data.partyName.toLowerCase().includes(searchQuery.toLowerCase());
+                    })
+                    .map((filteredData) => (
+                      <Tr key={filteredData._id} onClick={() => handleRowClick(filteredData._id)} style={{ cursor: 'pointer' }}>
+                        <Td isNumeric style={{ border: '1px solid gray' }}>{filteredData._id}</Td>
+                        <Td style={{ border: '1px solid gray' }}>{filteredData.partyName}</Td>
+                        <Td style={{ border: '1px solid gray' }}>{filteredData.paidAmount}</Td>
+                        <Td style={{ border: '1px solid gray' }}>{filteredData.dueAmount}</Td>
+                        <Td style={{ border: '1px solid gray' }}>{filteredData.totalInvoice}</Td>
+                      </Tr>
+                    ))
+                ) : (
+                  // Render normal data when there's no search query
+                  filteredData.map((data) => (
+                    <Tr key={data._id} onClick={() => handleRowClick(data._id)} style={{ cursor: 'pointer' }}>
+                      <Td isNumeric style={{ border: '1px solid gray' }}>{data._id}</Td>
+                      <Td style={{ border: '1px solid gray' }}>{data.partyName}</Td>
+                      <Td style={{ border: '1px solid gray' }}>{data.paidAmount}</Td>
+                      <Td style={{ border: '1px solid gray' }}>{data.dueAmount}</Td>
+                      <Td style={{ border: '1px solid gray' }}>{data.totalInvoice}</Td>
+                    </Tr>
+                  ))
+                )}
               </Tbody>
             </Table>
           </TableContainer>
@@ -197,7 +217,7 @@ const Parties = () => {
             <ModalHeader style={{ borderBottom: '1px solid #E2E8F0', padding: '16px' }}>
               Add New Party
             </ModalHeader>
-            <ModalCloseButton style={{ padding: '12px' }}/>
+            <ModalCloseButton style={{ padding: '12px' }} />
             <ModalBody style={{ padding: '16px' }}>
               <Flex direction='row'>
                 <FormControl margin={"10px"}>
@@ -211,46 +231,46 @@ const Parties = () => {
                   />
                 </FormControl>
                 <FormControl margin={"10px"}>
-                <FormLabel>Email :</FormLabel>
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  value={form.email}
-                  name="email"
-                  onChange={handleChangeParty}
-                />
+                  <FormLabel>Email :</FormLabel>
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    value={form.email}
+                    name="email"
+                    onChange={handleChangeParty}
+                  />
                 </FormControl>
               </Flex>
-              
+
               <Flex>
                 {/* GST no. */}
                 <FormControl margin={"10px"}>
-                <FormLabel>GST NO :</FormLabel>
-                <Input
-                type="text"
-                placeholder="GST NO"
-                value={form.GSTNo}
-                name="GSTNo"
-                onChange={handleChangeParty}
-                isInvalid={!isValidGSTNo(form.GSTNo) && form.GSTNo !== ""}
-                />
-                {!isValidGSTNo(form.GSTNo) && form.GSTNo !== "" && (
-                <FormErrorMessage>Please enter a valid GST number</FormErrorMessage>
-                )}
+                  <FormLabel>GST NO :</FormLabel>
+                  <Input
+                    type="text"
+                    placeholder="GST NO"
+                    value={form.GSTNo}
+                    name="GSTNo"
+                    onChange={handleChangeParty}
+                    isInvalid={!isValidGSTNo(form.GSTNo) && form.GSTNo !== ""}
+                  />
+                  {!isValidGSTNo(form.GSTNo) && form.GSTNo !== "" && (
+                    <FormErrorMessage>Please enter a valid GST number</FormErrorMessage>
+                  )}
                 </FormControl>
                 <FormControl margin={"10px"}>
-                <FormLabel>GST Type :</FormLabel>
-                <Select
-                  placeholder="GST Type"
-                  name="GSTType"
-                  onChange={handleChangeParty}
-                >
-                  <option value="c_gst">cgst</option>
-                  <option value="s_gst">sgst</option>
-                </Select>
+                  <FormLabel>GST Type :</FormLabel>
+                  <Select
+                    placeholder="GST Type"
+                    name="GSTType"
+                    onChange={handleChangeParty}
+                  >
+                    <option value="c_gst">cgst</option>
+                    <option value="s_gst">sgst</option>
+                  </Select>
                 </FormControl>
               </Flex>
-              
+
               <Flex>
                 <FormControl margin={"10px"}>
                   <FormLabel>Phone Number :</FormLabel>
@@ -273,7 +293,7 @@ const Parties = () => {
                   />
                 </FormControl>
               </Flex>
-              
+
               <Flex>
                 <FormControl margin={"10px"}>
                   <FormLabel>Billing Address:</FormLabel>
@@ -305,7 +325,7 @@ const Parties = () => {
               <Button
                 colorScheme="green"
                 onClick={handleAddParty}
-                disabled={form.partyName==""}
+                disabled={form.partyName == ""}
               >
                 Add
               </Button>

@@ -1,7 +1,11 @@
 import React from 'react';
 import { Box, Heading, Input, Flex, Text, Select } from '@chakra-ui/react';
 
-const Invoice = () => {
+const Invoice = ({ formData , setFormData}) => {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
   return (
     <Box p="2">
       <Heading size="md" mb="4">
@@ -9,15 +13,15 @@ const Invoice = () => {
       </Heading>
       <Flex mb="2">
         <Text flex="0 0 120px">Invoice No:</Text>
-        <Input flex="1" ml="2" size="sm" />
+        <Input name="invoiceNo" flex="1" ml="2" size="sm" onChange={handleInputChange} />
       </Flex>
       <Flex mb="2">
         <Text flex="0 0 120px">Date:</Text>
-        <Input type="date" flex="1" ml="2" size="sm" />
+        <Input name="invoiceDate" type="date" flex="1" ml="2" size="sm" />
       </Flex>
       <Flex mb="2">
         <Text flex="0 0 120px">Payment Mode:</Text>
-        <Select placeholder="Mode" size="sm" flex="1" />
+        <Select name="paymentMode" placeholder="Mode" size="sm" flex="1" onChange={handleInputChange} />
       </Flex>
       {/* <Flex mb="2">
         <Text flex="0 0 120px">Tax:</Text>
@@ -25,11 +29,11 @@ const Invoice = () => {
       </Flex> */}
       <Flex mb="2">
         <Text flex="0 0 120px">GST Number:</Text>
-        <Input flex="1" size="sm" />
+        <Input name="gstNo" flex="1" size="sm" onChange={handleInputChange} />
       </Flex>
       <Flex mb="2">
         <Text flex="0 0 120px">Due Date:</Text>
-        <Input type="date" flex="1" ml="2" size="sm" />
+        <Input  name="dueDate" type="date" flex="1" ml="2" size="sm" onChange={handleInputChange} />
       </Flex>
     </Box>
   );

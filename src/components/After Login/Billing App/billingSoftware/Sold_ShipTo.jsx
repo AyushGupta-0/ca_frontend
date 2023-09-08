@@ -1,7 +1,12 @@
 import React from 'react';
 import { Box, Flex, Heading, Select, Input, Textarea } from '@chakra-ui/react';
 
-const Sold_ShipTo = () => {
+const Sold_ShipTo = ({ formData, setFormData }) => {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   return (
     <Flex>
       {/* Box 1 */}
@@ -10,12 +15,25 @@ const Sold_ShipTo = () => {
           <Heading size="xs" marginRight="1">
             Sold To:
           </Heading>
-          <Select placeholder="Select customer" width="70%" fontSize="sm" size='sm' 
+          <Select placeholder="Select customer" width="70%" fontSize="sm" size='sm'
             mt='-10px'
           />
         </Flex>
-        <Input placeholder="Customer Name" mb="1" size="sm" />
-        <Textarea placeholder="Address" size="sm" />
+        <Input
+          name="soldToCustomerName"
+          placeholder="Customer Name"
+          mb="1"
+          size="sm"
+          value={formData?.soldToCustomerName}
+          onChange={handleInputChange}
+        />
+        <Textarea
+          name="soldToCustomerAddress"
+          placeholder="Address"
+          size="sm"
+          value={formData?.soldToCustomerAddress}
+          onChange={handleInputChange}
+        />
       </Box>
 
       {/* Box 2 */}
@@ -25,8 +43,21 @@ const Sold_ShipTo = () => {
             Ship To:
           </Heading>
         </Flex>
-        <Input placeholder="Name" mb="1" size="sm" />
-        <Textarea placeholder="Address" size="sm" />
+        <Input
+          name="shipToCustomerName"
+          placeholder="Name"
+          mb="1"
+          size="sm"
+          value={formData?.shipToCustomerName}
+          onChange={handleInputChange}
+        />
+        <Textarea
+          name="shipToCustomerAddress"
+          placeholder="Address"
+          size="sm"
+          value={formData?.shipToCustomerAddress}
+          onChange={handleInputChange}
+        />
       </Box>
     </Flex>
   );

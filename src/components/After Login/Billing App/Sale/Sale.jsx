@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     Box, Button, Flex,
     useDisclosure,
@@ -12,85 +12,101 @@ import {
     Icon,
     Link,
 } from '@chakra-ui/react'
-import { Link as RouterLink} from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import Slidebar from '../Slidebar/Slidebar';
 import Company_name from '../Company_name/Company_name';
 import { FiDownload, FiShare2 } from 'react-icons/fi';
-
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    getInvoiceAction
+} from "../../../../Redux/Invoice/invoice.action";
 
 const Sale = () => {
-        const Company = {
-            name: "Company Name"
+    const Company = {
+        name: "Company Name"
+    }
+    const Items = [
+        {
+            id: 1,
+            Name: "name",
+            quantity: 10,
+            price: 1000,
+            tax: 0,
+            total: 1000,
         }
-        const Items = [
-            {
-                id: 1,
-                Name: "name",
-                quantity: 10,
-                price: 1000,
-                tax: 0,
-                total: 1000,
-            }
-        ]
-        const modal1 = useDisclosure()
+    ]
+    const modal1 = useDisclosure()
+    const token = localStorage.getItem("token");
+    const { firmId } = useSelector((store) => store.FirmRegistration);
+    const { getAllInvoice } = useSelector((store) => store.invoiceReducer);
 
-        return (
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-            <>
-                <Company_name company_name={Company.name} />
-                <Flex >
-                    <Slidebar />
-                    <Box margin={"auto"} marginTop="20px" overflow={"hidden"} width="80%">
-                        <Link as={RouterLink} to={"/billing-software"}>
-                            <Button backgroundColor="blue.400" px='2' margin={"10px"}
-                                onClick={modal1.onOpen}>Add Sales +</Button>
-                        </Link>
-                        <TableContainer width="100%" alignItems='center'
+    const handleViewClick = (invoiceId) => {
+        navigate(`/billing-software/${invoiceId}`);
+    };
+
+    useEffect(() => {
+        dispatch(getInvoiceAction(token, firmId));
+    }, [firmId])
+    return (
+
+        <>
+            <Company_name company_name={Company.name} />
+            <Flex >
+                <Slidebar />
+                <Box margin={"auto"} marginTop="20px" overflow={"hidden"} width="80%">
+                    <Link as={RouterLink} to={"/billing-software"}>
+                        <Button backgroundColor="blue.400" px='2' margin={"10px"}
+                            onClick={modal1.onOpen}>Add Sales +</Button>
+                    </Link>
+                    <TableContainer width="100%" alignItems='center'
                         justifyContent='center'
                         bg="white" boxShadow="md" p="4"
-                        >
-                            <Table width="100%">
-                                <Thead>
-                                    <Tr>
-                                        <Th style={{ border: '1px solid gray' }}>Invoice No</Th>
-                                        <Th style={{ border: '1px solid gray' }}>Date</Th>
-                                        <Th style={{ border: '1px solid gray' }}>Amount</Th>
-                                        <Th style={{ border: '1px solid gray' }}>Tax</Th>
-                                        <Th style={{ border: '1px solid gray' }}>Total Amount</Th>
-                                        <Th style={{ border: '1px solid gray' }}>Actions</Th>
-                                    </Tr>
-                                </Thead>
-                                <Tbody>
-                                    {
-                                        Items.map((data) =>
-                                            <Tr key={data.id}>
-                                                <Td style={{ border: '1px solid gray' }}>{data.invoiceNumber}</Td>
-                                                <Td style={{ border: '1px solid gray' }}>{data.date}</Td>
-                                                <Td style={{ border: '1px solid gray' }}>{data.amount}</Td>
-                                                <Td style={{ border: '1px solid gray' }}>{data.tax}</Td>
-                                                <Td style={{ border: '1px solid gray' }}>{data.total}</Td>
-                                                <Td style={{ border: '1px solid gray' }}>
-                                                    <Link color="blue.500" mr="2" textDecoration='underline'>
+                    >
+                        <Table width="100%">
+                            <Thead>
+                                <Tr>
+                                    <Th style={{ border: '1px solid gray' }}>Invoice No</Th>
+                                    <Th style={{ border: '1px solid gray' }}>Date</Th>
+                                    <Th style={{ border: '1px solid gray' }}>Amount</Th>
+                                    <Th style={{ border: '1px solid gray' }}>Tax</Th>
+                                    <Th style={{ border: '1px solid gray' }}>Total Amount</Th>
+                                    <Th style={{ border: '1px solid gray' }}>Actions</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                {
+                                    getAllInvoice.map((data) =>
+                                        <Tr key={data.id}>
+                                            <Td style={{ border: '1px solid gray' }}>{data.invoiceNo}</Td>
+                                            <Td style={{ border: '1px solid gray' }}>{data.invoiceDate}</Td>
+                                            <Td style={{ border: '1px solid gray' }}>{data.dueAmount}</Td>
+                                            <Td style={{ border: '1px solid gray' }}>0</Td>
+                                            <Td style={{ border: '1px solid gray' }}>{data.finalAmount}</Td>
+                                            <Td style={{ border: '1px solid gray' }}>
+                                                <Link color="blue.500" mr="2" textDecoration='underline' onClick={() => handleViewClick(data._id)}>
                                                     view
-                                                    </Link>
-                                                    <Link color="blue.500" mr="2">
-                                                        <Icon as={FiDownload} />
-                                                    </Link>
-                                                    <Link color="blue.500">
-                                                        <Icon as={FiShare2} />
-                                                    </Link>
-                                                </Td>
-                                            </Tr>
-                                        )
+                                                </Link>
+                                                <Link color="blue.500" mr="2">
+                                                    <Icon as={FiDownload} />
+                                                </Link>
+                                                <Link color="blue.500">
+                                                    <Icon as={FiShare2} />
+                                                </Link>
+                                            </Td>
+                                        </Tr>
+                                    )
 
-                                    }
+                                }
 
-                                </Tbody>
+                            </Tbody>
 
-                            </Table>
-                        </TableContainer>
-                    </Box>
-                    {/* <Modal isOpen={modal1.isOpen} onClose={modal1.onClose}>
+                        </Table>
+                    </TableContainer>
+                </Box>
+                {/* <Modal isOpen={modal1.isOpen} onClose={modal1.onClose}>
                         <ModalOverlay />
                         <ModalContent>
                             <ModalHeader>Add New Item</ModalHeader>
@@ -132,11 +148,11 @@ const Sale = () => {
                             </ModalFooter>
                         </ModalContent>
                     </Modal> */}
-                </Flex>
+            </Flex>
 
-            </>
-        )
-    }
+        </>
+    )
+}
 
 export default Sale
 
