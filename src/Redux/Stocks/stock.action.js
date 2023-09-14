@@ -14,7 +14,7 @@ export const getStockAction = (token, firmId) => (dispatch) => {
   };
   dispatch({ type: LOADING_STOCKS });
 
-  const url = `http://localhost:8080/item/${firmId}/products`;
+  const url = `https://taxservicebackend.onrender.com/item/${firmId}/products`;
   axios
     .get(url, { headers })
     .then((res) => {
@@ -31,7 +31,7 @@ export const postStockAction = (creds, token) => (dispatch) => {
   };
   dispatch({ type: LOADING_STOCKS });
 
-  const url = `http://localhost:8080/item/insertproduct`;
+  const url = `https://taxservicebackend.onrender.com/item/insertproduct`;
   axios
     .post(url, creds, { headers })
     .then((res) => {
@@ -57,7 +57,7 @@ export const updateStockAction = (creds, token) => (dispatch) => {
   };
   dispatch({ type: LOADING_STOCKS });
   try {
-    const url = `http://localhost:8080/items/id`;
+    const url = `https://taxservicebackend.onrender.com/items/id`;
     axios.put(url, creds, { headers }).then((res) => {
       dispatch({ type: UPDATE_STOCKS, payload: res.data });
       console.log(res);
@@ -74,10 +74,10 @@ const headers={
 }
     dispatch({ type: LOADING_STOCKS });
     try {
-      const url=`http://localhost:8080/items/product/${id}`
-      axios.post(url,{ headers }).then((res) => {
+      const url=`https://taxservicebackend.onrender.com/item/product/${id}`
+      axios.delete(url,{ headers }).then((res) => {
         dispatch({ type: DELETE_STOCKS, payload: res.data });
-        console.log(res)
+        // alert(res.data)
       });
     } catch (error) {
       console.log(error);

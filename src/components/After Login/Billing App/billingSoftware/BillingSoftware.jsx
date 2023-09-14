@@ -71,6 +71,8 @@ const BillingSoftware = () => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+        setFormData({ ...formData, firmId: firmId });
+
     };
 
     const submitInvoice = () => {

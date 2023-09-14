@@ -14,7 +14,7 @@ export const  getFirmData = (token) => (dispatch) => {
     dispatch({ type: LOADING_FIRM_REGISTER });
 
      axios.get(
-        `http://localhost:8080/firm_registration`,
+        `https://taxservicebackend.onrender.com/firm_registration`,
         { headers }
       )
         .then(res => {
@@ -39,7 +39,7 @@ export const firmRegisterAction = (formData, token) => (dispatch) => {
 
     dispatch({ type: LOADING_FIRM_REGISTER });
 
-    axios.post(`http://localhost:8080/firm_registration`, formData, { headers })
+    axios.post(`https://taxservicebackend.onrender.com/firm_registration`, formData, { headers })
         .then(res => {
             dispatch({ type: SUCCESS_FIRM_REGISTER, payload: res.data });
             console.log(res);

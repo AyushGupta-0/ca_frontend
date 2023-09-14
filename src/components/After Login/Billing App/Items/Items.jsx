@@ -67,6 +67,20 @@ const Items = () => {
   console.log("🚀 ~ file: Items.jsx:65 ~ Items ~ getStockData:", getStockData)
   const Categories = useSelector((store) => store.categoryReducer);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  useEffect(() => {
+    if (selectedCategories.length === 0) {
+      setFilteredProducts(getStockData);
+    } else {
+      const filtered = getStockData.filter((product) => {
+        return product.category.some((category) =>
+          selectedCategories.includes(category)
+        );
+      });
+      setFilteredProducts(filtered);
+    }
+  }, [selectedCategories, getStockData]);
 
   const dispatch = useDispatch();
   const [form, setForm] = useState({
@@ -82,10 +96,8 @@ const Items = () => {
     gstRate: "",
     firmId: `${firmId}`,
   });
-  console.log("🚀 ~ file: Items.jsx:85 ~ Items ~ form:", form)
 
   useEffect(() => {
-    // Join the selected categories into a comma-separated string (you can adjust the format as needed)
     const category = selectedCategories;
     setForm(prevForm => ({ ...prevForm, category }));
   }, [selectedCategories]);
@@ -137,7 +149,15 @@ const Items = () => {
   };
 
   const handleDelete = (id) =>{
-    dispatch(deleteStockAction(token, id));
+    dispatch(deleteStockAction(token, id))
+    .then(() => {
+      // After successful deletion, refetch data
+      dispatch(getStockAction(token, firmId));
+      dispatch(getCategoriesAction(token, firmId));
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
   return (
     <>
@@ -212,7 +232,7 @@ const Items = () => {
                 </Tr>
               </Thead>
               <Tbody>
-                {getStockData?.map((data) => (
+                {filteredProducts?.map((data) => (
                   <Tr key={data._id}>
                     <Td>{data._id}</Td>
                     <Td>{data.name}</Td>
@@ -227,7 +247,7 @@ const Items = () => {
                     <Td>
                       <Link><FaEdit /></Link>
                       <Link>more</Link>
-                      <Link onClick={handleDelete(data._id)}><FaTrash /></Link>
+                      <Link onClick={() => {handleDelete(data._id)}}><FaTrash /></Link>
                     </Td>
                   </Tr>
                 ))}
