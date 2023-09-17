@@ -19,16 +19,17 @@ import {
         return { ...state, loading: true, error: false };
       }
       case SUCCESS_PURCHASE: {
-        return { ...state, loading: false, error: false, partiesData: payload };
+        console.log(payload);
+        return { ...state, loading: false, error: false, purchaseData: payload };
       }
       case ERROR_PURCHASE: {
-        return { ...state, loading: false, error: false, getPartiesData: payload };
+        return { ...state, loading: false, error: false, purchaseData: payload };
       }
       case UPDATE_PURCHASE: {
-        return { ...state, loading: false, error: false, partiesData: payload };
+        return { ...state, loading: false, error: false, purchaseData: payload };
       }
       case DELETE_PURCHASE: {
-        return { ...state, loading: false, error: false , partiesData: payload };
+        return { ...state, loading: false, error: false , purchaseData: payload };
       }
       default: {
         return state;
