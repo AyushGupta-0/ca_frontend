@@ -53,7 +53,7 @@ const Profile = () => {
         const headers = {
             'token': `${token}`
         }
-        axios.get(`https://taxservicebackend.onrender.com/profile_get`, { headers })
+        axios.get(`https://tax-service.onrender.com/profile_get`, { headers })
             .then((res) => {
                 setProfileData(res.data.profile_data);
                 // console.log('profile update', res.data,profileData)

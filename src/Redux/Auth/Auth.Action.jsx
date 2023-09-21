@@ -9,7 +9,7 @@ export const AuthRegisterAction = (creds,navigate) => (dispatch) => {
   dispatch({ type: LOADING_REGISTER });
 
   axios
-    .post(`https://taxservicebackend.onrender.com/signup`, creds)
+    .post(`https://tax-service.onrender.com/signup`, creds)
     .then((res) => {
       dispatch({ type: SUCCESS_REGISTER, payload: creds });
     //   console.log(res.data);

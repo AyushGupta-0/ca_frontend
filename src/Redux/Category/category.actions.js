@@ -15,7 +15,7 @@ export const getCategoriesAction = (token, firmId) => (dispatch) => {
   };
   dispatch({ type: LOADING_CATEGORIES });
   try {
-    const url = `https://taxservicebackend.onrender.com/category/getcategory/${firmId}`;
+    const url = `https://tax-service.onrender.com/category/getcategory/${firmId}`;
     axios.get(url, { headers }).then((res) => {
       dispatch({ type: GET_CATEGORIES, payload: res.data });
     });
@@ -31,7 +31,7 @@ export const postCategoryAction = (creds, token, firmId) => (dispatch) => {
   };
   dispatch({ type: LOADING_CATEGORIES });
   try {
-    const url = `https://taxservicebackend.onrender.com/category/createcategory/${firmId}`;
+    const url = `https://tax-service.onrender.com/category/createcategory/${firmId}`;
     axios.post(url, creds, { headers }).then((res) => {
       dispatch({ type: SUCCESS_CATEGORIES, payload: res.data });
       console.log(res);
@@ -52,7 +52,7 @@ export const updateCategoryAction = (creds, token , firmId) => (dispatch) => {
   };
   dispatch({ type: LOADING_CATEGORIES });
   try {
-    const url = `https://taxservicebackend.onrender.com/category/updatecategory/${firmId}/id`;
+    const url = `https://tax-service.onrender.com/category/updatecategory/${firmId}/id`;
     axios.put(url, creds, { headers }).then((res) => {
       dispatch({ type: UPDATE_CATEGORIES, payload: res.data });
       console.log(res);
@@ -69,7 +69,7 @@ export const deleteCategoryAction = (categoryId, token, firmId) => (dispatch) =>
     };
     dispatch({ type: LOADING_CATEGORIES });
     try {
-      const url = `https://taxservicebackend.onrender.com/category/deletecategory/${firmId}/id`;
+      const url = `https://tax-service.onrender.com/category/deletecategory/${firmId}/id`;
       axios.delete(url, { headers }).then((res) => {
         dispatch({ type: DELETE_CATEGORIES, payload: categoryId }); // Dispatch the deleted categoryId
         console.log(res);

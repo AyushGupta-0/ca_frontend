@@ -18,7 +18,7 @@ export const getPartiesAction = (token, firmId) => (dispatch) => {
   };
   dispatch({ type: LOADING_PARTIES });
   try {
-    const url = `https://taxservicebackend.onrender.com/${firmId}/party`;
+    const url = `https://tax-service.onrender.com/${firmId}/party`;
     axios.get(url, { headers }).then((res) => {
       dispatch({ type: GET_PARTIES, payload: res.data.party });
       console.log("abcd", res.data.party);
@@ -35,7 +35,7 @@ export const getInduvidualPartiesAction = (token, firmId , id) => (dispatch) => 
   };
   dispatch({ type: LOADING_PARTIES });
   try {
-    const url = `https://taxservicebackend.onrender.com/${firmId}/party/${id}`;
+    const url = `https://tax-service.onrender.com/${firmId}/party/${id}`;
     axios.get(url, { headers }).then((res) => {
       dispatch({ type: INDUVIDUAL_PARTY, payload: res.data.party });
       console.log("abcd", res.data.party);
@@ -52,7 +52,7 @@ export const postPartiesAction = (creds, token, firmId) => (dispatch) => {
   };
   dispatch({ type: LOADING_PARTIES });
   try {
-    const url = `https://taxservicebackend.onrender.com/${firmId}/party`;
+    const url = `https://tax-service.onrender.com/${firmId}/party`;
     axios.post(url, creds, { headers }).then((res) => {
       dispatch({ type: SUCCESS_PARTIES, payload: res.data });
       console.log(res);
@@ -73,7 +73,7 @@ export const updatePartiesAction = (creds, token) => (dispatch) => {
   };
   dispatch({ type: LOADING_PARTIES });
   try {
-    const url = `https://taxservicebackend.onrender.com/party/id`;
+    const url = `https://tax-service.onrender.com/party/id`;
     axios.put(url, creds, { headers }).then((res) => {
       dispatch({ type: UPDATE_PARTIES, payload: res.data });
       console.log(res);
@@ -90,7 +90,7 @@ export const searchParty = (partyName, token , firmId) => (dispatch) => {
   };
   dispatch({ type: LOADING_PARTIES });
   try {
-    const url = `https://taxservicebackend.onrender.com/${firmId}/party/search?name=${partyName}`;
+    const url = `https://tax-service.onrender.com/${firmId}/party/search?name=${partyName}`;
     axios.put(url, partyName, { headers }).then((res) => {
       dispatch({ type: SEARCH_PARTIES, payload: res.data });
       console.log(res);
@@ -107,7 +107,7 @@ const headers={
 }
     dispatch({ type: LOADING_PARTIES });
     try {
-      const url=`https://taxservicebackend.onrender.com/party/${id}`
+      const url=`https://tax-service.onrender.com/party/${id}`
       axios.post(url,{ headers }).then((res) => {
         dispatch({ type: DELETE_PARTIES, payload: res.data.party });
            console.log("del::::",res.data.party)

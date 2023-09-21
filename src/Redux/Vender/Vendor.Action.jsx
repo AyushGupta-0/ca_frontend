@@ -9,7 +9,7 @@ export const VENDOR_LoginAction = (creds, navigate) => (dispatch) => {
 
 
 
-    axios.post(`https://taxservicebackend.onrender.com/vendor/login`, creds).then(res => {
+    axios.post(`https://tax-service.onrender.com/vendor/login`, creds).then(res => {
 
         dispatch({ type: SUCCESS_VENDOR_LOGIN, payload: res });
         console.log( res);

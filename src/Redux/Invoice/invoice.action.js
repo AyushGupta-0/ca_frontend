@@ -17,7 +17,7 @@ export const postInvoiceAction = (creds, firmId, token) => (dispatch) => {
   }
   dispatch({ type: LOADING_INVOICE });
   try {
-    const url = `https://taxservicebackend.onrender.com/invoice/firm/${firmId}/saleinvoice`
+    const url = `https://tax-service.onrender.com/invoice/firm/${firmId}/saleinvoice`
     axios.post(url, creds, { headers }).then((res) => {
       dispatch({ type: SUCCESS_INVOICE, payload: res.data });
       console.log(res);
@@ -38,7 +38,7 @@ export const getInvoiceAction = (token , firmId) => (dispatch) => {
   }
   dispatch({ type: LOADING_INVOICE });
   try {
-    const url = `https://taxservicebackend.onrender.com/invoice/firm/${firmId}/saleinvoice`
+    const url = `https://tax-service.onrender.com/invoice/firm/${firmId}/saleinvoice`
     axios.get(url, { headers }).then((res) => {
       dispatch({ type: GET_INVOICE, payload: res.data });
     });
@@ -54,7 +54,7 @@ export const getOneInvoiceAction = (token , firmId , id) => (dispatch) => {
   }
   dispatch({ type: LOADING_INVOICE });
   try {
-    const url = `https://taxservicebackend.onrender.com/invoice/firm/${firmId}/saleinvoice/${id}`
+    const url = `https://tax-service.onrender.com/invoice/firm/${firmId}/saleinvoice/${id}`
     axios.get(url, { headers }).then((res) => {
       dispatch({ type: GET_ONE_INVOICE, payload: res.data });
       console.log("abcd", res.data );
@@ -73,7 +73,7 @@ export const updateInvoiceAction = (creds, token) => (dispatch) => {
   }
   dispatch({ type: LOADING_INVOICE });
   try {
-    const url = `https://taxservicebackend.onrender.com/party/id`
+    const url = `https://tax-service.onrender.com/party/id`
     axios.put(url, creds, { headers }).then((res) => {
       dispatch({ type: UPDATE_INVOICE, payload: res.data });
       console.log(res);
@@ -92,7 +92,7 @@ export const updateInvoiceAction = (creds, token) => (dispatch) => {
     // }
 //     dispatch({ type: LOADING_INVOICE });
 //     try {
-//       const url=`https://taxservicebackend.onrender.com/party/${id}`
+//       const url=`https://tax-service.onrender.com/party/${id}`
 //       axios.post(url,{ headers }).then((res) => {
 //         dispatch({ type: DELETE_INVOICE, payload: res.data });
 //         console.log(res)

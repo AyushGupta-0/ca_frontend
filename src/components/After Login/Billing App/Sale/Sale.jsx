@@ -39,7 +39,6 @@ const Sale = () => {
     const token = localStorage.getItem("token");
     const { firmId } = useSelector((store) => store.FirmRegistration);
     const { getAllInvoice } = useSelector((store) => store.invoiceReducer);
-    console.log("🚀 ~ file: Sale.jsx:42 ~ Sale ~ getAllInvoice:", getAllInvoice)
 
     const dispatch = useDispatch();
     const navigate = useNavigate();

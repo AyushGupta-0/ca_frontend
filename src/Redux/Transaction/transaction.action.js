@@ -16,7 +16,7 @@ export const postTransactionAction = (creds,token) => (dispatch) => {
     }
   dispatch({ type: LOADING_TRANSACTION });
   try {
-    const url=`https://taxservicebackend.onrender.com/firmId/party`
+    const url=`https://tax-service.onrender.com/firmId/party`
     axios.post(url, creds, { headers }).then((res) => {
       dispatch({ type: SUCCESS_TRANSACTION, payload: res.data });
       console.log(res);
@@ -37,7 +37,7 @@ export const getTransactionAction = (token) => (dispatch) => {
     }
     dispatch({ type: LOADING_TRANSACTION });
     try {
-      const url=`https://taxservicebackend.onrender.com/party`
+      const url=`https://tax-service.onrender.com/party`
       axios.get(url,{ headers }).then((res) => {
         dispatch({ type: GET_TRANSACTION, payload: res.data });
         // console.log("abcd", res.data );
@@ -57,7 +57,7 @@ export const getTransactionAction = (token) => (dispatch) => {
     }
     dispatch({ type: LOADING_TRANSACTION });
     try {
-      const url=`https://taxservicebackend.onrender.com/party/id`
+      const url=`https://tax-service.onrender.com/party/id`
       axios.put(url,creds,{ headers }).then((res) => {
         dispatch({ type: UPDATE_TRANSACTION, payload: res.data });
         console.log(res);
@@ -76,7 +76,7 @@ export const getTransactionAction = (token) => (dispatch) => {
     // }
 //     dispatch({ type: LOADING_TRANSACTION });
 //     try {
-//       const url=`https://taxservicebackend.onrender.com/party/${id}`
+//       const url=`https://tax-service.onrender.com/party/${id}`
 //       axios.post(url,{ headers }).then((res) => {
 //         dispatch({ type: DELETE_TRANSACTION, payload: res.data });
 //         console.log(res)

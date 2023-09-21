@@ -11,7 +11,7 @@ import { ERROR_Profile, LOADING_Profile, SUCCESS_Profile } from "./Profile.Type"
 
 //     try {
 
-//         axios.get(`https://taxservicebackend.onrender.com/profile_get`, { headers }).then(res => {
+//         axios.get(`https://tax-service.onrender.com/profile_get`, { headers }).then(res => {
 //             dispatch({ type: SUCCESS_Profile, payload: res.data.profile_data});
 //             // console.log("res", res.data.profile_data);
 //         })
@@ -35,7 +35,7 @@ export const ProfileActionUpdate = (token, creds) => (dispatch) => {
 
     try {
 
-        axios.put(`https://taxservicebackend.onrender.com/profile_update`, creds,{ headers }).then(res => {
+        axios.put(`https://tax-service.onrender.com/profile_update`, creds,{ headers }).then(res => {
             dispatch({ type: SUCCESS_Profile, payload: res.data.profile_data });
             console.log("resup", res);
         })

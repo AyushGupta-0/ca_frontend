@@ -31,7 +31,7 @@ const AddClientForm = ({ onSubmit }) => {
         const headers = {
             'token':`${tokenLocal}`
         }
-        axios.post(`https://taxservicebackend.onrender.com/client_register`,{headers}).
+        axios.post(`https://tax-service.onrender.com/client_register`,{headers}).
         then((res)=>{
             console.log(res.data)
         })

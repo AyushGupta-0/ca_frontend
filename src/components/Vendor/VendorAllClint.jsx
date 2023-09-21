@@ -17,7 +17,7 @@ const VendorAllClint = () => {
         const headers = {
             'token': tokenLocal,
         };
-        axios.get(`https://taxservicebackend.onrender.com/vendor/getVendor`, { headers })
+        axios.get(`https://tax-service.onrender.com/vendor/getVendor`, { headers })
             .then((res) => {
                 setClients(res.data);
             })

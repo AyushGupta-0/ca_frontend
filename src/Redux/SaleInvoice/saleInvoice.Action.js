@@ -13,7 +13,7 @@ export const postSaleInvoice = (creds, token) => (dispatch) => {
         "token": `${token}`
     };
     dispatch({ type: LOADING_SALE_INVOICE });
-    const url = `https://taxservicebackend.onrender.com/saleinvoice`;
+    const url = `https://tax-service.onrender.com/saleinvoice`;
 
     axios
         .post(url, creds, { headers })
@@ -35,7 +35,7 @@ export const getSaleInvoice = (token) => (dispatch) => {
         "token": `${token}`
     };
     dispatch({ type: LOADING_SALE_INVOICE });
-    const url = `https://taxservicebackend.onrender.com/saleinvoice/id`;
+    const url = `https://tax-service.onrender.com/saleinvoice/id`;
 
     axios
         .get(url, { headers })
@@ -54,7 +54,7 @@ export const updateSaleInvoice = (creds, token) => (dispatch) => {
         "token": `${token}`
     };
     dispatch({ type: LOADING_SALE_INVOICE });
-    const url = `https://taxservicebackend.onrender.com/saleinvoice/id`;
+    const url = `https://tax-service.onrender.com/saleinvoice/id`;
 
     axios
         .put(url, creds, { headers })
@@ -75,7 +75,7 @@ export const updateSaleInvoice = (creds, token) => (dispatch) => {
     // }
 //     dispatch({ type: LOADING_SALE_INVOICE });
 //     try {
-//       const url=`https://taxservicebackend.onrender.com/saleinvoice/id`
+//       const url=`https://tax-service.onrender.com/saleinvoice/id`
 //       axios.post(url,{ headers }).then((res) => {
 //         dispatch({ type: DELETE_SALE_INVOICE, payload: res.data });
 //         console.log(res)
