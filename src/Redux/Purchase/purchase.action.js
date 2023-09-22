@@ -14,7 +14,7 @@ export const getPurchaseAction = (token, firmId) => (dispatch) => {
     };
     dispatch({ type: LOADING_PURCHASE });
     try {
-        const url = `http://localhost:8080/purchase/${firmId}/purchase`;
+        const url = `https://tax-service.onrender.com/purchase/${firmId}/purchase`;
         axios.get(url, { headers }).then((res) => {
             console.log("🚀 ~ file: purchase.action.js:19 ~ axios.get ~ res:", res)
             dispatch({ type: SUCCESS_PURCHASE, payload: res.data });
@@ -31,7 +31,7 @@ export const postPurchaseAction = (creds, token, firmId) => (dispatch) => {
     };
     dispatch({ type: LOADING_PURCHASE });
     try {
-        const url = `http://localhost:8080/purchase/insertpurchase/${firmId}`;
+        const url = `https://tax-service.onrender.com/purchase/insertpurchase/${firmId}`;
         axios.post(url, creds, { headers }).then((res) => {
             dispatch({ type: SUCCESS_PURCHASE, payload: res.data });
             console.log(res);
@@ -52,7 +52,7 @@ export const updatePurchaseAction = (creds, token , firmId , id) => (dispatch) =
     };
     dispatch({ type: LOADING_PURCHASE });
     try {
-        const url = `http://localhost:8080/purchase/updatepurchase/${firmId}/${id}`;
+        const url = `https://tax-service.onrender.com/purchase/updatepurchase/${firmId}/${id}`;
         axios.patch(url, creds, { headers }).then((res) => {
             dispatch({ type: UPDATE_PURCHASE, payload: res.data });
             console.log(res);
@@ -69,7 +69,7 @@ export const deletePurchaseAction = (token, id, firmId) => (dispatch) => {
     }
     dispatch({ type: LOADING_PURCHASE });
     try {
-        const url = `http://localhost:8080/purchase/deletepurchase/${firmId}/${id}`
+        const url = `https://tax-service.onrender.com/purchase/deletepurchase/${firmId}/${id}`
         axios.delete(url, { headers }).then((res) => {
             dispatch({ type: DELETE_PURCHASE, payload: res.data.party });
             dispatch(getPurchaseAction(token, firmId));
