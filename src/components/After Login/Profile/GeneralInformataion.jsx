@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   Box,
   Button,
@@ -20,6 +21,7 @@ import {
 import { CalendarIcon, EditIcon } from '@chakra-ui/icons';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { MdHeight } from 'react-icons/md';
 
 const GeneralInformation = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -27,6 +29,8 @@ const GeneralInformation = () => {
   const handleEditToggle = () => {
     setIsEditing((prev) => !prev);
   };
+
+  const [date,setDate] = useState(new Date());
 
   return (
     <Box bg="gray.100" p="4" minH="100vh" m='4'>
@@ -61,10 +65,12 @@ const GeneralInformation = () => {
                   children={<CalendarIcon color="gray.400" />}
                 />
                 <DatePicker
-                  selected={new Date()} // Set your selected date value
-                  disabled={!isEditing}
+                  // selected={new Date()} // Set your selected date value
+                  selected={date}
+                  onChange={(date)=>setDate(date)}
+                  disabled={isEditing}
                   customInput={<Input width="100%" />} // Use Chakra UI's Input component
-                  popperPlacement="auto" // Ensure popper placement fits layout
+                  popperPlacement="top" // Ensure popper placement fits layout
                   dateFormat="MM/dd/yyyy" // Customize date format
                 />
               </InputGroup>
@@ -82,11 +88,11 @@ const GeneralInformation = () => {
           <Grid templateColumns="1fr 1fr" gap="4">
             <FormControl mt="4">
               <FormLabel>Email</FormLabel>
-              <Input type="email" defaultValue="demo@gmail.com" isReadOnly={!isEditing} />
+              <Input type="email" defaultValue="demo@gmail.com" isReadOnly={isEditing} />
             </FormControl>
             <FormControl mt="4">
               <FormLabel>Phone Number</FormLabel>
-              <Input type="tel" defaultValue="1234567890" isReadOnly={!isEditing} />
+              <Input type="tel" defaultValue="1234567890" isReadOnly={isEditing} />
             </FormControl>
           </Grid>
         </Box>
@@ -96,12 +102,12 @@ const GeneralInformation = () => {
           <Grid templateColumns="1fr 1fr" gap="4" mt="4">
             <FormControl>
               <FormLabel>Address</FormLabel>
-              <Input placeholder="Enter your home address" isReadOnly={!isEditing} />
+              <Input width="200%" placeholder="Enter your home address" isReadOnly={!isEditing} />
             </FormControl>
-            <FormControl>
+            {/* <FormControl>
               <FormLabel>Number</FormLabel>
               <Input isReadOnly={!isEditing} />
-            </FormControl>
+            </FormControl> */}
           </Grid>
           <Grid templateColumns={{ base: '1fr', md: '1fr 1fr 1fr' }} gap="4" mt="4">
             <FormControl>
@@ -117,7 +123,7 @@ const GeneralInformation = () => {
               </Select>
             </FormControl>
             <FormControl>
-              <FormLabel>Zip Code</FormLabel>
+              <FormLabel>Pin Code</FormLabel>
               <Input isReadOnly={!isEditing} />
             </FormControl>
           </Grid>

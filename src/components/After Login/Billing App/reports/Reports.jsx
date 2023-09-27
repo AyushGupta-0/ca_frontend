@@ -25,7 +25,7 @@ const tableData = [
     {
         reportNo: '2',
         customerName: 'bb',
-        amount: 40,
+        amount: 400,
         balance: 20,
         date: '23-08-2023'
     },

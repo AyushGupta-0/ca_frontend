@@ -91,6 +91,9 @@ const Parties = () => {
     shippingAddress: "",
   });
 
+  console.log("iddddd - ",firmId)
+  console.log("partiesdataaa- ", getPartiesData)
+
 
   const handleChangeParty = (e) => {
     e.preventDefault();
@@ -265,8 +268,8 @@ const Parties = () => {
                     name="GSTType"
                     onChange={handleChangeParty}
                   >
-                    <option value="c_gst">cgst</option>
-                    <option value="s_gst">sgst</option>
+                    <option value="c_gst">Registered</option>
+                    <option value="s_gst">Unregistered</option>
                   </Select>
                 </FormControl>
               </Flex>
