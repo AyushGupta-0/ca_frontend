@@ -2,3 +2,7 @@
     color: blue;
     text-decoration: none;
 }
+.react-datepicker-popperplacement{
+    width: "80px";
+    height: "40px";
+}

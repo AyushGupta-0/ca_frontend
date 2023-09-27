@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Company_name from '../Company_name/Company_name'
 import Slidebar from '../Slidebar/Slidebar'
 import { Box, Flex, Heading, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Button, Input, InputRightAddon, InputGroup, Select, Text } from '@chakra-ui/react'
 import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons'
 import { useNavigate } from 'react-router-dom'
-
+import { useDispatch, useSelector } from 'react-redux'
+import {
+    getInvoiceAction
+} from "../../../../Redux/Invoice/invoice.action";
 
 const Company = {
     name: "Company Name"
@@ -56,6 +59,21 @@ const SaleReports = () => {
     const handleRowClick = (reportNo) => {
         navigate('/individual-report')
     }
+
+    const token = localStorage.getItem("token");
+    const { firmId } = useSelector((store) => store.FirmRegistration);
+    const { getAllInvoice } = useSelector((store) => store.invoiceReducer);
+    console.log("🚀 ~ file: SaleReports.jsx:64 ~ SaleReports ~ getAllInvoice:", getAllInvoice)
+
+    const dispatch = useDispatch();
+
+    const handleViewClick = (invoiceId) => {
+        navigate(`/billing-software/${invoiceId}`);
+    };
+
+    useEffect(() => {
+        dispatch(getInvoiceAction(token, firmId));
+    }, [firmId])
   return (
     <>
         

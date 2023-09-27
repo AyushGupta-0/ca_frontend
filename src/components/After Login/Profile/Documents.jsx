@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
   Heading,
@@ -15,10 +15,13 @@ import {
   Select,
   FormControl,
   FormLabel,
-} from '@chakra-ui/react';
-import { DownloadIcon } from '@chakra-ui/icons';
-import { RiFileUploadLine } from 'react-icons/ri';
-import pako from 'pako';
+  border,
+  
+} from "@chakra-ui/react";
+import { DownloadIcon ,CloseIcon } from "@chakra-ui/icons";
+import { RiFileUploadLine } from "react-icons/ri";
+import pako from "pako";
+import { color } from "framer-motion";
 
 const Documents = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -26,13 +29,17 @@ const Documents = () => {
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
   };
+  
+  const closeDocument = (event) => {
+    setSelectedFile(null);
+  }
 
   const handleUpload = async () => {
     if (selectedFile) {
       let compressedFile = null;
 
       // Check if the selected file is an image
-      if (selectedFile.type.startsWith('image/')) {
+      if (selectedFile.type.startsWith("image/")) {
         compressedFile = await compressImage(selectedFile);
       } else {
         // For non-image files, no compression needed
@@ -40,7 +47,7 @@ const Documents = () => {
       }
 
       // Implement your upload logic for the compressed file
-      console.log('Uploading file:', compressedFile);
+      console.log("Uploading file:", compressedFile);
 
       // You can now upload the 'compressedFile' using an API, library, or service
     }
@@ -51,7 +58,7 @@ const Documents = () => {
       const reader = new FileReader();
       reader.onload = async (event) => {
         const base64Image = event.target.result;
-        const buffer = new Uint8Array(base64Image.split(',')[1]);
+        const buffer = new Uint8Array(base64Image.split(",")[1]);
         const compressedBuffer = pako.deflate(buffer, { level: 6 });
         const blob = new Blob([compressedBuffer], { type: imageFile.type });
         resolve(blob);
@@ -61,10 +68,10 @@ const Documents = () => {
   };
 
   const uploadedDocuments = [
-    { id: 1, name: 'Document1.pdf', verified: true },
-    { id: 2, name: 'Document2.jpg', verified: false },
-    { id: 3, name: 'Document3.jpg', verified: false },
-    { id: 4, name: 'Document4.jpg', verified: true },
+    { id: 1, name: "Document1.pdf", verified: true },
+    { id: 2, name: "Document2.jpg", verified: false },
+    { id: 3, name: "Document3.jpg", verified: false },
+    { id: 4, name: "Document4.jpg", verified: true },
     // ... add more documents ...
   ];
 
@@ -72,9 +79,9 @@ const Documents = () => {
     // Handle download logic here
   };
   const handelSelect = (e) => {
-
-    setSelectedValue(e.target.value)
-  }
+    setSelectedValue(e.target.value);
+  };
+ 
 
   return (
     <Box m="4" p="4">
@@ -85,21 +92,32 @@ const Documents = () => {
         <Divider mb="4" />
 
         <Stack spacing="4">
-          <Flex flexDirection={{ base: 'column', md: 'row' }} alignItems="flex-start">
+          <Flex
+            flexDirection={{ base: "column", md: "row" }}
+            alignItems="flex-start"
+          >
             {/* KYC Documents Section */}
             <Box bg="gray.100" p="4" borderRadius="md" flex="1" minH={"210px"}>
-              <Text fontSize="lg" mb="4" color="blue.500">
+              <Text border="2px" borderColor="blackAlpha.800" fontSize="lg" mb="4" color="blue.500">
                 Upload KYC Document
               </Text>
               <FormControl isRequired>
                 <FormLabel htmlFor="Documents Upload Type"></FormLabel>
-                <Select placeholder='Select Document Type' onChange={handelSelect}>
+                <Select
+                  placeholder="Select Document Type"
+                  onChange={handelSelect}
+                >
                   <option value="Aadhar">Aadhar</option>
                   <option value="Pan">Pan</option>
                   <option value="Driving License">Driving License</option>
                 </Select>
               </FormControl>
-              <HStack spacing="2" alignItems="flex-start" justifyContent="space-between" mt={"10px"}>
+              <HStack
+                spacing="2"
+                alignItems="flex-start"
+                justifyContent="space-between"
+                mt={"10px"}
+              >
                 <label htmlFor="kyc-upload" className="custom-file-upload">
                   <RiFileUploadLine size={30} />
                   Choose a KYC document
@@ -108,45 +126,75 @@ const Documents = () => {
                   type="file"
                   id="kyc-upload"
                   accept=".pdf, .jpg, .jpeg, .png"
-                  style={{ display: 'none' }}
+                  style={{ display: "none" }}
                   onChange={handleFileSelect}
                 />
+                {selectedFile && <CloseIcon onClick={closeDocument} margin="4" color="red.500"/>}
 
                 {selectedFile && <Text>{selectedFile.name}</Text>}
                 <Button
                   colorScheme={selectedValue == null ? "disabled" : "blue"}
                   onClick={handleUpload}
                   disabled={selectedValue == null}
-                
                 >
-                  Upload KYC
+                  <Text color="blackAlpha.500">Upload KYC</Text>
                 </Button>
-
-
               </HStack>
             </Box>
 
             {/* Document Upload Section */}
-            <Box bg="gray.100" p="4" borderRadius="md" flex="1" ml={{ md: '4' }} minH={"210px"}>
-              <Text fontSize="lg" mb="4" color="blue.500">
+            <Box
+              bg="gray.100"
+              p="4"
+              borderRadius="md"
+              flex="1"
+              ml={{ md: "4" }}
+              minH={"210px"}
+            >
+              <Text border="2px" borderColor="blackAlpha.800" fontSize="lg" mb="4" color="blue.500">
                 Upload Other Document
               </Text>
-              <HStack spacing="2" alignItems="flex-start" justifyContent="space-between">
+              <HStack
+                spacing="4"
+                alignItems="flex-row"
+                justifyContent="space-between"
+              >
+                <section>
+                  <label htmlFor="file-upload" className="custom-file-upload">
+                    <RiFileUploadLine size={30} />
+                    Choose a file
+                  </label>
+                  <Input
+                    type="file"
+                    id="file-upload"
+                    accept=".pdf, .doc, .docx, .jpg, .jpeg, .png"
+                    style={{ display: "none" }}
+                    onChange={handleFileSelect}
+                  />
+                  {selectedFile && <CloseIcon onClick={closeDocument} margin="4" color="red.500"/>}
+                  {selectedFile && <Text>{selectedFile.name}</Text>}
+                  <Button margin="4" colorScheme="blue" onClick={handleUpload}>
+                    Upload Document
+                  </Button>
+                </section>
+                <section>
                 <label htmlFor="file-upload" className="custom-file-upload">
                   <RiFileUploadLine size={30} />
-                  Choose a file
+                  Choose a photo
                 </label>
                 <Input
                   type="file"
                   id="file-upload"
                   accept=".pdf, .doc, .docx, .jpg, .jpeg, .png"
-                  style={{ display: 'none' }}
+                  style={{ display: "none" }}
                   onChange={handleFileSelect}
                 />
+                {selectedFile && <CloseIcon onClick={closeDocument} margin="4" color="red.500"/>}
                 {selectedFile && <Text>{selectedFile.name}</Text>}
-                <Button colorScheme="blue" onClick={handleUpload}>
+                <Button margin="4" colorScheme="blue" onClick={handleUpload}>
                   Upload Document
                 </Button>
+                </section>
               </HStack>
             </Box>
           </Flex>
@@ -175,8 +223,11 @@ const Documents = () => {
                     onClick={() => handleDownloadDocument(document.name)}
                     mr="4"
                   />
-                  <Badge colorScheme={document.verified ? 'green' : 'red'} mr="4">
-                    {document.verified ? 'Verified' : 'Pending'}
+                  <Badge
+                    colorScheme={document.verified ? "green" : "red"}
+                    mr="4"
+                  >
+                    {document.verified ? "Verified" : "Pending"}
                   </Badge>
                 </Flex>
               </Flex>

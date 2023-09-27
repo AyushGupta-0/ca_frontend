@@ -14,6 +14,7 @@ import {
   Text,
   Link,
 } from '@chakra-ui/react';
+import { ArrowLeftIcon } from "@chakra-ui/icons";
 import { FiBell } from 'react-icons/fi';
 import { FiLogOut } from 'react-icons/fi';
 import { RiProfileFill } from 'react-icons/ri';
@@ -40,6 +41,7 @@ const Header = () => {
       <Flex alignItems="center" justifyContent="space-between">
         <Box>
           <Flex alignItems="center">
+            <Link href="/HomeDash"><ArrowLeftIcon margin="2" color="blackAlpha.500"/></Link>
             <Heading as='h1' ml="8">
               Profile
             </Heading>
@@ -81,12 +83,12 @@ const Header = () => {
                 />
               </MenuItem>
               <MenuItem bg="#FFB91D">
-                <Link to="/privacy-policy">
+                <Link href="/privacy-policy">
                   Privacy Policy
                 </Link>
               </MenuItem>
               <MenuItem bg="#FFB91D">
-                <Link to="/refund-policy">
+                <Link href="/refund-policy">
                   Refund Policy
                 </Link>
               </MenuItem>
