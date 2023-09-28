@@ -1,80 +1,66 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Company_name from '../../Company_name/Company_name'
 import Slidebar from '../../Slidebar/Slidebar'
 import { Box, Flex, Heading, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Button, Input, InputRightAddon, InputGroup, Select, Text } from '@chakra-ui/react'
 import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons'
 import { useNavigate } from 'react-router-dom'
-
-
-const Company = {
-    name: "Company Name"
-}
-const tableData = [
-    {
-        gstIn_UIN_No: '1',
-        receiverName: 'aa',
-        invoiceDate: '20-08-2023',
-        invoiceValue: 20,
-        placeOfSupply: 'SAMSDDSN',
-        reverseCharge: '10%',
-        taxRate: '20%',
-        invoiceType: 'XYZ',
-        eCommerceGSTIN: 'SAMSDDSN',
-        rate: 10,
-        taxableValue: 100,
-        cessAmount: 1020
-    },
-    {
-        gstIn_UIN_No: '1',
-        receiverName: 'aa',
-        invoiceDate: '20-08-2023',
-        invoiceValue: 20,
-        placeOfSupply: 'SAMSDDSN',
-        reverseCharge: '10%',
-        taxRate: '20%',
-        invoiceType: 'XYZ',
-        eCommerceGSTIN: 'SAMSDDSN',
-        rate: 10,
-        taxableValue: 100,
-        cessAmount: 1020
-    },
-    {
-        gstIn_UIN_No: '1',
-        receiverName: 'aa',
-        invoiceDate: '20-08-2023',
-        invoiceValue: 20,
-        placeOfSupply: 'SAMSDDSN',
-        reverseCharge: '10%',
-        taxRate: '20%',
-        invoiceType: 'XYZ',
-        eCommerceGSTIN: 'SAMSDDSN',
-        rate: 10,
-        taxableValue: 100,
-        cessAmount: 1020
-    },
-
-]
+import { useDispatch, useSelector } from 'react-redux'
+import { getInvoiceAction } from '../../../../../Redux/Invoice/invoice.action'
 
 const GSTR1_b2cl = () => {
-    const navigate = useNavigate();
-    const [searchQuery, setSearchQuery] = useState('');
-    const [searchData, setSearchData] = useState(tableData);
 
-    const handleSearch = (e) => {
-        setSearchQuery(e.target.value);
-        setSearchData(tableData.filter((data) =>
-            data.name.toLowerCase().includes(searchQuery.toLowerCase())
-        ))
-    }
+    const navigate = useNavigate();
 
     const handleRowClick = (reportNo) => {
         navigate('/individual-report')
     }
+
+    const token = localStorage.getItem("token");
+    const { firmId } = useSelector((store) => store.FirmRegistration);
+    const { getAllInvoice } = useSelector((store) => store.invoiceReducer);
+    const dispatch = useDispatch();
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchData, setSearchData] = useState(getAllInvoice);
+
+    const handleSearch = (e) => {
+        setSearchQuery(e.target.value);
+        setSearchData(getAllInvoice?.filter((data) =>
+            data?.invoiceNo?.toLowerCase().includes(searchQuery?.toLowerCase())
+        ))
+        setSearchData(
+            getAllInvoice?.filter((data) => {
+                const lowerCaseName = data?.invoiceNo?.toLowerCase();
+                const isInDateRange = (
+                    (!startDate || new Date(data.dueDate) >= new Date(startDate)) &&
+                    (!endDate || new Date(data.dueDate) <= new Date(endDate))
+                );
+
+                return lowerCaseName.includes(searchQuery?.toLowerCase()) && isInDateRange;
+            })
+        );
+    }
+    useEffect(() => {
+        dispatch(getInvoiceAction(token, firmId));
+    }, [firmId])
+
+    const calculateTaxableValue = (finalAmount, taxRate) => {
+        const taxRateDecimal = parseFloat(taxRate) / 100;
+        const taxableValue = finalAmount / (1 + taxRateDecimal);
+        return taxableValue.toFixed(2); 
+    };
+
+    const calculateCessAmount = (finalAmount, taxRate, cessRate) => {
+        const taxRateDecimal = parseFloat(taxRate) / 100;
+        const cessRateDecimal = parseFloat(cessRate) / 100;
+        const taxableValue = calculateTaxableValue(finalAmount, taxRate);
+        const cessAmount = (taxableValue * cessRateDecimal).toFixed(2);
+        return cessAmount;
+    };
     return (
         <>
-
-            <Box Flex='1' padding='15px'
-            >
+            <Box Flex='1' padding='15px'>
                 <Heading size='md' mt='2'> GSTR1 B2CL</Heading>
                 <Flex alignItems='right' position='absolute' right="230" top="140">
                     <Button fontSize={"10px"} bg={"blue.400"} marginLeft="10px">Print</Button>
@@ -85,9 +71,21 @@ const GSTR1_b2cl = () => {
                     flexDirection={{ base: 'column', md: 'row' }}
                 >
                     <Flex>
-                        <Input type='date' size='sm' mr='2' />
+                        <Input
+                            type='date'
+                            size='sm'
+                            mr='2'
+                            value={startDate}
+                            onChange={(e) => { setStartDate(e.target.value); handleSearch(e) }}
+                        />
                         <Text size='lg' mr='2'>to</Text>
-                        <Input type='date' size='sm' mr='4' />
+                        <Input
+                            type='date'
+                            size='sm'
+                            mr='4'
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
+                        />
                     </Flex>
                     <InputGroup mt='-2'>
                         <Input
@@ -123,17 +121,21 @@ const GSTR1_b2cl = () => {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {tableData?.map((data) => (
+                            {searchData?.map((data) => (
                                 <Tr onClick={() => handleRowClick(data.reportNo)} style={{ cursor: 'pointer' }}
                                 >
-                                    <Td style={{ border: '1px solid gray' }}>{data.gstIn_UIN_No}</Td>
-                                    <Td style={{ border: '1px solid gray' }}>{data.receiverName}</Td>
-                                    <Td style={{ border: '1px solid gray' }}>{data.invoiceDate}</Td>
-                                    <Td style={{ border: '1px solid gray' }}>{data.invoiceValue} </Td>
+                                    <Td style={{ border: '1px solid gray' }}>{data.invoiceNo}</Td>
+                                    <Td style={{ border: '1px solid gray' }}>{data.dueDate}</Td>
+                                    <Td style={{ border: '1px solid gray' }}>{data.finalAmount} </Td>
                                     <Td style={{ border: '1px solid gray' }}>{data.placeOfSupply}</Td>
                                     <Td style={{ border: '1px solid gray' }}>{data.reverseCharge}</Td>
                                     <Td style={{ border: '1px solid gray' }}>{data.taxRate}</Td>
-                                    <Td style={{ border: '1px solid gray' }}>{data.invoiceType}</Td>
+                                    <Td style={{ border: '1px solid gray' }}>
+                                        {calculateTaxableValue(data.finalAmount, data.taxRate)}
+                                    </Td>
+                                    <Td style={{ border: '1px solid gray' }}>
+                                        {calculateCessAmount(data.finalAmount, data.taxRate, data.cessRate)}
+                                    </Td>
                                     <Td style={{ border: '1px solid gray' }}>{data.eCommerceGSTIN}</Td>
                                 </Tr>
                             ))}

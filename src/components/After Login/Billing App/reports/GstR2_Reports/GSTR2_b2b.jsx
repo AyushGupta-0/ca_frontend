@@ -5,7 +5,6 @@ import { Box, Flex, Heading, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Bu
 import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons'
 import { useNavigate } from 'react-router-dom'
 
-
 const Company = {
     name: "Company Name"
 }
@@ -93,8 +92,7 @@ const GSTR2_b2b = () => {
     return (
         <>
 
-            <Box Flex='1' padding='15px'
-            >
+            <Box Flex='1' padding='15px'>
                 <Heading size='md' mt='2'> GSTR2 B2B</Heading>
                 <Flex alignItems='right' position='absolute' right="230" top="140">
                     <Button fontSize={"10px"} bg={"blue.400"} marginLeft="10px">Print</Button>
