@@ -101,7 +101,7 @@ const AddCompanyForm = () => {
                             <option value="Services">Services</option>
                             <option value="Other">Other</option>
                         </Select>
-                        <Select placeholder='State' name='businessType' value={formData.businessType} onChange={handleChange} variant='flushed'>
+                        <Select placeholder='State' name='state' value={formData.state} onChange={handleChange} variant='flushed'>
                             <option>None</option>
                             <option>State 1</option>
                             <option>State 2</option>

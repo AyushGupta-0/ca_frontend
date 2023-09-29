@@ -133,9 +133,8 @@ const Company_name = (ppx) => {
   
     const selectedFirm = get_firm_data.find((firm) => firm._id === value);
     const selectedCompanyName = selectedFirm ? selectedFirm.companyName : "";
-  
-    console.log("Selected Company ID:", value);
-    console.log("Selected Company Name:", selectedCompanyName);
+    const companyLogo = selectedFirm ? selectedFirm.companyLogo : "";
+    console.log("🚀 ~ file: Company_name.jsx:137 ~ handleChange ~ companyLogo:", companyLogo)
   
     setCompanyName(selectedCompanyName) // update heading
     setForm({ ...form, companyName: selectedCompanyName });
@@ -152,7 +151,7 @@ const Company_name = (ppx) => {
   useEffect(() => {
     
     dispatch(getFirmData(token));
-  }, []);
+  }, [firmId]);
   console.log(firmId)
 
   return (

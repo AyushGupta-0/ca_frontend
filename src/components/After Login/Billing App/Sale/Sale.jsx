@@ -38,6 +38,7 @@ const Sale = () => {
     const modal1 = useDisclosure()
     const token = localStorage.getItem("token");
     const { firmId } = useSelector((store) => store.FirmRegistration);
+    console.log("🚀 ~ file: Sale.jsx:41 ~ Sale ~ firmId:", firmId)
     const { getAllInvoice } = useSelector((store) => store.invoiceReducer);
 
     const dispatch = useDispatch();
