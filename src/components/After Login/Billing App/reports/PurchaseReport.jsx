@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import Company_name from '../Company_name/Company_name'
 import Slidebar from '../Slidebar/Slidebar'
 import { Box, Flex, Heading, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Button, Input, InputRightAddon, InputGroup, Select, Text } from '@chakra-ui/react'
 import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+    getInvoiceAction
+} from "../../../../Redux/Invoice/invoice.action";
+
 
 
 const Company = {
@@ -56,6 +61,41 @@ const PurchaseReport = () => {
     const handleRowClick = (reportNo) => {
         navigate('/individual-report')
     }
+
+    const token = localStorage.getItem("token");
+    const { firmId } = useSelector((store) => store.FirmRegistration);
+    console.log("firmid -", firmId)
+    const { getAllInvoice } = useSelector((store) => store.invoiceReducer);
+    console.log("🚀 ~ file: SaleReports.jsx:64 ~ SaleReports ~ getAllInvoice:", getAllInvoice)
+    
+    const TotalNumberOfTransaction = getAllInvoice.length;
+    console.log("NumberOfTransaction- " ,TotalNumberOfTransaction );
+
+    const TotalNumberOfSaleArray = getAllInvoice.map(option => option.finalAmount);
+    let sumofAmount = 0;
+    for(let i=0;i<TotalNumberOfSaleArray.length;i++){
+        sumofAmount += TotalNumberOfSaleArray[i];
+    }
+    console.log("SumofAmount - " , sumofAmount );
+
+    const TotalNumberOfDueArray = getAllInvoice.map(option => option.dueAmount);
+    let sumofDueAmount = 0;
+    for(let i=0;i<TotalNumberOfDueArray.length;i++){
+        sumofDueAmount += TotalNumberOfDueArray[i];
+    }
+    console.log("SumofDueAmount - " , sumofDueAmount );
+
+    const dispatch = useDispatch();
+
+    const handleViewClick = (invoiceId) => {
+        navigate(`/billing-software/${invoiceId}`);
+    };
+
+    useEffect(() => {
+        dispatch(getInvoiceAction(token, firmId));
+    }, [firmId])
+
+
   return (
     <>
         
@@ -134,7 +174,7 @@ const PurchaseReport = () => {
                         p='2'
                         >
                             <Text>No of Txn</Text>
-                            <Text fontSize='20px' mt='-2'>5</Text>
+                            <Text fontSize='20px' mt='-2'>{TotalNumberOfTransaction}</Text>
                         </Box>
                         <Box border= '0.1px solid lightgray'
                         boxShadow= 'rgba(149, 157, 165, 0.2) 0px 8px 24px'
@@ -144,7 +184,8 @@ const PurchaseReport = () => {
                         p='2'
                         >
                             <Text>Total Sale</Text>
-                            <Text fontSize='20px' mt='-2'>100 ₹</Text>
+                            
+                            <Text fontSize='20px' mt='-2'>{sumofAmount} ₹</Text>
                         </Box>
                     <Box border= '0.1px solid lightgray'
                     boxShadow= 'rgba(149, 157, 165, 0.2) 0px 8px 24px'
@@ -154,7 +195,7 @@ const PurchaseReport = () => {
                     p='2'
                     >
                         <Text>Balance Due</Text>
-                        <Text fontSize='20px' mt='-2'>90 ₹</Text>
+                        <Text fontSize='20px' mt='-2'>{sumofDueAmount} ₹</Text>
                     </Box>
                     </Flex>
                     <TableContainer m='2' margin='15px'
@@ -180,15 +221,15 @@ const PurchaseReport = () => {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {tableData?.map((data)=>(
+                                {getAllInvoice?.map((data)=>(
                                     <Tr onClick={()=>handleRowClick(data.reportNo)} style={{cursor:'pointer'}}
                                     >
                                         <Td style={{border:'1px solid gray'}}>
                                         {data.reportNo}</Td>
-                                        <Td style={{border:'1px solid gray'}}>{data.customerName}</Td>
-                                        <Td style={{border:'1px solid gray'}}>{data.amount} ₹</Td>
-                                        <Td style={{border:'1px solid gray'}}>{data.balance} </Td>
-                                        <Td style={{border:'1px solid gray'}}>{data.date}</Td>
+                                        <Td style={{border:'1px solid gray'}}>{data.shipToCustomerName}</Td>
+                                        <Td style={{border:'1px solid gray'}}>{data.finalAmount} ₹</Td>
+                                        <Td style={{border:'1px solid gray'}}>{data.dueAmount} </Td>
+                                        <Td style={{border:'1px solid gray'}}>{data.dueDate}</Td>
                                         <Td style={{border:'1px solid gray'}}>Edit</Td>
                                         <Td style={{border:'1px solid gray'}}>Delete</Td>
                                     </Tr>

@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import React, { useEffect, useState } from 'react'
+
 import Company_name from '../Company_name/Company_name'
 import Slidebar from '../Slidebar/Slidebar'
 import { Box, Flex, Heading, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Button, Input, InputRightAddon, InputGroup, Select, Text } from '@chakra-ui/react'
 import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import {
-    getInvoiceAction
-} from "../../../../Redux/Invoice/invoice.action";
 import { useDispatch, useSelector } from 'react-redux'
 import {
     getInvoiceAction
@@ -73,19 +69,7 @@ const SaleReports = () => {
     console.log("firmid -", firmId)
     const { getAllInvoice } = useSelector((store) => store.invoiceReducer);
     console.log("🚀 ~ file: SaleReports.jsx:64 ~ SaleReports ~ getAllInvoice:", getAllInvoice)
-    // const listItems = getAllInvoice.map(
-    //     (element) => {
-    //         return (<div>
-               
-                   
-    //               <div>
-    //                 {element._id}
-    //                 </div>
-    //                 </div>)
-                    
-    //     }
-    // )
-    // console.log( "1 data are "  , listItems);
+    
     const TotalNumberOfTransaction = getAllInvoice.length;
     console.log("NumberOfTransaction- " ,TotalNumberOfTransaction );
 
